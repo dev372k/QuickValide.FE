@@ -7,7 +7,7 @@ import { request } from "./helpers/requestHelper";
 import "./App.css";
 import Wave from "./components/Wave";
 function App() {
-  const [content, setContent] = useState({});
+  const [content, setContent] = useState([]);
   const [isError, setIsError] = useState(false);
 
   const [pricings, setPricings] = useState([]);
@@ -38,7 +38,7 @@ function App() {
 
   const AddPricing = (pric) => {};
 
-  return !content ? (
+  return content.length === 0 ? (
     <p className="text-center my-4 p-4 bg-emerald-500 text-white font-semibold w-64 mx-auto">
       Loading...
     </p>

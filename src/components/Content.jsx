@@ -8,7 +8,10 @@ const Content = ({ content }) => {
   //     console.log(content);
   //   };
   return (
-    <div className="text-6xl w-full text-center lg:text-left" id="waitlist">
+    <div
+      className="text-4xl sm:text-5xl md:text-6xl w-full text-center lg:text-left"
+      id="waitlist"
+    >
       <div
         style={{ direction: "ltr !important" }}
         className=" mx-auto py-10 font-bold"

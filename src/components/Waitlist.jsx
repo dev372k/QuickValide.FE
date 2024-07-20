@@ -5,8 +5,8 @@ const WaitList = ({ btnColor, wishListRef }) => {
     "
     >
       <div
-        className="w-full bg-white  rounded-lg p-4 shadow-md
-          bg-white bg-opacity-20 backdrop-filter backdrop-blur-lg rounded-lg border border-white border-opacity-30 p-6
+        className="w-full shadow-md
+          bg-white bg-opacity-20 backdrop-filter backdrop-blur-lg rounded-lg border border-white border-opacity-100 p-6
 
       "
       >

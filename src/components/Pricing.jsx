@@ -3,8 +3,6 @@ function Pricing({ pricings, btnColor, wishListRef, setSelectedPlan }) {
     setSelectedPlan(planName);
   }
 
-  console.log(btnColor);
-
   return (
     <>
       <div className="text-center text-4xl font-bold my-8 w-full">Pricing</div>
@@ -20,6 +18,7 @@ function Pricing({ pricings, btnColor, wishListRef, setSelectedPlan }) {
               className="rounded-lg shadow-lg overflow-hidden m-2 w-full -skew-y-12
             bg-white bg-opacity-30 backdrop-filter backdrop-blur-lg rounded-lg border border-white border-opacity-30 p-3
             "
+              key={pricing.Title}
             >
               <div className="px-3 py-8 relative">
                 {/* Conditional Badge Rendering */}
@@ -74,7 +73,7 @@ function Pricing({ pricings, btnColor, wishListRef, setSelectedPlan }) {
                 </ul>
                 <a
                   href="#waitlist"
-                  class="w-full mt-6 text-white py-2 rounded-lg  block text-center"
+                  className="w-full mt-6 text-white py-2 rounded-lg  block text-center"
                   style={{ background: btnColor || "#0099ff" }}
                   onClick={() => handleSelectPlan(pricing.Title)}
                 >

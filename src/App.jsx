@@ -32,12 +32,12 @@ function App() {
       setPricings(modifyAndParsePricing(response.result.data.pricing));
       setContent(response?.result?.data);
       setIsError(!response?.result?.status);
+      document.title = response?.result?.data?.name;
     }
 
     getData();
   }, []);
 
-  console.log(content?.style?.shade);
   const AddPricing = (pric) => {};
 
   return content.length === 0 ? (
@@ -59,23 +59,26 @@ function App() {
         <Wave fill={content?.style?.shade} />
       </div>
       {/* Header */}
-      <header class="text-black container mx-auto px-4 sm:px-6 md:px-8 lg:px-12">
-        <div class="container mx-auto flex justify-between items-center py-4 px-2">
-          <div class="text-xl font-bold">
+      <header className="text-black container mx-auto px-4 sm:px-6 md:px-8 lg:px-12">
+        <div className="container mx-auto flex justify-between items-center py-4 px-2">
+          <div className="text-xl font-bold">
             <a href="#">{content?.name}</a>
           </div>
-          <nav class="flex space-x-4">
-            <a href="#home" class="hover:text-gray-400">
+          <nav className="flex space-x-4">
+            <a href="#home" className="hover:text-gray-400">
               Home
             </a>
 
             {content.pricing && (
-              <a href="#pricing" class="hover:text-gray-400">
+              <a href="#pricing" className="hover:text-gray-400">
                 Pricing
               </a>
             )}
 
-            <a href={`mailto:${content?.email}`} class="hover:text-gray-400">
+            <a
+              href={`mailto:${content?.email}`}
+              className="hover:text-gray-400"
+            >
               Contact Us
             </a>
           </nav>
@@ -97,9 +100,9 @@ function App() {
           height="500"
           src={content?.videoLink}
           title="YouTube video player"
-          frameborder="0"
+          frameBorder="0"
           allow=""
-          referrerpolicy="strict-origin-when-cross-origin"
+          referrerPolicy="strict-origin-when-cross-origin"
         ></iframe>
       </div>
 

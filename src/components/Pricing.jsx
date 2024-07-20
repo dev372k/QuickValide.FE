@@ -3,17 +3,22 @@ function Pricing({ pricings, btnColor, wishListRef, setSelectedPlan }) {
     setSelectedPlan(planName);
   }
 
+  console.log(btnColor);
+
   return (
     <>
       <div className="text-center text-4xl font-bold my-8 w-full">Pricing</div>
       <div
-        className={`flex justify-center items-center w-full flex-col gap-8 md:gap-4 md:flex-row md:space-x-4 mx-auto px-4 sm:px-6 lg:px-8 bg-[${btnColor}] bg-opacity-20 py-24 md:py-36 skew-y-12`}
+        className={`flex justify-center items-center w-full flex-col gap-8 md:gap-4 md:flex-row md:space-x-4 mx-auto px-4 sm:px-6 lg:px-8 bg-opacity-20 py-24 md:py-36 skew-y-12`}
+        style={{
+          background: `linear-gradient(to right bottom, ${btnColor}, #fff)`,
+        }}
       >
         {pricings.map((pricing) => {
           return (
             <div
               className="rounded-lg shadow-lg overflow-hidden m-2 w-full -skew-y-12
-            bg-white bg-opacity-20 backdrop-filter backdrop-blur-lg rounded-lg border border-white border-opacity-30 p-3
+            bg-white bg-opacity-30 backdrop-filter backdrop-blur-lg rounded-lg border border-white border-opacity-30 p-3
             "
             >
               <div className="px-3 py-8 relative">

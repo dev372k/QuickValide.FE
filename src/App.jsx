@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Pricing from "./components/Pricing";
 import WaitList from "./components/Waitlist";
 import Content from "./components/Content";
@@ -9,6 +9,7 @@ import Wave from "./components/Wave";
 function App() {
   const [content, setContent] = useState([]);
   const [isError, setIsError] = useState(false);
+  const [selectedPlan, setSelectedPlan] = useState("");
 
   const [pricings, setPricings] = useState([]);
 
@@ -36,6 +37,7 @@ function App() {
     getData();
   }, []);
 
+  console.log(content?.style?.shade);
   const AddPricing = (pric) => {};
 
   return content.length === 0 ? (
@@ -57,7 +59,7 @@ function App() {
         <Wave fill={content?.style?.shade} />
       </div>
       {/* Header */}
-      <header class="text-black">
+      <header class="text-black container mx-auto px-4 sm:px-6 md:px-8 lg:px-12">
         <div class="container mx-auto flex justify-between items-center py-4 px-2">
           <div class="text-xl font-bold">
             <a href="#">{content?.name}</a>
@@ -80,7 +82,7 @@ function App() {
         </div>
       </header>
 
-      <div className="min-h-[calc(100vh-150px)] flex flex-col justify-center lg:flex-row items-center lg:justify-between container mx-auto gap-10 lg:gap-6">
+      <div className="min-h-[calc(100vh-150px)] flex flex-col justify-center lg:flex-row items-center lg:justify-between container mx-auto gap-10 lg:gap-12 container mx-auto px-4 sm:px-6 md:px-8 lg:px-12">
         {/* Content */}
         <Content content={content?.content} />
 
@@ -104,7 +106,12 @@ function App() {
       {/* Pricing */}
       {content.pricing && (
         <div className="my-16" id="pricing">
-          <Pricing pricings={pricings} btnColor={content?.style?.shade} />
+          <Pricing
+            pricings={pricings}
+            btnColor={content?.style?.shade}
+            selectedPlan={selectedPlan}
+            setSelectedPlan={setSelectedPlan}
+          />
         </div>
       )}
     </div>

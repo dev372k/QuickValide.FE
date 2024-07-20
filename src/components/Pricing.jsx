@@ -1,15 +1,25 @@
-function Pricing({ pricings, btnColor }) {
+function Pricing({ pricings, btnColor, wishListRef, setSelectedPlan }) {
+  function handleSelectPlan(planName) {
+    setSelectedPlan(planName);
+  }
+
   return (
     <>
-      <div className="text-center text-4xl font-bold my-4 w-full">Pricing</div>
-      <div className="flex justify-center w-full flex-col gap-8 md:gap-4 md:flex-row flex-wrap items-center md:space-x-4 mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="text-center text-4xl font-bold my-8 w-full">Pricing</div>
+      <div
+        className={`flex justify-center items-center w-full flex-col gap-8 md:gap-4 md:flex-row md:space-x-4 mx-auto px-4 sm:px-6 lg:px-8 bg-[${btnColor}] bg-opacity-20 py-24 md:py-36 skew-y-12`}
+      >
         {pricings.map((pricing) => {
           return (
-            <div className="flex-1 bg-white rounded-lg shadow-lg overflow-hidden m-2 w-full">
-              <div className="px-5 py-10 relative">
+            <div
+              className="rounded-lg shadow-lg overflow-hidden m-2 w-full -skew-y-12
+            bg-white bg-opacity-20 backdrop-filter backdrop-blur-lg rounded-lg border border-white border-opacity-30 p-3
+            "
+            >
+              <div className="px-3 py-8 relative">
                 {/* Conditional Badge Rendering */}
                 {pricing.IsRecommended && (
-                  <div className="absolute top-0 right-0 bg-yellow-500 text-white text-xs font-bold px-2 py-1 rounded-bl-lg">
+                  <div className="absolute top-0 -right-16 bg-yellow-500 text-white text-xs font-bold px-2 py-3 rounded-bl-lg -translate-x-1/2 -translate-y-1/2">
                     Recommended
                   </div>
                 )}
@@ -61,6 +71,7 @@ function Pricing({ pricings, btnColor }) {
                   href="#waitlist"
                   class="w-full mt-6 text-white py-2 rounded-lg  block text-center"
                   style={{ background: btnColor || "#0099ff" }}
+                  onClick={() => handleSelectPlan(pricing.Title)}
                 >
                   Subscribe
                 </a>

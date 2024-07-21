@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { isEmail } from "validator";
 import { Link } from "react-router-dom";
@@ -17,6 +17,10 @@ function Login() {
     formState: { errors },
     handleSubmit,
   } = useForm();
+
+  useEffect(function () {
+    document.title = "Login";
+  }, []);
 
   function onSubmit(e) {
     navigate("/dashboard");

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { isEmail } from "validator";
 import { Link } from "react-router-dom";
@@ -20,6 +20,10 @@ function Register() {
     handleSubmit,
     getValues,
   } = useForm();
+
+  useEffect(function () {
+    document.title = "Register";
+  }, []);
 
   function onSubmit(e) {
     console.log(getValues().password, getValues().passwordConfirm);

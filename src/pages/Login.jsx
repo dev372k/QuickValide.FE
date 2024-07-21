@@ -27,7 +27,7 @@ function Login() {
   }
 
   return (
-    <main className="w-full min-h-screen flex items-center justify-center px-4 md:px-6 bg-gray-50">
+    <main className="w-full min-h-screen flex items-center justify-center px-4 md:px-6 bg-[#ecf0f1]">
       <div className="absolute top-5 left-5">
         <p className="text-xl md:text-2xl font-semibold tracking-widest text-gray-700">
           LOGO
@@ -45,18 +45,18 @@ function Login() {
               <input
                 type="text"
                 placeholder="Email address"
-                className="p-3 border-[1px] input border-gray-200 rounded-md w-full focus:outline-none focus:border-[#2db2eb] text-md font-medium text-gray-600"
+                className="p-3 border-[1px] input border-gray-200 rounded-md w-full focus:outline-none focus:border-[#3498db] text-md font-medium text-gray-600"
                 {...register("email", {
                   required: "Email is required",
                   validate: (value) =>
                     isEmail(value) || "Invalid email provided",
                 })}
               />
-              <p className="absolute top-0 transition-all -translate-y-1/2 left-2 text-xs p-1 px-2 bg-[#2db2eb] rounded-md text-white">
+              <p className="absolute top-0 transition-all -translate-y-1/2 left-2 text-xs p-1 px-2 bg-[#3498db] rounded-md text-white">
                 Email address
               </p>
               {errors?.email && (
-                <p className="my-1 text-red-500 text-sm font-medium">
+                <p className="my-1 text-[#e74c3c] text-sm font-medium">
                   {errors?.email?.message}
                 </p>
               )}
@@ -66,13 +66,13 @@ function Login() {
                 <input
                   type={isPasswordShown ? "text" : "password"}
                   placeholder="Password"
-                  className="p-3 border-[1px] input border-gray-200 rounded-md w-full mr-auto focus:outline-none focus:border-[#2db2eb] text-md font-medium text-gray-600"
+                  className="p-3 border-[1px] input border-gray-200 rounded-md w-full mr-auto focus:outline-none focus:border-[#3498db] text-md font-medium text-gray-600"
                   {...register("password", {
                     required: "Password is required",
                     minLength: [8, "Password cannot be less than 8 characters"],
                   })}
                 />
-                <p className="absolute top-0 transition-all -translate-y-1/2 left-2 text-xs p-1 px-2 bg-[#2db2eb] rounded-md text-white">
+                <p className="absolute top-0 transition-all -translate-y-1/2 left-2 text-xs p-1 px-2 bg-[#3498db] rounded-md text-white">
                   Password
                 </p>
 
@@ -88,42 +88,40 @@ function Login() {
                 />
               </div>
               {errors?.password && (
-                <p className="my-1 text-red-500 text-sm font-medium">
+                <p className="my-1 text-[#e74c3c] text-sm font-medium">
                   {errors?.password?.message}
                 </p>
               )}
             </div>
 
-            <div className="flex items-center justify-between gap-2 flex-wrap">
-              <button
-                type="submit"
-                className="p-2 w-1/2 text-md hover:bg-opacity-80 font-semibold text-white bg-[#2db2eb] rounded-md"
-              >
-                Login
-              </button>
-              <a href="#" className="text-sm font-medium text-[#2db2eb]">
-                Forgot password?
-              </a>
-            </div>
+            <a href="#" className="text-sm font-medium text-[#3498db] self-end">
+              Forgot password?
+            </a>
+            <button
+              type="submit"
+              className="p-2  text-md  hover:bg-opacity-80 font-semibold text-white bg-[#2c3e50] rounded-md"
+            >
+              Login
+            </button>
           </div>
 
-          <div className="flex items-center text-md text-gray-600 gap-1">
+          <div className="flex items-center justify-center gap-3 text-sm sm:text-md p-3 border-[1px] border-gray-200 rounded-lg hover:bg-gray-100 cursor-pointer">
+            <img src={GoogleIcon} alt="Google icon" />
+            <p className="text-md font-medium text-gray-600">
+              Continue with Google instead
+            </p>
+          </div>
+
+          <div className="flex items-center text-md text-gray-600 gap-1 self-center">
             <p>Don't have an account?</p>
             <Link
               to="/register"
-              className="text-[#2db2eb] font-semibold underline"
+              className="text-[#3498db] font-semibold underline"
             >
               Register.
             </Link>
           </div>
         </form>
-
-        <div className="flex items-center justify-center gap-3 text-sm sm:text-md p-3 border-[1px] border-gray-200 rounded-lg hover:bg-gray-100 cursor-pointer">
-          <img src={GoogleIcon} alt="Google icon" />
-          <p className="text-md font-medium text-gray-600">
-            Continue with Google instead
-          </p>
-        </div>
       </div>
     </main>
   );

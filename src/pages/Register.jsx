@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import GoogleIcon from "../assets/google.svg";
 import EyeOpen from "../assets/eye-open.svg";
 import EyeClosed from "../assets/eye-closed.svg";
+import Logo from "../assets/logo-no-background.svg";
 
 function Register() {
   const navigate = useNavigate();
@@ -33,16 +34,14 @@ function Register() {
   }
 
   return (
-    <main className="w-full min-h-screen flex items-center justify-center px-4 md:px-6 bg-[#ecf0f1]">
+    <main className="w-full min-h-screen flex items-center justify-center px-4 md:px-6 ">
       <div className="absolute top-5 left-5">
-        <p className="text-xl md:text-2xl font-semibold tracking-widest text-gray-700">
-          LOGO
-        </p>
+        <img src={Logo} alt="Logo" className="h-8" />
       </div>
 
       <div className="flex md:w-[30rem] flex-col gap-5 px-5 py-8 my-5 bg-white rounded-lg border-[1px] border-gray-300 w-[90%] sm:w-[25rem]">
         <form className="flex flex-col gap-4" onSubmit={handleSubmit(onSubmit)}>
-          <h2 className="text-3xl text-center font-medium tracking-widest uppercase">
+          <h2 className="text-3xl text-center font-medium tracking-widest">
             Register
           </h2>
 

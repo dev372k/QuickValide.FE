@@ -9,7 +9,7 @@ function PriceCard({ card }) {
           Recommended
         </p>
       )}
-      <div className="flex flex-col items-start gap-2 py-3 border-b-[1px] border-primary">
+      <div className="flex flex-col items-start gap-2 py-6 border-b-[1px] border-gray-300">
         <p className="text-lg text-slate-400 font-medium">{card.Title}</p>
         <p className="font-bold text-2xl md:text-3xl text-slate-600">
           {card.Price}
@@ -20,7 +20,7 @@ function PriceCard({ card }) {
         {card.Features.map((feature) => {
           return (
             <div
-              className={`flex items-center  py-3 gap-2 text-lg font-medium ${
+              className={`flex items-center  py-3 gap-2 text-md md:text-lg font-medium ${
                 feature.IsOffer ? "text-gray-500" : "text-gray-400"
               }`}
             >

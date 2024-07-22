@@ -4,6 +4,7 @@ import Hero from "../assets/hero-4.svg";
 import PriceCard from "../components/PriceCard";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import { Turn as Hamburger } from "hamburger-react";
 
 function LandingPage() {
   const [pricings, setPricings] = useState([
@@ -77,6 +78,8 @@ function LandingPage() {
       IsRecommended: false,
     },
   ]);
+
+  const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
   return (
     <main className="w-full h-screen ">
       <section className="min-h-screen w-full">
@@ -85,7 +88,7 @@ function LandingPage() {
             <img src={Logo} alt="Logo" className="h-full w-full" />
           </div>
 
-          <div className="flex items-center gap-3 text-sm font-semibold text-gray-500">
+          <div className=" items-center gap-3 text-sm font-semibold text-gray-500 hidden md:flex">
             <a href="#">Home</a>
             <a href="#">About Us</a>
             <a href="#" className="pr-2 border-r-2 border-r-gray-500">
@@ -104,9 +107,55 @@ function LandingPage() {
               Register
             </Link>
           </div>
+
+          <div
+            onClick={() => setIsMobileNavOpen(!isMobileNavOpen)}
+            className="md:hidden"
+          >
+            <Hamburger color="#E67E22" size={30} rounded />
+          </div>
+
+          <nav
+            className={`fixed top-20 left-1/2 -translate-x-1/2 w-[90%] bg-primary rounded-lg text-white  flex-col gap-2 items-center text-lg overflow-hidden md:hidden ${
+              isMobileNavOpen ? "flex" : "hidden"
+            } min-h-[80vh]`}
+          >
+            <a
+              href="#"
+              className="hover:bg-gray-600 w-full text-center p-2 rounded-md font-semibold mt-10"
+            >
+              Home
+            </a>
+            <a
+              href="#"
+              className="hover:bg-gray-600 w-full text-center p-2 rounded-md font-semibold"
+            >
+              About Us
+            </a>
+            <a
+              href="#"
+              className="hover:bg-gray-600 w-full text-center p-2 rounded-md font-semibold mb-auto"
+            >
+              Pricing
+            </a>
+            <div className="w-full flex">
+              <Link
+                to="/login"
+                className="p-3 flex items-center justify-center  border-2 border-accent text-white w-1/2 hover:bg-accent"
+              >
+                Login
+              </Link>
+              <Link
+                to="/register"
+                className="p-3 flex items-center justify-center  border-2 border-accent  hover:bg-accent text-white w-1/2"
+              >
+                Register
+              </Link>
+            </div>
+          </nav>
         </nav>
 
-        <header className="flex flex-col justify-center md:items-center md:flex-row-reverse gap-3 md:gap-8 px-4 md:px-16 lg:px-36 mt-12 h-[calc(100vh-200px)]">
+        <header className="flex flex-col justify-center md:items-center md:flex-row-reverse gap-3 md:gap-8 px-4 md:px-16 lg:px-36 mt-24 md:mt-36 h-[calc(100vh-300px)]">
           <div className=" self-center h-full">
             <img src={Hero} alt="Hero image" className="w-full h-full" />
           </div>

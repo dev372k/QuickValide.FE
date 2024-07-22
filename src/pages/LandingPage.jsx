@@ -29,8 +29,8 @@ function LandingPage() {
           </div>
         </nav>
 
-        <header className="flex flex-col md:items-center md:flex-row-reverse gap-8 px-4 md:px-16 lg:px-24 mt-12">
-          <div className="w-3/4 self-center h-[80vh]">
+        <header className="flex flex-col md:items-center md:flex-row-reverse gap-8 px-4 md:px-16 lg:px-24 mt-12 md:h-[calc(100vh-100px)]">
+          <div className="w-3/4 self-center h-full">
             <img src={Hero} alt="Hero image" className="w-full h-full" />
           </div>
           <div className="w-3/4 md:w-full self-center md:self-center text-4xl text-center md:text-left md:text-6xl font-bold">

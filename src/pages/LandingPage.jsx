@@ -1,11 +1,85 @@
 import Logo from "../assets/logo-no-background.svg";
+import LogoWhite from "../assets/logo-white.svg";
 import Hero from "../assets/hero-4.svg";
+import PriceCard from "../components/PriceCard";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
 function LandingPage() {
+  const [pricings, setPricings] = useState([
+    {
+      Title: "Free",
+      Price: "$0/Month",
+      Features: [
+        {
+          Name: "1 Team Member",
+          IsOffer: true,
+        },
+        {
+          Name: "2GB Storage",
+          IsOffer: true,
+        },
+        {
+          Name: "Add Custom Domain",
+          IsOffer: false,
+        },
+        {
+          Name: "24 hour Support",
+          IsOffer: false,
+        },
+      ],
+      IsRecommended: false,
+    },
+    {
+      Title: "Standard",
+      Price: "$10/Month",
+      Features: [
+        {
+          Name: "3 Team Member",
+          IsOffer: true,
+        },
+        {
+          Name: "5GB Storage",
+          IsOffer: true,
+        },
+        {
+          Name: "Add Custom Domain",
+          IsOffer: true,
+        },
+        {
+          Name: "24 hour Support",
+          IsOffer: false,
+        },
+      ],
+      IsRecommended: true,
+    },
+    {
+      Title: "Premium",
+      Price: "$25/Month",
+      Features: [
+        {
+          Name: "10 Team Member",
+          IsOffer: true,
+        },
+        {
+          Name: "10GB Storage",
+          IsOffer: true,
+        },
+        {
+          Name: "Add Custom Domain",
+          IsOffer: true,
+        },
+        {
+          Name: "24 hour Support",
+          IsOffer: true,
+        },
+      ],
+      IsRecommended: false,
+    },
+  ]);
   return (
     <main className="w-full h-screen ">
-      <section className="min-h-screen">
+      <section className="min-h-screen w-full">
         <nav className="flex items-center justify-between px-4 md:px-8 lg:px-12 py-5 gap-4">
           <div className="h-8">
             <img src={Logo} alt="Logo" className="h-full w-full" />
@@ -32,11 +106,11 @@ function LandingPage() {
           </div>
         </nav>
 
-        <header className="flex flex-col md:items-center md:flex-row-reverse gap-8 px-4 md:px-16 lg:px-36 mt-12 md:h-[calc(100vh-200px)]">
-          <div className="w-3/4 self-center h-full">
+        <header className="flex flex-col justify-center md:items-center md:flex-row-reverse gap-3 md:gap-8 px-4 md:px-16 lg:px-36 mt-12 h-[calc(100vh-200px)]">
+          <div className=" self-center h-full">
             <img src={Hero} alt="Hero image" className="w-full h-full" />
           </div>
-          <div className="w-[90%] md:w-[90%] self-center md:self-center  text-center text-text-dark md:text-left font-semibold flex flex-col gap-6 items-start ">
+          <div className="w-[90%]  self-center text-center text-text-dark md:text-left font-semibold flex flex-col gap-6 items-start ">
             <div className="flex flex-col items-center md:items-start gap-4">
               <h1 className="leading-none text-4xl  md:text-5xl">
                 Transforming ideas into reality with Cutting-Edge Technology
@@ -55,6 +129,56 @@ function LandingPage() {
           </div>
         </header>
       </section>
+
+      <section className="py-24 md:py-32 lg:py-36  px-4 md:px-8 lg:px-12 w-full flex items-center justify-center bg-primary mt-16">
+        <div className="p-5 bg-white rounded-lg shadow-sm flex flex-col items-center gap-3 md:w-[500px] lg:w-[700px] md:justify-center w-full">
+          <h2 className="text-2xl md:text-3xl font-medium">
+            Join our Waitlist
+          </h2>
+          <input
+            type="email"
+            placeholder="your@gmail.com"
+            className="bg-gray-50 w-full p-2 text-lg rounded-md focus:outline-none focus:border-accent border-2 border-transparent font-medium text-gray-500"
+          />
+          <button className="text-md bg-accent text-white w-full p-2 rounded-md">
+            Join Waitlist
+          </button>
+        </div>
+      </section>
+
+      <section className="py-24 md:py-32 lg:py-36  px-4 md:px-8 lg:px-12 w-full flex items-center justify-center">
+        <iframe
+          width="1000"
+          height="500"
+          src={"https://www.youtube.com/embed/lPrjP4A_X4s?si=bSY7qw8u_iXuRFKj"}
+          title="YouTube video player"
+          frameBorder="0"
+          allow=""
+          referrerPolicy="strict-origin-when-cross-origin"
+        ></iframe>
+      </section>
+
+      <section className="py-24 md:py-32 lg:py-36  px-4 md:px-8 lg:px-12 w-full flex items-center justify-center bg-accent">
+        <div className="flex items-center gap-8 flex-col flex-wrap md:flex-row  w-full">
+          {pricings.map((pricing) => (
+            <PriceCard card={pricing} />
+          ))}
+        </div>
+      </section>
+
+      <footer className="py-24 md:py-32 lg:py-32  px-4 md:px-8 lg:px-12 w-full flex justify-betwen bg-black  items-center">
+        <div className="w-full flex items-center justify-between flex-wrap mx-auto">
+          <img src={Logo} alt="Logo" className="h-12" />
+        </div>
+        <div className="w-full ">
+          <ul className="text-white text-lg flex items-end justify-end gap-5 w-full self-end">
+            <li>Home</li>
+            <li>About Us</li>
+            <li>Contact Us</li>
+            <li>Pricing</li>
+          </ul>
+        </div>
+      </footer>
     </main>
   );
 }

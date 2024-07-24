@@ -34,7 +34,7 @@ function Register() {
   }
 
   return (
-    <main className="w-full min-h-screen flex items-center justify-center ">
+    <main className="w-full min-h-screen flex justify-center ">
       <div className="md:flex hidden min-h-screen relative overflow-hidden bg-accent-1 bg-opacity-75 w-[30%] lg:w-[45%]">
         <p className="text-text-primary text-9xl top-1/2 -translate-y-1/2 absolute opacity-20 font-bold">
           Ideas to Reality

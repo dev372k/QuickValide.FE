@@ -128,7 +128,7 @@ function Login() {
 
             <div className="flex items-center text-md text-text-primary gap-1 self-center">
               <p>Don't have an account?</p>
-              <Link to="/register" className="text-accent-1 font-semibold">
+              <Link to="/register" className="text-accent-2 font-semibold">
                 Register
               </Link>
             </div>

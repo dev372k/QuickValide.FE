@@ -12,9 +12,9 @@ function Navigation() {
     <nav className="px-8 py-4 fixed top-0 navbar transparent transition-all bg-white bg-opacity-50 backdrop-blur-sm duration-300 z-50 backdrop-filter left-0 right-0  z-100 flex items-center justify-between gap-3">
       {/* Logo  */}
       <div className="w-32">
-        <Link to="/">
+        <a href="#">
           <img src={Logo} alt="Logo" />
-        </Link>
+        </a>
       </div>
 
       <MobileNav
@@ -24,9 +24,36 @@ function Navigation() {
 
       {/* Links  */}
       <ul className="md:flex items-center gap-3 text-sm text-text-primary hidden">
-        <li>About Us</li>
-        <li>Pricing</li>
-        <li>Contact</li>
+        <a
+          href="#features"
+          className="hover:text-accent-1 border-b-2 transition-all duration-150 border-b-transparent hover:border-b-accent-1"
+        >
+          <li>Features</li>
+        </a>
+        <a
+          href="#about-us"
+          className="hover:text-accent-1 border-b-2 transition-all duration-150 border-b-transparent hover:border-b-accent-1"
+        >
+          <li>About Us</li>
+        </a>
+        <a
+          href="#pricings"
+          className="hover:text-accent-1 border-b-2 transition-all duration-150 border-b-transparent hover:border-b-accent-1"
+        >
+          <li>Pricings</li>
+        </a>
+        <a
+          href="#reviews"
+          className="hover:text-accent-1 border-b-2 transition-all duration-150 border-b-transparent hover:border-b-accent-1"
+        >
+          <li>Reviews</li>
+        </a>
+        <a
+          href="#contact-us"
+          className="hover:text-accent-1 border-b-2 transition-all duration-150 border-b-transparent hover:border-b-accent-1"
+        >
+          <li>Contact Us</li>
+        </a>
       </ul>
 
       {/* Buttons  */}
@@ -46,7 +73,7 @@ function Navigation() {
         className="md:hidden"
         onClick={() => setIsMobileNavOpen(!isMobileNavOpen)}
       >
-        <Hamburger size={28} color="#E91E63" />
+        <Hamburger size={28} color="#E91E63" toggled={isMobileNavOpen} />
       </div>
     </nav>
   );

@@ -1,13 +1,22 @@
 import SetupIcon from "../../../assets/setup.svg";
 import { IoMdCheckmarkCircle } from "react-icons/io";
 import { RxCrossCircled } from "react-icons/rx";
+import FreeIcon from "../../../assets/basic-pricing.svg";
+import StandardIcon from "../../../assets/standard-pricing.svg";
+import PremiumIcon from "../../../assets/premium-pricing.svg";
 
-function Pricing({ pricing }) {
+const icons = {
+  Free: FreeIcon,
+  Standard: StandardIcon,
+  Premium: PremiumIcon,
+};
+
+function Pricing({ pricing, showMore }) {
   return (
     <div
-      className={`w-full bg-white p-8 md:p-10 rounded-xl flex flex-col  gap-4 border-[1px] border-gray-200 overflow-hidden relative ${
+      className={`w-full bg-white p-8 md:p-10 rounded-xl flex flex-col  gap-4 border-[1px]  overflow-hidden relative ${
         pricing.IsRecommended ? "border-accent-2" : "border-gray-200"
-      }`}
+      } ${!showMore ? (pricing.Title === "Free" ? "flex" : "hidden") : "flex"}`}
     >
       {pricing.IsRecommended && (
         <p className="absolute right-0 top-0 p-2 text-xs bg-accent-2 rounded-bl-lg text-white font-medium">
@@ -15,7 +24,7 @@ function Pricing({ pricing }) {
         </p>
       )}
       <div className="flex flex-col w-full items-center gap-3">
-        <img src={SetupIcon} alt="Icon" className="w-12" />
+        <img src={icons[pricing.Title]} alt="Icon" className="w-12" />
         <div>
           <h3 className="text-text-primary font-medium text-xl">
             {pricing.Title}

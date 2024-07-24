@@ -1,11 +1,14 @@
 function ContactUs() {
   return (
-    <section className="px-6  bg-section-background md:mx-auto py-36  flex flex-col md:flex-row  gap-12 w-full md:w-auto items-center md:items-start md:px-32">
+    <section
+      id="contact-us"
+      className="px-6  bg-section-background md:mx-auto py-36  flex flex-col md:flex-row  gap-12 w-full md:w-auto items-center md:items-start md:px-32"
+    >
       <div className="lg:w-1/2 items-center md:items-start md:text-left text-center flex flex-col gap-2 w-full">
-        <h3 className="text-3xl font-medium text-accent-1">Contact Us</h3>
-        <p className="text-sm text-text-secondary md:w-3/4">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi
-          aliquam voluptatem architecto suscipit.
+        <h3 className="text-3xl font-semibold text-accent-1">Contact Us</h3>
+        <p className="text-sm lg:text-md text-text-secondary md:w-3/4">
+          We prioritize the satisfaction of our customers, so if you got any
+          query feel free to leave a message. We'll be happy to assist you.
         </p>
       </div>
       <div className="w-full lg:w-1/2 flex flex-col gap-3">

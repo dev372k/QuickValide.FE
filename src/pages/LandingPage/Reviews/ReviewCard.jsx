@@ -11,9 +11,7 @@ const ReviewCard = ({ review, className }) => {
         alt={review.title}
         className="h-14 w-14 rounded-full  object-cover"
       />
-      <h3 className="text-lg text-text-primary font-semibold">
-        {review.title}
-      </h3>
+
       <p className="text-gray text-md text-text-secondary">
         {review.description}
       </p>

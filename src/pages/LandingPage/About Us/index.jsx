@@ -4,7 +4,7 @@ import Vision from "../../../assets/vision.jpg";
 
 function AboutUs() {
   return (
-    <section className="px-6 py-32 lg:px-32 flex flex-col gap-16">
+    <section className="px-6 py-32 lg:px-32 flex flex-col gap-16" id="about-us">
       <div>
         <h2 className="text-4xl font-semibold text-text-primary text-center">
           About Us

@@ -7,9 +7,24 @@ import Pricing from "./Pricings/index.jsx";
 import ContactUs from "./Contact Us/index.jsx";
 import Reviews from "./Reviews/index.jsx";
 
+import { useEffect } from "react";
+
 function LandingPage() {
+  useEffect(function () {
+    document.title = "QuickValide | Home";
+  }, []);
   return (
-    <main className="w-full min-h-screen">
+    <main className="w-full min-h-screen relative">
+      <a
+        href="#"
+        className="text-xs fixed p-3 px-4 leading-none bg-text-primary text-white rounded-full gap-1 bottom-5 right-5 z-100 flex flex-col items-center"
+      >
+        <span>&uarr;</span>
+        <span className="text-center">
+          Back <br />
+          to top
+        </span>
+      </a>
       <Navigation />
       <Header />
       <Video />

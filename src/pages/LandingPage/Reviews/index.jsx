@@ -7,7 +7,7 @@ const reviews = [
   {
     image:
       "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    title: "Great Service",
+
     description:
       "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
     author: "Mary Smith",
@@ -15,7 +15,7 @@ const reviews = [
   {
     image:
       "https://plus.unsplash.com/premium_photo-1671656349322-41de944d259b?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    title: "Amazing Experience",
+
     description:
       "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
     author: "Jane Smith",
@@ -23,7 +23,7 @@ const reviews = [
   {
     image:
       "https://images.unsplash.com/photo-1521310192545-4ac7951413f0?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    title: "Highly Recommend",
+
     description:
       "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
     author: "Michael Johnson",
@@ -31,7 +31,7 @@ const reviews = [
   {
     image:
       "https://plus.unsplash.com/premium_photo-1670071482460-5c08776521fe?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    title: "Best in Town",
+
     description:
       "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
     author: "Emily Davis",
@@ -39,7 +39,7 @@ const reviews = [
   {
     image:
       "https://plus.unsplash.com/premium_photo-1664199486587-37f325d15182?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    title: "Will Come Again",
+
     description:
       "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
     author: "William Brown",
@@ -62,7 +62,10 @@ const ReviewCarousel = () => {
   };
 
   return (
-    <section className="px-6 py-36  w-full flex flex-col gap-12 md:px-32">
+    <section
+      className="px-6 py-36  w-full flex flex-col gap-12 md:px-32"
+      id="reviews"
+    >
       <div className="text-4xl font-semibold text-text-primary text-center">
         <h2>Reviews</h2>
       </div>

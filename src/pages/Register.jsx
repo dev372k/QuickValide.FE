@@ -41,18 +41,26 @@ function Register() {
         </p>
       </div>
 
-      <div className="flex items-center justify-center w-full">
-        <Link className="absolute top-5 left-5" to="/">
-          <img src={Logo} alt="Logo" className="h-8" />
+      <div className="flex items-center justify-center w-full relative">
+        <Link
+          to="/"
+          className="absolute top-5 left-5 text-sm p-2 text-accent-2 font-medium hover:bg-accent-2 hover:text-white transition-all rounded-full"
+        >
+          &larr; Back to home
         </Link>
         <div className="flex md:w-[30rem] flex-col gap-5 px-5 py-8 my-5 bg-white rounded-lg border-[1px] border-gray-300 w-[90%] sm:w-[25rem]">
           <form
             className="flex flex-col gap-4"
             onSubmit={handleSubmit(onSubmit)}
           >
-            <h2 className="text-3xl text-center font-medium tracking-widest">
-              Register
-            </h2>
+            <div className="flex flex-col items-center gap-1">
+              <h2 className="text-2xl text-center font-medium text-text-primary">
+                Hi there, let's start
+              </h2>
+              <p className="text-text-secondary text-sm">
+                This is first step of your marvelous journey
+              </p>
+            </div>
 
             {!doPasswordsMatch && (
               <p className="text-sm font-medium text-white bg-error rounded-lg p-3">
@@ -61,11 +69,22 @@ function Register() {
             )}
 
             <div className="flex flex-col gap-4">
+              <div className="flex items-center justify-center gap-3 text-sm sm:text-md p-3 border-[1px] border-gray-200 rounded-lg hover:bg-gray-100 cursor-pointer">
+                <img src={GoogleIcon} alt="Google icon" />
+                <p className="text-md font-medium text-text-primary">
+                  Continue with Google
+                </p>
+              </div>
+
+              <div className="bg-text-secondary bg-opacity-75 w-full h-[1px] my-3 flex items-center justify-center text-text-secondary text-sm">
+                <span className="p-1 bg-white">OR</span>
+              </div>
+
               <div className="relative">
                 <input
                   type="text"
                   placeholder="Name"
-                  className="p-3 border-[1px] border-gray-200 rounded-md w-full text-text-primary input focus:outline-none focus:border-accent-2 text-md font-medium"
+                  className="p-2 border-[1px] border-gray-200 rounded-md w-full text-text-primary input focus:outline-none focus:border-accent-2 text-md font-medium"
                   {...register("name", {
                     required: "Name is required",
                     minLength: [3, "Name cannot be less than characters"],
@@ -84,7 +103,7 @@ function Register() {
                 <input
                   type="text"
                   placeholder="Email address"
-                  className="p-3 border-[1px] border-gray-200 input rounded-md w-full focus:outline-none focus:border-accent-2  text-md font-medium text-text-primary"
+                  className="p-2 border-[1px] border-gray-200 input rounded-md w-full focus:outline-none focus:border-accent-2  text-md font-medium text-text-primary"
                   {...register("email", {
                     required: "Email is required",
                     validate: (value) =>
@@ -105,7 +124,7 @@ function Register() {
                   <input
                     type={isPasswordShown ? "text" : "password"}
                     placeholder="Password"
-                    className="p-3 border-[1px] border-gray-200 input rounded-md w-full mr-auto focus:outline-none focus:border-accent-2  text-md font-medium text-text-primary"
+                    className="p-2 border-[1px] border-gray-200 input rounded-md w-full mr-auto focus:outline-none focus:border-accent-2  text-md font-medium text-text-primary"
                     {...register("password", {
                       required: "Password is required",
                       minLength: [
@@ -140,7 +159,7 @@ function Register() {
                   <input
                     type={isPasswordConfirmShown ? "text" : "password"}
                     placeholder="Password Confirmation"
-                    className="p-3 border-[1px] border-gray-200 input rounded-md w-full mr-auto focus:outline-none focus:border-accent-2 text-md font-medium text-text-primary"
+                    className="p-2 border-[1px] border-gray-200 input rounded-md w-full mr-auto focus:outline-none focus:border-accent-2 text-md font-medium text-text-primary"
                     {...register("passwordConfirm", {
                       required: "Password confirmation is required",
                       minLength: [
@@ -175,21 +194,14 @@ function Register() {
 
               <button
                 type="submit"
-                className="p-2 text-md font-semibold text-white bg-accent-1 rounded-md"
+                className="p-2 text-md font-semibold text-white bg-accent-1 hover:bg-opacity-75 rounded-md"
               >
                 Register
               </button>
             </div>
-
-            <div className="flex items-center justify-center gap-3 text-sm sm:text-md p-3 border-[1px] border-gray-200 rounded-lg hover:bg-gray-100 cursor-pointer">
-              <img src={GoogleIcon} alt="Google icon" />
-              <p className="text-md font-medium text-text-primary">
-                Continue with Google instead
-              </p>
-            </div>
           </form>
 
-          <div className="flex items-center self-center text-md text-text-primary gap-1">
+          <div className="flex items-center self-center text-sm text-text-primary gap-1">
             <p>Already have an account?</p>
             <Link to="/login" className="text-accent-2 font-semibold ">
               Login

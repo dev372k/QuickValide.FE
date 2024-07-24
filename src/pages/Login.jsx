@@ -7,7 +7,6 @@ import { useNavigate } from "react-router-dom";
 import GoogleIcon from "../assets/google.svg";
 import EyeOpen from "../assets/eye-open.svg";
 import EyeClosed from "../assets/eye-closed.svg";
-import Logo from "../assets/logo-no-background.svg";
 
 function Login() {
   const navigate = useNavigate();
@@ -34,26 +33,44 @@ function Login() {
           Ideas to Reality
         </p>
       </div>
-      <div className="flex items-center justify-center w-full">
-        <Link className="absolute top-5 left-5" to="/">
-          <img src={Logo} alt="Logo" className="h-8" />
+      <div className="flex items-center justify-center w-full relative">
+        <Link
+          to="/"
+          className="absolute top-5 left-5 text-sm p-2 text-accent-2 font-medium hover:bg-accent-2 hover:text-white transition-all rounded-full"
+        >
+          &larr; Back to home
         </Link>
-
         <div className="flex md:w-[30rem] flex-col gap-5 px-5 py-8 rounded-lg border-[1px] bg-white border-gray-300 w-[90%] sm:w-[25rem]">
           <form
             className="flex flex-col gap-4"
             onSubmit={handleSubmit(onSubmit)}
           >
-            <h2 className="text-3xl text-center font-medium tracking-widest ">
-              Login
-            </h2>
+            <div className="flex flex-col items-center gap-1">
+              <h2 className="text-2xl text-center font-medium text-text-primary">
+                Welcome back
+              </h2>
+              <p className="text-text-secondary text-sm">
+                Glad to see you again, let the magic begin
+              </p>
+            </div>
 
             <div className="flex flex-col gap-4">
+              <div className="flex items-center justify-center gap-3 text-sm sm:text-md p-3 border-[1px] border-gray-200 rounded-lg hover:bg-gray-100 cursor-pointer">
+                <img src={GoogleIcon} alt="Google icon" />
+                <p className="text-md font-medium text-gray-600">
+                  Continue with Google
+                </p>
+              </div>
+
+              <div className="bg-text-secondary bg-opacity-75 w-full h-[1px] my-3 flex items-center justify-center text-text-secondary text-sm">
+                <span className="p-1 bg-white">OR</span>
+              </div>
+
               <div className="relative">
                 <input
                   type="text"
                   placeholder="Email address"
-                  className="p-3 border-[1px] input border-gray-200 rounded-md w-full focus:outline-none focus:border-accent-2 text-md font-medium text-text-primary"
+                  className="p-2 border-[1px] input border-gray-200 rounded-md w-full focus:outline-none focus:border-accent-2 text-md font-medium text-text-primary"
                   {...register("email", {
                     required: "Email is required",
                     validate: (value) =>
@@ -74,7 +91,7 @@ function Login() {
                   <input
                     type={isPasswordShown ? "text" : "password"}
                     placeholder="Password"
-                    className="p-3 border-[1px] input border-gray-200 rounded-md w-full mr-auto focus:outline-none focus:border-accent-2 text-md font-medium text-text-primary"
+                    className="p-2 border-[1px] input border-gray-200 rounded-md w-full mr-auto focus:outline-none focus:border-accent-2 text-md font-medium text-text-primary"
                     {...register("password", {
                       required: "Password is required",
                       minLength: [
@@ -117,13 +134,6 @@ function Login() {
               >
                 Login
               </button>
-            </div>
-
-            <div className="flex items-center justify-center gap-3 text-sm sm:text-md p-3 border-[1px] border-gray-200 rounded-lg hover:bg-gray-100 cursor-pointer">
-              <img src={GoogleIcon} alt="Google icon" />
-              <p className="text-md font-medium text-gray-600">
-                Continue with Google instead
-              </p>
             </div>
 
             <div className="flex items-center text-md text-text-primary gap-1 self-center">

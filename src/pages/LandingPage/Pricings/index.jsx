@@ -74,14 +74,14 @@ const pricings = [
 
 function Pricings() {
   return (
-    <section className="px-6 py-36 bg-section-background flex flex-col gap-12">
+    <section className="px-6 py-36 bg-section-background flex flex-col w-full gap-12 lg:px-32">
       <div>
         <h2 className="text-center text-3xl font-semibold text-text-primary">
           Pricings
         </h2>
       </div>
 
-      <div className="flex gap-4 justify-between flex-col md:flex-row w-full md:w-[70rem] mx-auto">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4  w-full  mx-auto">
         {pricings.map((pricing) => (
           <Pricing pricing={pricing} />
         ))}

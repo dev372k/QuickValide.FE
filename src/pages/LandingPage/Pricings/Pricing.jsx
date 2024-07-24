@@ -48,7 +48,7 @@ function Pricing({ pricing }) {
               {feature.IsOffer ? (
                 <IoMdCheckmarkCircle size={24} className="text-accent-1" />
               ) : (
-                <RxCrossCircled />
+                <RxCrossCircled size={24} />
               )}
               <p>{feature.Name}</p>
             </li>

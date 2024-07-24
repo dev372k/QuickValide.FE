@@ -42,7 +42,7 @@ const features = [
 
 function Features() {
   return (
-    <section className="px-6 py-36 lg:px-48 bg-section-background w-full flex flex-col gap-8">
+    <section className="px-6 py-36  bg-section-background w-full flex flex-col gap-8 lg:px-32">
       <div>
         <h2 className="text-center text-3xl font-semibold text-text-primary">
           Features

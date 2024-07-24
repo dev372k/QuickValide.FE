@@ -1,10 +1,11 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 
 const texts = ["Fast", "Simple", "and Effective"];
 
 function Content() {
   const [index, setIndex] = useState(0);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -39,7 +40,8 @@ function Content() {
       </h1>
 
       <Link
-        to="/register"
+        to="register"
+        onClick={() => navigate("register")}
         className="p-2 bg-accent-1 text-white font-medium px-4 rounded-lg text-md"
       >
         Get started &rarr;

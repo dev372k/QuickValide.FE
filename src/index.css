@@ -1,6 +1,11 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+  @apply font-primary;
+}
 
 .input:placeholder-shown + p,
 .input:not(:focus) + p {
@@ -14,4 +19,94 @@
   background-position: center;
   background-repeat: repeat-y;
   background-size: cover;
+}
+
+/* header {
+  background-image: url("./assets//mesh.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+} */
+
+.bright-bulb {
+  position: relative;
+  color: #fff; /* Make text color transparent */
+  -webkit-text-stroke: 1px #00bcd4;
+  text-shadow: 0 0 10px rgba(0, 188, 212, 0.7), 0 0 20px rgba(0, 188, 212, 0.5),
+    0 0 30px rgba(0, 188, 212, 0.3);
+}
+
+.bright-bulb::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  /* box-shadow: 0 0 20px rgba(0, 188, 212, 0.7), 0 0 40px rgba(0, 188, 212, 0.5),
+    0 0 60px rgba(0, 188, 212, 0.3); */
+  z-index: -1;
+}
+
+.bulb-tail {
+  position: relative;
+  display: inline-block;
+}
+
+.bulb-tail::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2px;
+  height: 20px;
+  background: #00bcd4;
+  box-shadow: 0 0 10px rgba(0, 188, 212, 0.7), 0 0 20px rgba(0, 188, 212, 0.5),
+    0 0 30px rgba(0, 188, 212, 0.3);
+}
+.text-container {
+  position: relative;
+  height: 50px; /* Adjust height to match the text size */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.text {
+  position: absolute;
+  opacity: 0;
+  transition: opacity 1s ease, transform 1s ease;
+  animation: slide;
+  animation-duration: 500ms;
+}
+
+.text.active {
+  opacity: 1;
+  transform: translateY(0%);
+}
+
+.text.inactive {
+  opacity: 0;
+  transform: translateY(-100%);
+}
+
+@keyframes slide {
+  0% {
+    transform: translateY(0%);
+  }
+  25% {
+    transform: translateY(-100%);
+  }
+  50% {
+    transform: translateY(-200%);
+    opacity: 1;
+  }
+  75% {
+    transform: translateY(-300%);
+  }
+  100% {
+    transform: translateY(0%);
+  }
 }

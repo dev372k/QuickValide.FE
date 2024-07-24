@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { Turn as Hamburger } from "hamburger-react";
 
-function LandingPage() {
+function Home() {
   const [pricings, setPricings] = useState([
     {
       Title: "Free",
@@ -232,4 +232,4 @@ function LandingPage() {
   );
 }
 
-export default LandingPage;
+export default Home;

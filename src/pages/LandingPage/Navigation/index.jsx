@@ -8,20 +8,8 @@ import { Turn as Hamburger } from "hamburger-react";
 function Navigation() {
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
 
-  useEffect(function () {
-    window.addEventListener("scroll", function () {
-      var navbar = document.getElementById("navbar");
-      if (window.scrollY > 50) {
-        navbar.classList.add("bg-black", "bg-opacity-70", "p-2");
-        navbar.classList.remove("p-4");
-      } else {
-        navbar.classList.remove("bg-black", "bg-opacity-70", "p-2");
-        navbar.classList.add("p-4");
-      }
-    });
-  }, []);
   return (
-    <nav className="px-8 py-4 fixed top-0 transparent transition-all backdrop-blur-sm duration-300 z-50 backdrop-filter left-0 right-0  z-100 flex items-center justify-between gap-3">
+    <nav className="px-8 py-4 fixed top-0 navbar transparent transition-all bg-white bg-opacity-50 backdrop-blur-sm duration-300 z-50 backdrop-filter left-0 right-0  z-100 flex items-center justify-between gap-3">
       {/* Logo  */}
       <div className="w-32">
         <Link to="/">

@@ -1,6 +1,9 @@
 import Navigation from "./Navigation/index.jsx";
 import Header from "./Header/index.jsx";
 import Features from "./Features/index.jsx";
+import AboutUs from "./About Us/index.jsx";
+import Pricing from "./Pricings/index.jsx";
+import ContactUs from "./Contact Us/index.jsx";
 
 function LandingPage() {
   return (
@@ -8,6 +11,9 @@ function LandingPage() {
       <Navigation />
       <Header />
       <Features />
+      <AboutUs />
+      <Pricing />
+      <ContactUs />
     </main>
   );
 }

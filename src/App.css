@@ -1,9 +1,0 @@
-.wavy-background {
-  background: url('./wave.svg') repeat-x bottom center;
-  background-size: cover;
-  height: 150vh;
-  /* display: flex;
-  justify-content: center;
-  align-items: center; */
-  position: relative;
-}

@@ -5,7 +5,6 @@ import Register from "./pages/Register";
 // import Home from "./pages/Home";
 import LandingPage from "./pages/LandingPage/index";
 import Dashboard from "./pages/Dashboard";
-import Responsive from "./pages/LandingPage/Reviews/Slider";
 
 function App() {
   return (

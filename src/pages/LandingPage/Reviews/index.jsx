@@ -89,7 +89,10 @@ const ReviewCarousel = () => {
   };
 
   return (
-    <section className="px-6  md:w-[45rem] lg:w-[55rem] xl:w-[60rem] justify-between  md:mx-auto py-36  flex flex-col w-full items-center gap-8">
+    <section
+      id="reviews"
+      className="px-6  md:w-[45rem] lg:w-[55rem] xl:w-[60rem] justify-between  md:mx-auto py-36  flex flex-col w-full items-center gap-8"
+    >
       <div>
         <h2 className="text-3xl font-semibold text-text-primary">Reviews</h2>
       </div>

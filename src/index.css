@@ -62,13 +62,13 @@ body {
   width: 2px;
   height: 20px;
   background: #00bcd4;
-  box-shadow: 0 0 10px rgba(0, 188, 212, 0.7), 0 0 20px rgba(0, 188, 212, 0.5),
-    0 0 30px rgba(0, 188, 212, 0.3);
+  box-shadow: 0 0 5px rgba(0, 188, 212, 0.7), 0 0 10px rgba(0, 188, 212, 0.5),
+    0 0 15px rgba(0, 188, 212, 0.3);
 }
 .text-container {
   position: relative;
-  height: 50px; /* Adjust height to match the text size */
   display: flex;
+  height: 90px;
   align-items: center;
   justify-content: center;
   overflow: hidden;

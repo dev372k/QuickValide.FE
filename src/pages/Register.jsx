@@ -44,7 +44,7 @@ function Register() {
       <div className="flex items-center justify-center w-full relative">
         <Link
           to="/"
-          className="absolute top-5 left-5 text-sm p-2 text-accent-2 font-medium hover:bg-accent-2 hover:text-white transition-all rounded-full"
+          className="absolute top-5 left-5 text-sm p-2 text-accent-2 font-medium hover:bg-accent-2 bg-white hover:text-white transition-all rounded-full"
         >
           &larr; Back to home
         </Link>
@@ -57,7 +57,7 @@ function Register() {
               <h2 className="text-2xl text-center font-medium text-text-primary">
                 Hi there, let's start
               </h2>
-              <p className="text-text-secondary text-sm">
+              <p className="text-text-secondary text-xs">
                 This is first step of your marvelous journey
               </p>
             </div>
@@ -71,26 +71,26 @@ function Register() {
             <div className="flex flex-col gap-4">
               <div className="flex items-center justify-center gap-3 text-sm sm:text-md p-3 border-[1px] border-gray-200 rounded-lg hover:bg-gray-100 cursor-pointer">
                 <img src={GoogleIcon} alt="Google icon" />
-                <p className="text-md font-medium text-text-primary">
+                <p className="text-sm font-medium text-text-primary">
                   Continue with Google
                 </p>
               </div>
 
-              <div className="bg-text-secondary bg-opacity-75 w-full h-[1px] my-3 flex items-center justify-center text-text-secondary text-sm">
-                <span className="p-1 bg-white">OR</span>
+              <div className="bg-text-secondary bg-opacity-75 w-full h-[1px] my-1 flex items-center justify-center text-text-secondary text-sm">
+                <span className="p-1 bg-white">or</span>
               </div>
 
               <div className="relative">
                 <input
                   type="text"
                   placeholder="Name"
-                  className="p-2 border-[1px] border-gray-200 rounded-md w-full text-text-primary input focus:outline-none focus:border-accent-2 text-md font-medium"
+                  className="p-2 py-3 border-[1px] border-gray-200 rounded-md w-full text-text-primary input focus:outline-none focus:border-accent-2 text-sm "
                   {...register("name", {
                     required: "Name is required",
                     minLength: [3, "Name cannot be less than characters"],
                   })}
                 />
-                <p className="absolute top-0 transition-all -translate-y-1/2 left-2 text-xs p-1 px-2 bg-accent-2 rounded-md text-white">
+                <p className="absolute top-0 transition-all -translate-y-1/2 left-2 text-xs p-1 px-2 bg-accent-2 rounded-sm text-white">
                   Name
                 </p>
                 {errors?.name && (
@@ -103,14 +103,14 @@ function Register() {
                 <input
                   type="text"
                   placeholder="Email address"
-                  className="p-2 border-[1px] border-gray-200 input rounded-md w-full focus:outline-none focus:border-accent-2  text-md font-medium text-text-primary"
+                  className="p-2 py-3 border-[1px] border-gray-200 input rounded-md w-full focus:outline-none focus:border-accent-2  text-sm  text-text-primary"
                   {...register("email", {
                     required: "Email is required",
                     validate: (value) =>
                       isEmail(value) || "Invalid email provided",
                   })}
                 />
-                <p className="absolute top-0 transition-all -translate-y-1/2 left-2 text-xs p-1 px-2 bg-accent-2 rounded-md text-white">
+                <p className="absolute top-0 transition-all -translate-y-1/2 left-2 text-xs p-1 px-2 bg-accent-2 rounded-sm text-white">
                   Email address
                 </p>
                 {errors?.email && (
@@ -124,7 +124,7 @@ function Register() {
                   <input
                     type={isPasswordShown ? "text" : "password"}
                     placeholder="Password"
-                    className="p-2 border-[1px] border-gray-200 input rounded-md w-full mr-auto focus:outline-none focus:border-accent-2  text-md font-medium text-text-primary"
+                    className="p-2 py-3 border-[1px] border-gray-200 input rounded-md w-full mr-auto focus:outline-none focus:border-accent-2  text-sm text-text-primary"
                     {...register("password", {
                       required: "Password is required",
                       minLength: [
@@ -133,7 +133,7 @@ function Register() {
                       ],
                     })}
                   />
-                  <p className="absolute top-0 transition-all -translate-y-1/2 left-2 text-xs p-1 px-2 bg-accent-2 rounded-md text-white">
+                  <p className="absolute top-0 transition-all -translate-y-1/2 left-2 text-xs p-1 px-2 bg-accent-2 rounded-sm text-white">
                     Password
                   </p>
 
@@ -159,7 +159,7 @@ function Register() {
                   <input
                     type={isPasswordConfirmShown ? "text" : "password"}
                     placeholder="Password Confirmation"
-                    className="p-2 border-[1px] border-gray-200 input rounded-md w-full mr-auto focus:outline-none focus:border-accent-2 text-md font-medium text-text-primary"
+                    className="p-2 py-3 border-[1px] border-gray-200 input rounded-md w-full mr-auto focus:outline-none focus:border-accent-2 text-sm text-text-primary"
                     {...register("passwordConfirm", {
                       required: "Password confirmation is required",
                       minLength: [
@@ -168,7 +168,7 @@ function Register() {
                       ],
                     })}
                   />
-                  <p className="absolute top-0 transition-all -translate-y-1/2 left-2 text-xs p-1 px-2 bg-accent-2 rounded-md text-white">
+                  <p className="absolute top-0 transition-all -translate-y-1/2 left-2 text-xs p-1 px-2 bg-accent-2 rounded-sm text-white">
                     Password Confirmation
                   </p>
 
@@ -194,7 +194,7 @@ function Register() {
 
               <button
                 type="submit"
-                className="p-2 text-md font-semibold text-white bg-accent-1 hover:bg-opacity-75 rounded-md"
+                className="p-2 text-md font-medium text-white bg-accent-1 hover:bg-opacity-75 rounded-md"
               >
                 Register
               </button>

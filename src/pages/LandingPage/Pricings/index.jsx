@@ -1,5 +1,5 @@
 import Pricing from "./Pricing";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const pricings = [
   {
@@ -75,9 +75,28 @@ const pricings = [
 
 function Pricings() {
   const [showMore, setShowMore] = useState(false);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    handleResize();
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (windowWidth >= 768) setShowMore(true);
+  }, [windowWidth]);
   return (
     <section
-      className="px-6 py-36 bg-section-background flex flex-col w-full gap-12 lg:px-32"
+      className="px-6 py-36 bg-section-background relative z-10 flex flex-col w-full gap-12 lg:px-32"
       id="pricings"
     >
       <div>
@@ -86,15 +105,15 @@ function Pricings() {
         </h2>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4  w-full  mx-auto">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  w-full align-items-center justify-items-center gap-5 md:w-[35rem] lg:w-[55rem] xl:w-[60rem] mx-auto">
         {pricings.map((pricing) => (
-          <Pricing pricing={pricing} showMore={showMore} />
+          <Pricing pricing={pricing} showMore={showMore} key={pricing.Title} />
         ))}
       </div>
 
       <button
         onClick={() => setShowMore(!showMore)}
-        className="px-3 py-2 text-md bg-accent-1 self-center text-white rounded-full md:hidden"
+        className="px-3 py-2 text-sm bg-accent-1 self-center text-white rounded-full md:hidden"
       >
         {showMore ? "Show less" : "Show more"}
       </button>

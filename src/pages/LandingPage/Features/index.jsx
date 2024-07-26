@@ -49,21 +49,23 @@ const features = [
 
 function Features() {
   return (
-    <section
-      className="px-6 py-36  bg-section-background w-full flex flex-col gap-8 lg:px-32"
-      id="features"
-    >
-      <div>
-        <h2 className="text-center text-3xl font-semibold text-text-primary">
-          Features
-        </h2>
-      </div>
+    <section className="bg-section-background w-full flex flex-col items-center justify-center">
+      <section
+        className="px-6 py-36 md:w-[45rem] lg:w-[55rem] xl:w-[60rem] flex flex-col  gap-8 "
+        id="features"
+      >
+        <div>
+          <h2 className="text-center text-3xl font-semibold text-text-primary">
+            Features
+          </h2>
+        </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        {features.map((feature) => (
-          <Feature feature={feature} />
-        ))}
-      </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {features.map((feature) => (
+            <Feature feature={feature} key={feature.id} />
+          ))}
+        </div>
+      </section>
     </section>
   );
 }

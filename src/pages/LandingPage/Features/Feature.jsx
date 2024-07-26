@@ -8,7 +8,7 @@ function Feature({ feature }) {
         <h3 className="text-lg font-semibold text-text-primary">
           {feature.title}
         </h3>
-        <p className="text-text-secondary">{feature.description}</p>
+        <p className="text-text-secondary text-sm">{feature.description}</p>
       </div>
     </div>
   );

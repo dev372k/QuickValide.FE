@@ -6,6 +6,7 @@ import AboutUs from "./About Us/index.jsx";
 import Pricing from "./Pricings/index.jsx";
 import ContactUs from "./Contact Us/index.jsx";
 import Reviews from "./Reviews/index.jsx";
+import Footer from "./Footer/index.jsx";
 
 import { useEffect } from "react";
 
@@ -17,7 +18,7 @@ function LandingPage() {
     <main className="w-full min-h-screen relative">
       <a
         href="#"
-        className="text-xs fixed p-3 px-4 leading-none bg-text-primary text-white rounded-full gap-1 bottom-5 right-5 z-100 flex flex-col items-center"
+        className="text-xs fixed p-3 px-4 leading-none bg-text-primary text-white rounded-full gap-1 bottom-5 right-5 z-[1000] flex flex-col items-center"
       >
         <span>&uarr;</span>
         <span className="text-center">
@@ -33,6 +34,7 @@ function LandingPage() {
       <Pricing />
       <Reviews />
       <ContactUs />
+      <Footer />
     </main>
   );
 }

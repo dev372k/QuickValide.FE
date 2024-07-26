@@ -1,7 +1,10 @@
 // ReviewCarousel.jsx
 import React, { useState } from "react";
 import ReviewCard from "./ReviewCard";
-import "./carousel.css"; // Make sure to create and import the CSS file
+
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const reviews = [
   {
@@ -47,68 +50,59 @@ const reviews = [
 ];
 
 const ReviewCarousel = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  const handlePrev = () => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex === 0 ? reviews.length - 1 : prevIndex - 1
-    );
-  };
-
-  const handleNext = () => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex === reviews.length - 1 ? 0 : prevIndex + 1
-    );
+  var settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    autoplay: true,
+    autoplaySpeed: 10000,
+    slidesToShow: 2,
+    slidesToScroll: 2,
+    cssEase: "linear",
+    initialSlide: 0,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          infinite: true,
+          dots: true,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          initialSlide: 2,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
   };
 
   return (
-    <section
-      className="px-6 py-36  w-full flex flex-col gap-12 md:px-32"
-      id="reviews"
-    >
-      <div className="text-4xl font-semibold text-text-primary text-center">
-        <h2>Reviews</h2>
+    <section className="px-6  md:w-[45rem] lg:w-[55rem] xl:w-[60rem] justify-between  md:mx-auto py-36  flex flex-col w-full items-center gap-8">
+      <div>
+        <h2 className="text-3xl font-semibold text-text-primary">Reviews</h2>
       </div>
-
-      <div className="w-full place-items-center  grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4 lg:grap-6">
-        {reviews.map((review) => (
-          <ReviewCard review={review} />
-        ))}
+      <div className="w-full slider-container">
+        <Slider
+          {...settings}
+          className="w-[95%] flex items-center gap-8 mx-auto"
+        >
+          {reviews.map((review, index) => (
+            <ReviewCard key={index} review={review} />
+          ))}
+        </Slider>
       </div>
-      {/* <div className="relative w-full  mx-auto">
-        <button
-          onClick={handlePrev}
-          className="absolute left-0 top-1/2 transform -translate-y-1/2 z-10 p-2 h-full bg-white backdrop-blur-md text-4xl text-accent-1 bg-opacity-50 rounded-lg border-[1px]"
-        >
-          {"<"}
-        </button>
-        <div className="overflow-hidden relative">
-          <div
-            className="whitespace-nowrap transition-transform duration-500 ease-in-out"
-            style={{ transform: `translateX(-${currentIndex * 100}%)` }}
-          >
-            {reviews.map((review, index) => (
-              <div
-                key={index}
-                className="inline-block w-full h-full"
-                style={{
-                  transform: `scale(${index === currentIndex ? 1 : 0.8})`,
-                  opacity: index === currentIndex ? 1 : 0.5,
-                  transition: "transform 0.5s, opacity 0.5s",
-                }}
-              >
-                <ReviewCard review={review} />
-              </div>
-            ))}
-          </div>
-        </div>
-        <button
-          onClick={handleNext}
-          className="absolute right-0 top-1/2 transform h-full -translate-y-1/2 z-10 p-2 bg-white backdrop-blur-md text-4xl text-accent-1 bg-opacity-50 rounded-lg border-[1px]"
-        >
-          {">"}
-        </button>
-      </div> */}
     </section>
   );
 };

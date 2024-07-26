@@ -14,7 +14,7 @@ const icons = {
 function Pricing({ pricing, showMore }) {
   return (
     <div
-      className={`w-full bg-white p-8 md:p-10 rounded-xl flex flex-col  gap-4 border-[1px]  overflow-hidden relative ${
+      className={`max-w-72 bg-white p-8 md:p-10 rounded-xl flex flex-col  gap-4 border-[1px]  overflow-hidden relative -z-10 ${
         pricing.IsRecommended ? "border-accent-2" : "border-gray-200"
       } ${!showMore ? (pricing.Title === "Free" ? "flex" : "hidden") : "flex"}`}
     >
@@ -47,12 +47,13 @@ function Pricing({ pricing, showMore }) {
       </button>
 
       <ul className="flex flex-col gap-3 py-6">
-        {pricing.Features.map((feature) => {
+        {pricing.Features.map((feature, index) => {
           return (
             <li
               className={`flex items-center gap-2 ${
                 feature.IsOffer ? "text-text-primary" : "text-text-secondary"
               } `}
+              key={index}
             >
               {feature.IsOffer ? (
                 <IoMdCheckmarkCircle size={24} className="text-accent-1" />

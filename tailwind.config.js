@@ -23,6 +23,20 @@ export default {
       backgroundImage: {
         meshy: "url('/src/assets/mesh.png')",
       },
+      keyframes: {
+        blob1: {
+          "0% , 100%": { transform: "translate(0, 0)" },
+          "50%": { transform: "translate(60px, 40px)" },
+        },
+        blob2: {
+          "0% , 100%": { transform: "translate(0, 0)" },
+          "50%": { transform: "translate(20px, -20px)" },
+        },
+      },
+      animation: {
+        pinkCircle: "blob1 5s ease-in-out infinite",
+        blueCircle: "blob2 5s ease-in infinite",
+      },
     },
   },
   plugins: [addIconSelectors(["hugeicons"])],

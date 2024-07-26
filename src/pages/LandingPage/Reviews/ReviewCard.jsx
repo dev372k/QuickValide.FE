@@ -1,21 +1,16 @@
 // ReviewCard.jsx
 import React from "react";
 
-const ReviewCard = ({ review, className }) => {
+const ReviewCard = ({ review }) => {
   return (
-    <div
-      className={`mx-12 py-6 border-[1px] bg-white  rounded-lg  flex flex-col gap-2 px-8 w-full ${className}`}
-    >
+    <div className="p-6 border-[1px] rounded-lg  mb-10 md:mr-5 flex flex-col gap-5">
       <img
         src={review.image}
         alt={review.title}
-        className="h-14 w-14 rounded-full  object-cover"
+        className="h-14 w-14 rounded-full object-cover"
       />
-
-      <p className="text-gray text-md text-text-secondary">
-        {review.description}
-      </p>
-      <p className="text-text-primary text-sm">- {review.author}</p>
+      <p className="text-gray-600 text-sm">{review.description}</p>
+      <p className="text-gray-900 text-xs">- {review.author}</p>
     </div>
   );
 };

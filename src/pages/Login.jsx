@@ -36,7 +36,7 @@ function Login() {
       <div className="flex items-center justify-center w-full relative">
         <Link
           to="/"
-          className="absolute top-5 left-5 text-sm p-2 text-accent-2 font-medium hover:bg-accent-2 hover:text-white transition-all rounded-full"
+          className="absolute top-5 left-5 text-sm p-2 text-accent-2 font-medium hover:bg-accent-2 bg-white hover:text-white transition-all rounded-full"
         >
           &larr; Back to home
         </Link>
@@ -49,7 +49,7 @@ function Login() {
               <h2 className="text-2xl text-center font-medium text-text-primary">
                 Welcome back
               </h2>
-              <p className="text-text-secondary text-sm">
+              <p className="text-text-secondary text-xs">
                 Glad to see you again, let the magic begin
               </p>
             </div>
@@ -57,20 +57,20 @@ function Login() {
             <div className="flex flex-col gap-4">
               <div className="flex items-center justify-center gap-3 text-sm sm:text-md p-3 border-[1px] border-gray-200 rounded-lg hover:bg-gray-100 cursor-pointer">
                 <img src={GoogleIcon} alt="Google icon" />
-                <p className="text-md font-medium text-gray-600">
+                <p className="text-sm font-medium text-gray-600">
                   Continue with Google
                 </p>
               </div>
 
-              <div className="bg-text-secondary bg-opacity-75 w-full h-[1px] my-3 flex items-center justify-center text-text-secondary text-sm">
-                <span className="p-1 bg-white">OR</span>
+              <div className="bg-text-secondary bg-opacity-75 w-full h-[1px] my-1 flex items-center justify-center text-text-secondary text-sm">
+                <span className="p-1 bg-white">or</span>
               </div>
 
               <div className="relative">
                 <input
                   type="text"
                   placeholder="Email address"
-                  className="p-2 border-[1px] input border-gray-200 rounded-md w-full focus:outline-none focus:border-accent-2 text-md font-medium text-text-primary"
+                  className="p-2 py-3 border-[1px] input border-gray-200 rounded-md w-full focus:outline-none focus:border-accent-2 text-sm  text-text-primary"
                   {...register("email", {
                     required: "Email is required",
                     validate: (value) =>
@@ -91,7 +91,7 @@ function Login() {
                   <input
                     type={isPasswordShown ? "text" : "password"}
                     placeholder="Password"
-                    className="p-2 border-[1px] input border-gray-200 rounded-md w-full mr-auto focus:outline-none focus:border-accent-2 text-md font-medium text-text-primary"
+                    className="p-2 py-3 border-[1px] input border-gray-200 rounded-md w-full mr-auto focus:outline-none focus:border-accent-2 text-sm  text-text-primary"
                     {...register("password", {
                       required: "Password is required",
                       minLength: [
@@ -124,19 +124,19 @@ function Login() {
 
               <a
                 href="#"
-                className="text-sm font-medium text-accent-2 self-end"
+                className="text-xs font-medium text-accent-2 self-end"
               >
                 Forgot password?
               </a>
               <button
                 type="submit"
-                className="p-2  text-md  hover:bg-opacity-80 font-semibold text-white bg-accent-1 rounded-md"
+                className="p-2  text-md hover:bg-opacity-80 font-medium text-white bg-accent-1 rounded-md"
               >
                 Login
               </button>
             </div>
 
-            <div className="flex items-center text-md text-text-primary gap-1 self-center">
+            <div className="flex items-center text-sm text-text-primary gap-1 self-center">
               <p>Don't have an account?</p>
               <Link to="/register" className="text-accent-2 font-semibold">
                 Register

@@ -25,6 +25,7 @@
     "react-icons": "^5.2.1",
     "react-router-dom": "^6.25.1",
     "react-slick": "^0.30.2",
+    "serve": "^14.2.3",
     "slick-carousel": "^1.8.1",
     "swiper": "^11.1.7",
     "validate": "^5.2.0",

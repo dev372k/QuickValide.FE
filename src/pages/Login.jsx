@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { isEmail } from "validator";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { GoogleLogin } from "@react-oauth/google";
+import { GoogleLogin, useGoogleLogin } from "@react-oauth/google";
 
 import GoogleIcon from "../assets/google.svg";
 import EyeOpen from "../assets/eye-open.svg";
@@ -37,15 +37,17 @@ function Login() {
     navigate("/dashboard");
   }
 
-  const onSuccess = (response) => {
-    console.log(response);
+  const googleLogin = useGoogleLogin({
+    onSuccess: (response) => {
+      console.log(response);
 
-    // Handle successful login
-  };
+      // Handle successful login
+    },
 
-  const onFailure = (error) => {
-    console.error(error);
-  };
+    onFailure: (error) => {
+      console.error(error);
+    },
+  });
 
   return (
     <main className="w-full min-h-screen flex">
@@ -75,7 +77,7 @@ function Login() {
               </p>
             </div>
 
-            <div className="w-full">
+            {/* <div className="w-full">
               <GoogleLogin
                 className="w-full"
                 onSuccess={onSuccess}
@@ -86,12 +88,16 @@ function Login() {
                 text="Continue with Google"
                 width={400}
               />
-            </div>
+            </div> */}
 
             <div className="flex flex-col gap-4">
-              <div className="flex items-center justify-center gap-3 text-sm sm:text-md p-3 border-[1px] border-gray-200 rounded-lg hover:bg-gray-100 cursor-pointer">
+              <div
+                role="button"
+                onClick={() => googleLogin()}
+                className="flex items-center justify-center gap-3 text-sm sm:text-md p-3 border-[1px] border-gray-200 rounded-lg hover:bg-gray-100 cursor-pointer"
+              >
                 <img src={GoogleIcon} alt="Google icon" />
-                <p className="text-sm font-medium text-gray-600">
+                <p className="text-sm font-medium text-text-primary">
                   Continue with Google
                 </p>
               </div>

@@ -34,7 +34,6 @@ function Login() {
       "POST",
       data
     );
-    console.log(res);
     navigate("/dashboard");
   }
 
@@ -76,12 +75,20 @@ function Login() {
               </p>
             </div>
 
-            <div className="flex flex-col gap-4">
+            <div className="w-full">
               <GoogleLogin
-                buttonText="Continue with Google"
+                className="w-full"
                 onSuccess={onSuccess}
                 onFailure={onFailure}
+                theme="outline"
+                size="large"
+                logo_alignment="center"
+                text="Continue with Google"
+                width="100%"
               />
+            </div>
+
+            <div className="flex flex-col gap-4">
               <div className="flex items-center justify-center gap-3 text-sm sm:text-md p-3 border-[1px] border-gray-200 rounded-lg hover:bg-gray-100 cursor-pointer">
                 <img src={GoogleIcon} alt="Google icon" />
                 <p className="text-sm font-medium text-gray-600">

@@ -84,7 +84,7 @@ function Login() {
                 size="large"
                 logo_alignment="center"
                 text="Continue with Google"
-                width="100%"
+                width={400}
               />
             </div>
 

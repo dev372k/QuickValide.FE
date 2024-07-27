@@ -8,17 +8,29 @@ import ContactUs from "./Contact Us/index.jsx";
 import Reviews from "./Reviews/index.jsx";
 import Footer from "./Footer/index.jsx";
 
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 
 function LandingPage() {
+  const [scrollY, setScrollY] = useState(0);
   useEffect(function () {
     document.title = "QuickValide | Home";
+
+    window.addEventListener("scroll", () => {
+      setScrollY(window.scrollY);
+    });
+
+    return () => {
+      window.removeEventListener("scroll", setScrollY(window.scrollY));
+    };
   }, []);
+
   return (
     <main className="w-full min-h-screen relative">
       <a
         href="#"
-        className="text-xs fixed p-3 px-4 leading-none bg-text-primary text-white rounded-full gap-1 bottom-5 right-5 z-[1000] flex flex-col items-center"
+        className={`text-xs fixed p-3 px-4 leading-none bg-text-primary text-white rounded-full gap-1 bottom-5 right-5 z-[1000]  flex-col items-center ${
+          scrollY >= 1000 ? "flex" : "hidden"
+        }`}
       >
         <span>&uarr;</span>
         <span className="text-center">

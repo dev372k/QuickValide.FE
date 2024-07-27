@@ -114,3 +114,33 @@ body {
 html {
   scroll-behavior: smooth;
 }
+
+:root::selection {
+  background-color: #e91e63 !important;
+  color: red;
+}
+
+.slick-dots li button:before {
+  color: #333333; /* Red color for dots */
+}
+
+.slick-dots li.slick-active button:before {
+  color: #e91e63; /* Green color for active dot */
+}
+
+.custom-next,
+.custom-prev {
+  display: block;
+  background: red;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  font-size: 20px;
+  color: white;
+}
+
+.custom-prev {
+  background: green;
+}

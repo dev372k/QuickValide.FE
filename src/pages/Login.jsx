@@ -3,10 +3,15 @@ import { useForm } from "react-hook-form";
 import { isEmail } from "validator";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google";
 
 import GoogleIcon from "../assets/google.svg";
 import EyeOpen from "../assets/eye-open.svg";
 import EyeClosed from "../assets/eye-closed.svg";
+import { request } from "../helpers/requestHelper";
+
+const clientId =
+  "933017194074-dp2kaj9jolvebu8u14uluqms0mibj9e2.apps.googleusercontent.com";
 
 function Login() {
   const navigate = useNavigate();
@@ -22,9 +27,26 @@ function Login() {
     document.title = "Login";
   }, []);
 
-  function onSubmit(e) {
+  async function onSubmit(data) {
+    console.log(data);
+    const res = await request(
+      "https://api.quickvalide.com/api/Auth/login",
+      "POST",
+      data
+    );
+    console.log(res);
     navigate("/dashboard");
   }
+
+  const onSuccess = (response) => {
+    console.log(response);
+
+    // Handle successful login
+  };
+
+  const onFailure = (error) => {
+    console.error(error);
+  };
 
   return (
     <main className="w-full min-h-screen flex">
@@ -55,6 +77,14 @@ function Login() {
             </div>
 
             <div className="flex flex-col gap-4">
+              <GoogleOAuthProvider>
+                <GoogleLogin
+                  buttonText="Continue with Google"
+                  clientId={clientId}
+                  onSuccess={onSuccess}
+                  onFailure={onFailure}
+                />
+              </GoogleOAuthProvider>
               <div className="flex items-center justify-center gap-3 text-sm sm:text-md p-3 border-[1px] border-gray-200 rounded-lg hover:bg-gray-100 cursor-pointer">
                 <img src={GoogleIcon} alt="Google icon" />
                 <p className="text-sm font-medium text-gray-600">

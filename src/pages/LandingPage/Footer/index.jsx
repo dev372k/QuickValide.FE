@@ -10,6 +10,11 @@ function Footer() {
         </a>
         <ul className="flex flex-col items-center gap-3 text-sm">
           <div className="flex gap-4 text-text-primary flex-wrap justify-center">
+            <a href="#">
+              <li className="hover:text-accent-1 cursor-pointer border-b-[1px] transition-all duration-150 border-transparent font-medium hover:border-accent-1 py-1">
+                Home
+              </li>
+            </a>
             <a href="#features">
               <li className="hover:text-accent-1 cursor-pointer border-b-[1px] transition-all duration-150 border-transparent font-medium hover:border-accent-1 py-1">
                 Features

@@ -25,6 +25,12 @@ function Navigation() {
       {/* Links  */}
       <ul className="md:flex items-center gap-3 text-sm text-text-primary hidden">
         <a
+          href="#"
+          className="hover:text-accent-1 border-b-2 transition-all duration-150 border-b-transparent hover:border-b-accent-1"
+        >
+          <li>Home</li>
+        </a>
+        <a
           href="#features"
           className="hover:text-accent-1 border-b-2 transition-all duration-150 border-b-transparent hover:border-b-accent-1"
         >

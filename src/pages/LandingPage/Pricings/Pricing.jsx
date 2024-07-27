@@ -60,7 +60,7 @@ function Pricing({ pricing, showMore }) {
               ) : (
                 <RxCrossCircled size={24} />
               )}
-              <p>{feature.Name}</p>
+              <p className="text-sm">{feature.Name}</p>
             </li>
           );
         })}

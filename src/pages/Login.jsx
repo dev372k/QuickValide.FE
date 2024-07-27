@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { isEmail } from "validator";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google";
+import { GoogleLogin } from "@react-oauth/google";
 
 import GoogleIcon from "../assets/google.svg";
 import EyeOpen from "../assets/eye-open.svg";
@@ -77,14 +77,11 @@ function Login() {
             </div>
 
             <div className="flex flex-col gap-4">
-              <GoogleOAuthProvider>
-                <GoogleLogin
-                  buttonText="Continue with Google"
-                  clientId={clientId}
-                  onSuccess={onSuccess}
-                  onFailure={onFailure}
-                />
-              </GoogleOAuthProvider>
+              <GoogleLogin
+                buttonText="Continue with Google"
+                onSuccess={onSuccess}
+                onFailure={onFailure}
+              />
               <div className="flex items-center justify-center gap-3 text-sm sm:text-md p-3 border-[1px] border-gray-200 rounded-lg hover:bg-gray-100 cursor-pointer">
                 <img src={GoogleIcon} alt="Google icon" />
                 <p className="text-sm font-medium text-gray-600">

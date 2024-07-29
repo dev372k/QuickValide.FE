@@ -7,7 +7,8 @@ import { useNavigate } from "react-router-dom";
 import GoogleIcon from "../assets/google.svg";
 import EyeOpen from "../assets/eye-open.svg";
 import EyeClosed from "../assets/eye-closed.svg";
-import Logo from "../assets/logo-no-background.svg";
+import { request } from "../helpers/requestHelper";
+import { useSelector } from "react-redux";
 
 function Register() {
   const navigate = useNavigate();
@@ -15,6 +16,12 @@ function Register() {
   const [isPasswordShown, setIsPasswordShown] = useState(false);
   const [isPasswordConfirmShown, setIsPasswordConfirmShown] = useState(false);
   const [doPasswordsMatch, setDoPasswordsMatch] = useState(true);
+  const [message, setMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [successMessage, setSuccessMessage] = useState("");
+
+  const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
+
   const {
     register,
     formState: { errors },
@@ -22,15 +29,45 @@ function Register() {
     getValues,
   } = useForm();
 
-  useEffect(function () {
-    document.title = "Register";
-  }, []);
+  useEffect(
+    function () {
+      document.title = "Register";
 
-  function onSubmit(e) {
-    console.log(getValues().password, getValues().passwordConfirm);
-    if (getValues().password !== getValues().passwordConfirm)
+      if (isAuthenticated) navigate("/dashboard");
+    },
+    [isAuthenticated]
+  );
+
+  async function onSubmit(data) {
+    if (getValues().password !== getValues().passwordConfirm) {
       setDoPasswordsMatch(false);
-    else navigate("/dashboard");
+      return;
+    }
+
+    const dataModified = {
+      name: data.name,
+      email: data.email,
+      password: data.password,
+    };
+    setIsLoading(true);
+    setMessage("");
+    setSuccessMessage("");
+    setDoPasswordsMatch(true);
+    const res = await request(
+      "https://api.quickvalide.com/api/Auth",
+      "POST",
+      dataModified
+    );
+    setIsLoading(false);
+
+    if (!res.status) setMessage(res.message);
+
+    if (res.status) {
+      setSuccessMessage("registered");
+      setTimeout(function () {
+        navigate("/login");
+      }, 3000);
+    }
   }
 
   return (
@@ -53,6 +90,11 @@ function Register() {
             className="flex flex-col gap-4"
             onSubmit={handleSubmit(onSubmit)}
           >
+            {successMessage && (
+              <p className="text-sm font-medium text-white bg-success rounded-md p-2">
+                Registered Successfully. Redirecting...
+              </p>
+            )}
             <div className="flex flex-col items-center gap-1">
               <h2 className="text-2xl text-center font-medium text-text-primary">
                 Hi there, let's start
@@ -61,12 +103,6 @@ function Register() {
                 This is first step of your marvelous journey
               </p>
             </div>
-
-            {!doPasswordsMatch && (
-              <p className="text-sm font-medium text-white bg-error rounded-lg p-3">
-                Passwords don't match
-              </p>
-            )}
 
             <div className="flex flex-col gap-4">
               <div className="flex items-center justify-center gap-3 text-sm sm:text-md p-3 border-[1px] border-gray-200 rounded-lg hover:bg-gray-100 cursor-pointer">
@@ -79,6 +115,18 @@ function Register() {
               <div className="bg-text-secondary bg-opacity-75 w-full h-[1px] my-1 flex items-center justify-center text-text-secondary text-sm">
                 <span className="p-1 bg-white">or</span>
               </div>
+
+              {!doPasswordsMatch && (
+                <p className="text-sm font-medium text-white bg-error rounded-md p-2">
+                  Passwords don't match
+                </p>
+              )}
+
+              {message && (
+                <p className="text-sm font-medium text-white bg-error rounded-md p-2">
+                  {message}
+                </p>
+              )}
 
               <div className="relative">
                 <input
@@ -194,9 +242,10 @@ function Register() {
 
               <button
                 type="submit"
-                className="p-2 text-md font-medium text-white bg-accent-1 hover:bg-opacity-75 rounded-md"
+                disabled={isLoading}
+                className="p-2 text-md font-medium text-white bg-accent-1 hover:bg-opacity-75 rounded-md disabled:bg-text-secondary disabled:text-gray-50"
               >
-                Register
+                {isLoading ? "Loading..." : "Register"}
               </button>
             </div>
           </form>

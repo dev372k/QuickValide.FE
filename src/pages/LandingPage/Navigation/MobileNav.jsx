@@ -1,7 +1,12 @@
 import { Link } from "react-router-dom";
 import Backdrop from "../../../components/Backdrop";
 
-function MobileNav({ isMobileNavOpen, setIsMobileNavOpen }) {
+function MobileNav({
+  isMobileNavOpen,
+  setIsMobileNavOpen,
+  isAuthenticated,
+  handleLogout,
+}) {
   return (
     <>
       {isMobileNavOpen && (
@@ -65,20 +70,29 @@ function MobileNav({ isMobileNavOpen, setIsMobileNavOpen }) {
               </a>
             </ul>
 
-            <div className="flex items-center flex-col gap-2 mb-3 px-12">
-              <Link
-                to="/login"
-                className="w-full p-2 text-center  bg-accent-2 rounded-full    hover:bg-opacity-50 text-white"
+            {isAuthenticated ? (
+              <button
+                className="py-3 font-medium text-accent-1 hover:bg-gray-100"
+                onClick={handleLogout}
               >
-                Login
-              </Link>
-              <Link
-                to="/register"
-                className="w-full p-2 text-center text-white bg-accent-1 border-t-[1px] hover:bg-opacity-75 rounded-full"
-              >
-                Register
-              </Link>
-            </div>
+                Logout
+              </button>
+            ) : (
+              <div className="flex items-center flex-col gap-2 mb-3 px-12">
+                <Link
+                  to="/login"
+                  className="w-full p-2 text-center  bg-accent-2 rounded-full    hover:bg-opacity-50 text-white"
+                >
+                  Login
+                </Link>
+                <Link
+                  to="/register"
+                  className="w-full p-2 text-center text-white bg-accent-1 border-t-[1px] hover:bg-opacity-75 rounded-full"
+                >
+                  Register
+                </Link>
+              </div>
+            )}
           </nav>
         </>
       )}

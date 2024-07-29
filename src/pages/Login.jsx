@@ -3,45 +3,87 @@ import { useForm } from "react-hook-form";
 import { isEmail } from "validator";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { GoogleLogin, useGoogleLogin } from "@react-oauth/google";
+import { useGoogleLogin } from "@react-oauth/google";
 
 import GoogleIcon from "../assets/google.svg";
 import EyeOpen from "../assets/eye-open.svg";
 import EyeClosed from "../assets/eye-closed.svg";
 import { request } from "../helpers/requestHelper";
+import { decodeToken, setToken } from "../helpers/jwtHelper";
+
+import { useDispatch, useSelector } from "react-redux";
+import { saveUser } from "../services/userSlice";
 
 const clientId =
   "933017194074-dp2kaj9jolvebu8u14uluqms0mibj9e2.apps.googleusercontent.com";
 
 function Login() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
 
   const [isPasswordShown, setIsPasswordShown] = useState(false);
+  const [message, setMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const {
     register,
     formState: { errors },
     handleSubmit,
   } = useForm();
 
-  useEffect(function () {
-    document.title = "Login";
-  }, []);
+  useEffect(
+    function () {
+      document.title = "Login";
+      console.log(isAuthenticated);
+      if (isAuthenticated) navigate("/dashboard");
+    },
+    [isAuthenticated]
+  );
 
   async function onSubmit(data) {
-    console.log(data);
+    setIsLoading(true);
+    setMessage("");
     const res = await request(
       "https://api.quickvalide.com/api/Auth/login",
       "POST",
       data
     );
-    navigate("/dashboard");
+    setIsLoading(false);
+    console.log(res);
+
+    if (!res.status) setMessage(res.message);
+
+    if (res.status) {
+      setToken(res?.data);
+      dispatch(
+        saveUser(
+          JSON.parse(
+            decodeToken(res?.data)[
+              "http://schemas.microsoft.com/ws/2008/06/identity/claims/userdata"
+            ]
+          )
+        )
+      );
+
+      navigate("/dashboard");
+    }
   }
 
   const googleLogin = useGoogleLogin({
-    onSuccess: (response) => {
-      console.log(response);
+    onSuccess: async (tokenResponse) => {
+      // Obtain the user info using the access token
+      const userInfo = await fetch(
+        "https://www.googleapis.com/oauth2/v3/userinfo",
+        {
+          headers: {
+            Authorization: `Bearer ${tokenResponse.access_token}`,
+          },
+        }
+      );
 
-      // Handle successful login
+      const user = await userInfo.json();
+      console.log(user);
     },
 
     onFailure: (error) => {
@@ -105,6 +147,11 @@ function Login() {
               <div className="bg-text-secondary bg-opacity-75 w-full h-[1px] my-1 flex items-center justify-center text-text-secondary text-sm">
                 <span className="p-1 bg-white">or</span>
               </div>
+              {message && (
+                <p className="w-full p-2 bg-error text-white text-sm text-medium rounded-md">
+                  {message}
+                </p>
+              )}
 
               <div className="relative">
                 <input
@@ -170,9 +217,10 @@ function Login() {
               </a>
               <button
                 type="submit"
-                className="p-2  text-md hover:bg-opacity-80 font-medium text-white bg-accent-1 rounded-md"
+                disabled={isLoading}
+                className="p-2  text-md hover:bg-opacity-80 font-medium text-white bg-accent-1 rounded-md disabled:bg-text-secondary disabled:text-gray-50"
               >
-                Login
+                {isLoading ? "Loading..." : "Login"}
               </button>
             </div>
 

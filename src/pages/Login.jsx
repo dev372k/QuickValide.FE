@@ -209,12 +209,12 @@ function Login() {
                 )}
               </div>
 
-              <a
-                href="#"
+              <Link
+                to="/forgot-password"
                 className="text-xs font-medium text-accent-2 self-end"
               >
                 Forgot password?
-              </a>
+              </Link>
               <button
                 type="submit"
                 disabled={isLoading}

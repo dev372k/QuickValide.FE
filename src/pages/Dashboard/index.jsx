@@ -18,8 +18,8 @@ function Dashboard() {
     <main className="w-full min-h-screen bg-section-background flex">
       <Sidebar />
 
-      <div className="p-3 w-full">
-        <div className="flex items-center gap-2 bg-white w-full p-3 rounded-lg border-[1px]">
+      <div className="p-3 w-full flex flex-col gap-2">
+        <div className="flex items-center gap-2 w-full p-3 border-b-[1px] ml-auto">
           <div className="w-10 h-10 text-sm leading-[0.5] p-1 flex items-center justify-center text-white rounded-full bg-accent-2">
             {deriveInitials(user?.Name)}
           </div>

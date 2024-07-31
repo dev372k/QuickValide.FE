@@ -73,6 +73,7 @@ function Login() {
   const googleLogin = useGoogleLogin({
     onSuccess: async (tokenResponse) => {
       // Obtain the user info using the access token
+      console.log("Google Auth Response:", tokenResponse);
       const userInfo = await fetch(
         "https://www.googleapis.com/oauth2/v3/userinfo",
         {

@@ -66,7 +66,7 @@ function Login() {
         )
       );
 
-      navigate("/dashboard");
+      navigate("/dashboard/home");
     }
   }
 

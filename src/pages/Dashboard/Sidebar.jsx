@@ -1,5 +1,7 @@
 import LogoIcon from "../../../public/favicon.svg";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
+import { removeToken } from "../../helpers/jwtHelper";
+import { useDispatch } from "react-redux";
 
 import { TbBrandGoogleAnalytics } from "react-icons/tb";
 import { TbSeo } from "react-icons/tb";
@@ -9,8 +11,17 @@ import Wailist from "../../assets/waitlist.svg";
 import Builder from "../../assets/builder.svg";
 import { PiSignOutLight } from "react-icons/pi";
 import { IoHomeOutline } from "react-icons/io5";
+import { logoutUser } from "../../services/userSlice";
 
 function Sidebar() {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  function handleLogout() {
+    removeToken();
+    dispatch(logoutUser());
+    navigate("/login");
+  }
   return (
     <aside className="h-screen bg-white p-1 py-3 border-r-[1px] text-xs flex flex-col items-center justify-between">
       <Link to="/">
@@ -73,7 +84,10 @@ function Sidebar() {
           <IoSettingsOutline size={24} />
           <p className="text-text-secondary tooltip-text">Settings</p>
         </NavLink>
-        <div className="hover:bg-section-background p-3 tooltip rounded-md cursor-pointer transition-all">
+        <div
+          onClick={handleLogout}
+          className="hover:bg-section-background p-3 tooltip rounded-md cursor-pointer transition-all"
+        >
           <PiSignOutLight size={24} />
           <p className="text-text-secondary tooltip-text">Sign out</p>
         </div>

@@ -36,7 +36,7 @@ function Login() {
     function () {
       document.title = "Login";
       console.log(isAuthenticated);
-      if (isAuthenticated) navigate("/dashboard");
+      if (isAuthenticated) navigate("/dashboard/home");
     },
     [isAuthenticated]
   );

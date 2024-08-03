@@ -54,15 +54,21 @@ function Login() {
 
     if (res.status) {
       setToken(res?.data);
-      dispatch(
-        saveUser(
-          JSON.parse(
-            decodeToken(res?.data)[
-              "http://schemas.microsoft.com/ws/2008/06/identity/claims/userdata"
-            ]
-          )
-        )
-      );
+    
+   
+      const userId = JSON.parse(
+        decodeToken(res?.data)[
+          "http://schemas.microsoft.com/ws/2008/06/identity/claims/userdata"
+        ]
+      )["Id"]
+
+      async function getUserAndSetUser() {
+        const res = await request(`https://api.quickvalide.com/api/Auth/${userId}`)
+        dispatch(saveUser(res.data))
+        
+      } 
+
+      getUserAndSetUser()
 
       navigate("/dashboard/home");
     }

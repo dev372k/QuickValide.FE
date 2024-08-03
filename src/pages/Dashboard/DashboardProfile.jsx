@@ -1,3 +1,4 @@
+
 import { useSelector } from "react-redux";
 import EyeOpen from "../../assets/eye-open.svg";
 import EyeClosed from "../../assets/eye-closed.svg";
@@ -14,14 +15,14 @@ function deriveInitials(name) {
   return initials;
 }
 
+
 function DashboardProfile() {
   let user =  useSelector(state => state.user.user);
   const dispatch = useDispatch();
 
-  console.log(user)
-
-  const [name, setName] = useState();
-  const [email, setEmail] = useState();
+ 
+  const [name, setName] = useState(user.name);
+  const [email, setEmail] = useState(user.email);
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
   const [isPasswordShown, setIsPasswordShown] = useState(false);
@@ -69,7 +70,8 @@ function DashboardProfile() {
     setIsLoading(false);
   }
   return (
-    <div className="flex gap-5 w-full flex-col md:flex-row items-start justify-center p-5 md:w-[45rem] lg:w-[60rem] mx-auto">
+    <div className="overflow-y-scroll h-[calc(100vh-64px)] justify-center w-full">
+      <div className="md:w-[45rem] lg:w-[60rem] w-full  p-5 flex gap-5  flex-col md:flex-row items-start  mx-auto">
       <div className="w-full p-5 rounded-lg border-[1px] bg-white flex flex-col gap-4">
         <h2 className="text-2xl font-medium text-text-primary">Profile</h2>
         <div className="w-16 h-16 rounded-full bg-accent-2 flex items-center justify-center text-2xl font-medium text-white">
@@ -97,7 +99,8 @@ function DashboardProfile() {
               placeholder="Name"
               id="name"
               name="name"
-              value={name}
+              defaultValue={user.name}
+              // value={name}
               onChange={(e) => setName(e.target.value)}
               className="p-2 rounded-md bg-gray-50 border-[1px] text-sm text-text-primary focus:outline-none focus:border-accent-2"
             />
@@ -112,7 +115,8 @@ function DashboardProfile() {
               id="email"
               name="email"
               disabled={true}
-              value={email}
+              defaultValue={user.email}
+              // value={email}
               className="p-2 rounded-md bg-gray-50 border-[1px] text-sm text-text-primary focus:outline-none focus:border-accent-2 disabled:text-text-secondary cursor-not-allowed"
             />
           </div>
@@ -202,6 +206,7 @@ function DashboardProfile() {
             </button>
           </div>
         </form>
+      </div>
       </div>
     </div>
   );

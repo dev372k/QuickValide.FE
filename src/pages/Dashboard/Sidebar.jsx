@@ -23,12 +23,9 @@ function Sidebar() {
     navigate("/login");
   }
   return (
-    <aside className="h-screen bg-white p-1 py-3 border-r-[1px] text-xs flex flex-col items-center justify-between">
-      <Link to="/">
-        <img src={LogoIcon} alt="Logo" className="w-8" />
-      </Link>
-
-      <div className="flex flex-col  mb-auto mt-6">
+    <aside className="sticky h-[calc(100vh-64px)] bg-white p-1 py-3  text-xs flex flex-col items-center justify-between flex-wrap">
+    
+      <div className="flex flex-col  mb-auto">
         <NavLink
           className={({ isActive }) =>
             isActive ? "sidebar-active" : "sidebar-inactive"

@@ -36,7 +36,6 @@ function App() {
       async function getUserAndSetUser() {
         const res = await request(`https://api.quickvalide.com/api/Auth/${userId}`)
         dispatch(saveUser(res.data))
-        console.log(res)
       } 
 
       getUserAndSetUser()

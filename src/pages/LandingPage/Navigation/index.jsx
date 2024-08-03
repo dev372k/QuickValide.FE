@@ -30,7 +30,7 @@ function Navigation() {
   }
 
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
-  const name = useSelector((state) => state.user.user.Name);
+  const name = useSelector((state) => state.user.user.name);
   const initials = deriveInitials(name);
 
   return (
@@ -92,7 +92,7 @@ function Navigation() {
       {isAuthenticated ? (
         <div className="flex items-center text-sm gap-2">
           <Link
-            to="/dashboard"
+            to="/dashboard/home"
             className="flex items-center gap-2 text-sm font-medium leading-none p-2 rounded-md hover:bg-gray-50"
           >
             <div className="p-2 rounded-md bg-accent-1 text-white text-xs">

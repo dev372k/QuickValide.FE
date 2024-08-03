@@ -30,12 +30,13 @@ function DashboardHome() {
             Your awesome apps for your awesome businesses
           </p>
           </div>
+          {apps?.length > 0 &&
           <div className="flex flex-col gap-1 items-start">
             <p className="text-xs text-text-secondary">Select app:</p>
           <select name="apps" id="apps" className="p-2 border-[1px] rounded-md text-xs">
             {apps?.map(app => <option value={app?.id}>{app?.name}</option>)}
           </select>
-          </div>
+          </div>}
         </div>
 
         <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3  gap-4 mt-12">

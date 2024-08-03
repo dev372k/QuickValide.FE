@@ -70,7 +70,7 @@ function DashboardProfile() {
     setIsLoading(false);
   }
   return (
-    <div className="overflow-y-scroll h-[calc(100vh-64px)] justify-center w-full">
+    <div className="h-[calc(100vh-64px)] justify-center w-full">
       <div className="md:w-[45rem] lg:w-[60rem] w-full  p-5 flex gap-5  flex-col md:flex-row items-start  mx-auto">
       <div className="w-full p-5 rounded-lg border-[1px] bg-white flex flex-col gap-4">
         <h2 className="text-2xl font-medium text-text-primary">Profile</h2>

@@ -10,8 +10,13 @@ import { VscAccount } from "react-icons/vsc";
 import Wailist from "../../assets/waitlist.svg";
 import Builder from "../../assets/builder.svg";
 import { PiSignOutLight } from "react-icons/pi";
+import { FaListUl } from "react-icons/fa6";
+import { MdOutlineBuild } from "react-icons/md";
+
+
 import { IoHomeOutline } from "react-icons/io5";
 import { logoutUser } from "../../services/userSlice";
+import Logo from '../../assets/logo-no-background.svg'
 
 function Sidebar() {
   const navigate = useNavigate();
@@ -23,84 +28,77 @@ function Sidebar() {
     navigate("/login");
   }
   return (
-    <aside className="sticky h-[calc(100vh-64px)] bg-white p-1 py-3  text-xs flex flex-col items-center justify-between flex-wrap">
-    
-      <div className="flex flex-col  mb-auto">
+    <aside className="h-screen bg-white border-r-[1px] text-xs flex flex-col items-center justify-between">
+      <div className="p-6">
+        <img src={Logo} alt="Logo" className="w-48"/>
+      </div>
+
+      <div className="w-full px-3 my-5">
+
+      <button className="p-2 text-sm rounded-full border-[1px] w-full border-accent-2 text-accent-2 font-semibold">Create App</button>
+      </div>
+      <div className="flex flex-col  mb-auto w-full pr-1">
         <NavLink
-          className={({ isActive }) =>
-            isActive ? "sidebar-active" : "sidebar-inactive"
-          }
+        className={({isActive}) => isActive ? "w-full px-16 py-3 flex items-center gap-2 text-md  hover:bg-opacity-75 bg-accent-1 text-white rounded-r-full transition-all" : "transition-all w-full px-16 py-3 flex items-center gap-2 text-md text-text-primary hover:bg-opacity-75 rounded-r-full"}
+          
           to="home"
         >
-          <IoHomeOutline size={24} />
-          <p className="text-text-secondary tooltip-text">Home</p>
+          <IoHomeOutline size={22} />
+          <p className="text-[15px] font-medium">Home</p>
         </NavLink>
         <NavLink
           to="profile"
-          className={({ isActive }) =>
-            isActive ? "sidebar-active" : "sidebar-inactive"
-          }
+          className={({isActive}) => isActive ? "w-full px-16 py-3 flex items-center gap-2 text-md  hover:bg-opacity-75 bg-accent-1 text-white rounded-r-full transition-all" : "transition-all w-full px-16 py-3 flex items-center gap-2 text-md text-text-primary hover:bg-opacity-75 rounded-r-full"}
         >
-          <VscAccount size={24} />
-          <p className="text-text-secondary tooltip-text">Profile</p>
+          <VscAccount size={20} />
+          <p className="text-[15px] font-medium">Profile</p>
         </NavLink>
         <NavLink
           to="analytics"
-          className={({ isActive }) =>
-            isActive ? "sidebar-active" : "sidebar-inactive"
-          }
+          className={({isActive}) => isActive ? "w-full px-16 py-3 flex items-center gap-2 text-md  hover:bg-opacity-75 bg-accent-1 text-white rounded-r-full transition-all" : "transition-all w-full px-16 py-3 flex items-center gap-2 text-md text-text-primary hover:bg-opacity-75 rounded-r-full"}
         >
-          <TbBrandGoogleAnalytics size={24} />
-          <p className="text-text-secondary text-center tooltip-text">
-            Google
-            <br /> Analytics
+          <TbBrandGoogleAnalytics size={20} />
+          <p className="text-[15px] font-medium">
+            Analytics
           </p>
         </NavLink>
         <NavLink
           to="seo"
-          className={({ isActive }) =>
-            isActive ? "sidebar-active" : "sidebar-inactive"
-          }
+          className={({isActive}) => isActive ? "w-full px-16 py-3 flex items-center gap-2 text-md  hover:bg-opacity-75 bg-accent-1 text-white rounded-r-full transition-all" : "transition-all w-full px-16 py-3 flex items-center gap-2 text-md text-text-primary hover:bg-opacity-75 rounded-r-full"}
         >
-          <TbSeo size={24} />
-          <p className="text-text-secondary tooltip-text">SEO</p>
+          <TbSeo size={20} />
+          <p className="text-[15px] font-medium">SEO</p>
         </NavLink>
         <NavLink
           to="waitlist"
-          className={({ isActive }) =>
-            isActive ? "sidebar-active" : "sidebar-inactive"
-          }
+          className={({isActive}) => isActive ? "w-full px-16 py-3 flex items-center gap-2 text-md  hover:bg-opacity-75 bg-accent-1 text-white rounded-r-full transition-all" : "transition-all w-full px-16 py-3 flex items-center gap-2 text-md text-text-primary hover:bg-opacity-75 rounded-r-full"}
         >
-          <img src={Wailist} alt="Waitlist icon" className="w-5" />
-          <p className="text-text-secondary tooltip-text">Waitlist</p>
+          <FaListUl size={20}/>
+          <p className="text-[15px] font-medium">Waitlist</p>
         </NavLink>
         <NavLink
           to="builder"
-          className={({ isActive }) =>
-            isActive ? "sidebar-active" : "sidebar-inactive"
-          }
+          className={({isActive}) => isActive ? "w-full px-16 py-3 flex items-center gap-2 text-md  hover:bg-opacity-75 bg-accent-1 text-white rounded-r-full transition-all" : "transition-all w-full px-16 py-3 flex items-center gap-2 text-md text-text-primary hover:bg-opacity-75 rounded-r-full"}
         >
-          <img src={Builder} alt="builder icon" className="w-6" />
-          <p className="text-text-secondary tooltip-text">Builder</p>
+          <MdOutlineBuild size={20}/>
+          <p className="text-[15px] font-medium">Builder</p>
         </NavLink>
       </div>
 
-      <div className="flex flex-col text-accent-1 ">
+      <div className="flex flex-col text-accent-1 w-full pr-1">
         <NavLink
           to="settings"
-          className={({ isActive }) =>
-            isActive ? "sidebar-active" : "sidebar-inactive"
-          }
+          className={({isActive}) => isActive ? "w-full px-16 py-3 flex items-center gap-2 text-md  hover:bg-opacity-75 bg-accent-1 text-white rounded-r-full transition-all" : "transition-all w-full px-16 py-3 flex items-center gap-2 text-md text-text-primary hover:bg-opacity-75 rounded-r-full"}
         >
-          <IoSettingsOutline size={24} />
-          <p className="text-text-secondary tooltip-text">Settings</p>
+          <IoSettingsOutline size={20} />
+          <p className="text-[15px] font-medium">Settings</p>
         </NavLink>
         <div
           onClick={handleLogout}
-          className="hover:bg-section-background p-3 tooltip rounded-md cursor-pointer transition-all"
+          className="hover:bg-gray-100 p-3 flex items-center rounded-r-full gap-2 rounded-md cursor-pointer transition-all px-16 "
         >
-          <PiSignOutLight size={24} />
-          <p className="text-text-secondary tooltip-text">Sign out</p>
+          <PiSignOutLight size={20} />
+          <p className="text-[15px] font-medium">Sign out</p>
         </div>
       </div>
     </aside>

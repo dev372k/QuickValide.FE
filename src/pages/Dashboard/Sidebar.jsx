@@ -30,7 +30,9 @@ function Sidebar() {
 
       <div className="flex flex-col  mb-auto mt-6">
         <NavLink
-          className="flex flex-col gap-1 items-center tooltip text-accent-1 hover:bg-section-background p-3 rounded-md cursor-pointer transition-all"
+          className={({ isActive }) =>
+            isActive ? "sidebar-active" : "sidebar-inactive"
+          }
           to="home"
         >
           <IoHomeOutline size={24} />
@@ -38,14 +40,18 @@ function Sidebar() {
         </NavLink>
         <NavLink
           to="profile"
-          className="flex flex-col gap-1 items-center tooltip text-accent-1 hover:bg-section-background p-3 rounded-md cursor-pointer transition-all"
+          className={({ isActive }) =>
+            isActive ? "sidebar-active" : "sidebar-inactive"
+          }
         >
           <VscAccount size={24} />
           <p className="text-text-secondary tooltip-text">Profile</p>
         </NavLink>
         <NavLink
           to="analytics"
-          className="flex flex-col gap-1 items-center tooltip text-accent-1 hover:bg-section-background p-3 rounded-md cursor-pointer transition-all"
+          className={({ isActive }) =>
+            isActive ? "sidebar-active" : "sidebar-inactive"
+          }
         >
           <TbBrandGoogleAnalytics size={24} />
           <p className="text-text-secondary text-center tooltip-text">
@@ -55,21 +61,27 @@ function Sidebar() {
         </NavLink>
         <NavLink
           to="seo"
-          className="flex flex-col gap-1 items-center tooltip  text-accent-1 hover:bg-section-background p-3 rounded-md cursor-pointer transition-all"
+          className={({ isActive }) =>
+            isActive ? "sidebar-active" : "sidebar-inactive"
+          }
         >
           <TbSeo size={24} />
           <p className="text-text-secondary tooltip-text">SEO</p>
         </NavLink>
         <NavLink
           to="waitlist"
-          className="flex flex-col gap-1 items-center tooltip text-accent-1 hover:bg-section-background p-3 rounded-md cursor-pointer transition-all"
+          className={({ isActive }) =>
+            isActive ? "sidebar-active" : "sidebar-inactive"
+          }
         >
           <img src={Wailist} alt="Waitlist icon" className="w-5" />
           <p className="text-text-secondary tooltip-text">Waitlist</p>
         </NavLink>
         <NavLink
           to="builder"
-          className="flex flex-col gap-1 items-center tooltip text-accent-1 hover:bg-section-background p-3 rounded-md cursor-pointer transition-all"
+          className={({ isActive }) =>
+            isActive ? "sidebar-active" : "sidebar-inactive"
+          }
         >
           <img src={Builder} alt="builder icon" className="w-6" />
           <p className="text-text-secondary tooltip-text">Builder</p>
@@ -79,7 +91,9 @@ function Sidebar() {
       <div className="flex flex-col text-accent-1 ">
         <NavLink
           to="settings"
-          className="hover:bg-section-background p-3 rounded-md tooltip cursor-pointer transition-all"
+          className={({ isActive }) =>
+            isActive ? "sidebar-active" : "sidebar-inactive"
+          }
         >
           <IoSettingsOutline size={24} />
           <p className="text-text-secondary tooltip-text">Settings</p>

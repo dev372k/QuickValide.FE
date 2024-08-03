@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { getToken, decodeToken, setToken } from "../helpers/jwtHelper";
 
 const initialState = {
   user: {},
@@ -17,8 +18,14 @@ const userSlice = createSlice({
       state.user = {};
       state.isAuthenticated = false;
     },
+    refreshUser: (state, action) => {
+      const token = getToken();
+      const user = decodeToken(token);
+      console.log(user);
+      state.user = {};
+    },
   },
 });
 
-export const { saveUser, logoutUser } = userSlice.actions;
+export const { saveUser, logoutUser, refreshUser } = userSlice.actions;
 export default userSlice.reducer;

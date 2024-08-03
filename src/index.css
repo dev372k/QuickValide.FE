@@ -169,6 +169,9 @@ html {
   opacity: 1;
 }
 
-.active {
-  @apply bg-gray-200;
+.sidebar-active {
+  @apply bg-gray-200 flex flex-col gap-1 items-center tooltip text-accent-1 hover:bg-section-background p-3 rounded-md cursor-pointer transition-all;
+}
+.sidebar-inactive {
+  @apply flex flex-col gap-1 items-center tooltip text-accent-1 hover:bg-section-background p-3 rounded-md cursor-pointer transition-all;
 }

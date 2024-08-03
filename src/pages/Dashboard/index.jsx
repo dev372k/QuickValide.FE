@@ -21,11 +21,11 @@ function Dashboard() {
       <div className="p-3 w-full flex flex-col gap-2">
         <div className="flex items-center gap-2 w-full p-3 border-b-[1px] ml-auto">
           <div className="w-10 h-10 text-sm leading-[0.5] p-1 flex items-center justify-center text-white rounded-full bg-accent-2">
-            {deriveInitials(user?.Name)}
+            {deriveInitials(user?.name)}
           </div>
           <div className="flex flex-col text-sm text-text-primary">
-            <p className="font-semibold">{user?.Name}</p>
-            <p className="text-xs text-text-secondary">{user?.Email}</p>
+            <p className="font-semibold">{user?.name}</p>
+            <p className="text-xs text-text-secondary">{user?.email}</p>
           </div>
         </div>
 

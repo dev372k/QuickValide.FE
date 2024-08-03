@@ -11,7 +11,6 @@ import TermsAndConditions from "./pages/Terms and Conditions";
 import { decodeToken, getToken } from "./helpers/jwtHelper";
 
 import { useDispatch } from "react-redux";
-import { saveUser } from "./services/userSlice";
 import DashboardHome from "./pages/Dashboard/DashboardHome.jsx";
 import DashboardSettings from "./pages/Dashboard/DashboardSettings.jsx";
 import DashboardBuilder from "./pages/Dashboard/DashboardBuilder.jsx";
@@ -20,20 +19,28 @@ import DashboardAnalytics from "./pages/Dashboard/DashboardAnalytics.jsx";
 import DashboardSEO from "./pages/Dashboard/DashboardSEO.jsx";
 import DashboardWaitlist from "./pages/Dashboard/DashbaordWaitlist.jsx";
 
+import { request } from "./helpers/requestHelper.js";
+import { saveUser } from "./services/userSlice.js";
+
 function App() {
   const dispatch = useDispatch();
   useEffect(function () {
     const token = getToken();
     if (token) {
-      dispatch(
-        saveUser(
-          JSON.parse(
-            decodeToken(token)[
-              "http://schemas.microsoft.com/ws/2008/06/identity/claims/userdata"
-            ]
-          )
-        )
-      );
+      const userId = JSON.parse(
+        decodeToken(token)[
+          "http://schemas.microsoft.com/ws/2008/06/identity/claims/userdata"
+        ]
+      )["Id"]
+
+      async function getUserAndSetUser() {
+        const res = await request(`https://api.quickvalide.com/api/Auth/${userId}`)
+        dispatch(saveUser(res.data))
+        console.log(res)
+      } 
+
+      getUserAndSetUser()
+
     }
   }, []);
   return (
@@ -82,5 +89,6 @@ function App() {
     </BrowserRouter>
   );
 }
+
 
 export default App;

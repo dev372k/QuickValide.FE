@@ -35,7 +35,6 @@ function Login() {
   useEffect(
     function () {
       document.title = "Login";
-      console.log(isAuthenticated);
       if (isAuthenticated) navigate("/dashboard/home");
     },
     [isAuthenticated]
@@ -50,7 +49,6 @@ function Login() {
       data
     );
     setIsLoading(false);
-    console.log(res);
 
     if (!res.status) setMessage(res.message);
 

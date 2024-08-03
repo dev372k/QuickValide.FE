@@ -1,9 +1,13 @@
 import { Outlet } from "react-router-dom";
 import { useSelector } from "react-redux";
+import {Spiral as Menu} from 'hamburger-react'
+
 
 import Sidebar from "./Sidebar";
 
-import Logo from '../../assets/logo-no-background.svg'
+import { useState, useEffect } from "react";
+import useWindowWidth from "../../hooks/useWindowWidth";
+
 
 function Dashboard() {
   const user = useSelector((state) => state.user.user);
@@ -15,14 +19,24 @@ function Dashboard() {
 
     return initials;
   }
+  const windowWidth = useWindowWidth()
+
+  useEffect(function() {
+    if (windowWidth > 768) setIsSidebarOpen(true)
+  }, [windowWidth])
+
+
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false)
 
   return (
     <main className="w-full h-full  flex ">
-         <Sidebar />
+         <Sidebar isSidebarOpen={isSidebarOpen} setIsSidebarOpen={setIsSidebarOpen}/>
 
         <div className="flex flex-col h-full w-full">
         <div className="w-full p-3 bg-white flex items-center justify-between gap-1 px-8">
-         
+          <div className="text-accent-2 md:hidden" onClick={() => setIsSidebarOpen(prev => !prev)}>
+            <Menu rounded size={26} toggled={isSidebarOpen}/>
+          </div>
 
          <div className="flex items-center gap-2 ml-auto">
            <div className="w-10 h-10 text-md font-semibold bg-accent-2 rounded-full flex items-center justify-center text-white">{deriveInitials(user.name)}</div>
@@ -33,7 +47,7 @@ function Dashboard() {
            </div>
          </div>
        </div>
-         <div className="px-16 mt-8">
+         <div>
 
           <Outlet />
          </div>

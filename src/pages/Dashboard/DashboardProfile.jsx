@@ -1,11 +1,11 @@
-
 import { useSelector } from "react-redux";
-import EyeOpen from "../../assets/eye-open.svg";
-import EyeClosed from "../../assets/eye-closed.svg";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { request } from "../../helpers/requestHelper";
 import { useDispatch } from "react-redux";
 import { saveUser } from "../../services/userSlice";
+import { useForm } from "react-hook-form";
+
+import { FadeLoader as Loader } from 'react-spinners'
 
 function deriveInitials(name) {
   let initials = "";
@@ -20,22 +20,13 @@ function DashboardProfile() {
   let user =  useSelector(state => state.user.user);
   const dispatch = useDispatch();
 
- 
-  const [name, setName] = useState(user.name);
-  const [email, setEmail] = useState(user.email);
-  const [password, setPassword] = useState("");
-  const [passwordConfirm, setPasswordConfirm] = useState("");
+  const {register: register1, handleSubmit: handleSubmit1, formState: {errors: errors1}} = useForm()
+  const {register: register2, handleSubmit: handleSubmit2, formState: {errors: errors2}} = useForm()
+
   const [isPasswordShown, setIsPasswordShown] = useState(false);
-  const [isPasswordConfirmShown, setIsPasswordConfirmShown] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
   const [error, setError] = useState("");
-
-  useEffect(function () {
-    console.log('Hello world')
-    setName(user.name);
-    setEmail(user.email);
-  }, []);
 
   async function refreshUser() {
     const res = await request(
@@ -44,171 +35,121 @@ function DashboardProfile() {
     dispatch(saveUser(res.data));
   }
 
-  async function handleChangeProfile(e) {
-    e.preventDefault();
-    setSuccessMessage("");
-    setError("");
-    setIsLoading(true);
-    const res = await request(
-      `https://api.quickvalide.com/api/Auth/${user.id}`,
-      "PUT",
-      { name }
-    );
 
-    if (res.status) {
-      setSuccessMessage("success");
-      setTimeout(function() {
-        setSuccessMessage('')
-      }, 3000)
-      refreshUser();
-    } else {
-      setError("error")
-      setTimeout(function() {
+  async function handleNameChange(data) {
+      const { name } = data
+
+      setSuccessMessage('')
+      setError('')
+      setIsLoading(true)
+
+      const res = await request(`https://api.quickvalide.com/api/Auth/${user.id}`, 'PUT', { name })
+
+      if (res.status) {
+        setSuccessMessage('success')
+
+        refreshUser()
+        
+        setTimeout(function() {
+          setSuccessMessage('')
+        }, 2000)
+      } else {
         setError('')
-      }, 3000)
-    }
-    setIsLoading(false);
+
+        setTimeout(function() {
+          setError('')
+        }, 2000)
+      }
+
+      setIsLoading(false)
+  }
+
+  function handlePasswordChange(data) {
+
   }
   return (
-    <div className="h-[calc(100vh-64px)] justify-center w-full">
-      <div className="md:w-[45rem] lg:w-[60rem] w-full  p-5 flex gap-5  flex-col md:flex-row items-start  mx-auto">
-      <div className="w-full p-5 rounded-lg border-[1px] bg-white flex flex-col gap-4">
-        <h2 className="text-2xl font-medium text-text-primary">Profile</h2>
-        <div className="w-16 h-16 rounded-full bg-accent-2 flex items-center justify-center text-2xl font-medium text-white">
-          {deriveInitials(user.name)}
+    <div className="w-full overflow-y-scroll h-[calc(100vh-72px)]">
+      <div className="w-full h-32 bg-gray-50 border-b-2 relative">
+        <div className="absolute w-24 h-24 md:w-28 md:h-28 left-5 top-full -translate-y-1/2  bg-gradient-to-r from-accent-1 to-accent-2 rounded-full">
+
+      <div className="w-[93%] h-[93%] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white  p-4   rounded-full text-2xl font-semibold text-text-primary  flex items-center justify-center shadow-md">{deriveInitials(user?.name)}</div>
         </div>
+    
+      </div>
+      <div className="px-6 sm:px-8 sm:w-[75%]  md:w-auto lg:px-32 my-16 flex flex-col gap-24 md:gap-32">
+        <form className="flex flex-col f w-full gap-3" onSubmit={handleSubmit1(handleNameChange)}>
+          <div className="text-text-primary text-3xl tracking-wider font-bold">
+            <h2 className="">Profile
 
-        {successMessage && (
-          <p className="text-xs font-medium text-white bg-success p-2 rounded-md w-full">
-            Updated Successfully.
-          </p>
-        )}
-        {error && (
-          <p className="text-xs font-medium text-white bg-error p-2 rounded-md w-full">
-            An error occured while updating.
-          </p>
-        )}
-
-        <form className="flex flex-col gap-3 w-full">
-          <div className="flex flex-col gap-1">
-            <label htmlFor="name" className="text-text-secondary text-sm">
-              Name:
-            </label>
-            <input
-              type="text"
-              placeholder="Name"
-              id="name"
-              name="name"
-              defaultValue={user.name}
-              // value={name}
-              onChange={(e) => setName(e.target.value)}
-              className="p-2 rounded-md bg-gray-50 border-[1px] text-sm text-text-primary focus:outline-none focus:border-accent-2"
-            />
-          </div>
-          <div className="flex flex-col gap-1">
-            <label htmlFor="email" className="text-text-secondary text-sm">
-              Email address:
-            </label>
-            <input
-              type="text"
-              placeholder="Email Address"
-              id="email"
-              name="email"
-              disabled={true}
-              defaultValue={user.email}
-              // value={email}
-              className="p-2 rounded-md bg-gray-50 border-[1px] text-sm text-text-primary focus:outline-none focus:border-accent-2 disabled:text-text-secondary cursor-not-allowed"
-            />
+            </h2>
           </div>
 
-          <div className="flex items-center gap-2 w-full text-xs font-semibold">
-            <button className="w-full p-2 border-[1px] rounded-md hover:bg-gray-50 transition-all">
-              Cancel
-            </button>
-            <button
-              onClick={handleChangeProfile}
-              className="w-full p-2 bg-accent-2 text-white rounded-md hover:bg-opacity-60 transition-all disabled:bg-text-secondary disabled:text-white"
-              disabled={isLoading}
-            >
-              {isLoading ? 'Updating...' : 'Update'}
-            </button>
+          {successMessage && <p className="text-sm w-full md:w-1/2 text-white p-2 bg-success rounded-md">Profile updated successfully</p>}
+          {error && <p className="text-sm text-white w-full md:w-1/2 p-2 bg-error rounded-md">An error occured</p>}
+
+          <div className="flex flex-col gap-1 items-start w-full">
+            <label htmlFor="name" className="text-sm text-text-secondary">Name:</label>
+            <input type="text" placeholder="Name" id="name" defaultValue={user.name}  className="w-full md:w-1/2 p-3 rounded-md border-[1px] text-sm  text-text-primary focus:outline-none focus:border-accent-2" {...register1('name', {
+              required: 'Name is required',
+              minLength: 3,
+              value: user.name
+            })}/>
+            {errors1?.name && errors1.name.type === "required" && <p className="text-xs text-error font-medium">Name is required</p>}
+            {errors1?.name && errors1.name.type === "minLength" && <p className="text-xs text-error font-medium">Name cannot be less than 3 characters</p>}
+          </div>
+
+          <div className="flex flex-col gap-1 items-start w-full">
+            <label htmlFor="name" className="text-sm text-text-secondary">Email address:</label>
+            <input type="text" placeholder="Email address" id="email" name="email" defaultValue={user.email} disabled className="w-full md:w-1/2 p-3 rounded-md border-[1px] text-sm text-text-secondary"/>
+          </div>
+
+          <div className="flex items-center gap-2 text-text-primary text-sm w-full md:w-1/2">
+            <button className=" p-2 px-3 rounded-md border-[1px] w-1/2">Cancel</button>
+            <button type="submit" className="p-2 px-3 rounded-md bg-accent-1 text-white w-1/2 flex items-center justify-center gap-2 disabled:bg-gray-600" disabled={isLoading}>{isLoading ? 'Loading...' : 'Update'}</button>
           </div>
         </form>
-      </div>
+        
+        
+        <form className="flex flex-col f w-full gap-3" onSubmit={handleSubmit2(handlePasswordChange)}>
+          <div className="text-text-primary text-3xl tracking-wider font-bold">
+            <h2 className="">Change Password
 
-      <div className="w-full  p-5 rounded-lg border-[1px] bg-white flex flex-col gap-8">
-        <h2 className="text-2xl font-medium text-text-primary">
-          Change Password
-        </h2>
-
-        <form className="flex flex-col gap-4 w-full">
-          <div className="flex flex-col gap-1">
-            <label htmlFor="name" className="text-text-secondary text-sm">
-              Password:
-            </label>
-            <div className="relative">
-              <input
-                type={isPasswordShown ? "text" : "password"}
-                placeholder="Enter password"
-                id="password"
-                name="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="p-2 rounded-md bg-gray-50 border-[1px] text-sm text-text-primary focus:outline-none focus:border-accent-2 w-full"
-              />
-              <img
-                src={isPasswordShown ? EyeClosed : EyeOpen}
-                alt="Eye open icon"
-                className={`absolute top-1/2 -translate-y-1/2 right-2 ${
-                  isPasswordShown ? "mt-3 -mr-[20px]" : "mt-1"
-                }`}
-                width={isPasswordShown ? 48 : 32}
-                height={isPasswordShown ? 48 : 32}
-                onClick={() => setIsPasswordShown(!isPasswordShown)}
-              />
-            </div>
-          </div>
-          <div className="flex flex-col gap-1">
-            <label htmlFor="email" className="text-text-secondary text-sm">
-              Password Confirmation:
-            </label>
-            <div className="relative">
-              <input
-                type={isPasswordConfirmShown ? "text" : "password"}
-                placeholder="Password Confirmation"
-                id="passwordConfirmation"
-                name="passwordConfirmation"
-                value={passwordConfirm}
-                onChange={(e) => setPasswordConfirm(e.target.value)}
-                className="p-2 rounded-md bg-gray-50 border-[1px] text-sm text-text-primary focus:outline-none focus:border-accent-2 w-full"
-              />
-              <img
-                src={isPasswordConfirmShown ? EyeClosed : EyeOpen}
-                alt="Eye open icon"
-                className={`absolute top-1/2 -translate-y-1/2 right-2 ${
-                  isPasswordConfirmShown ? "mt-3 -mr-[20px]" : "mt-1"
-                }`}
-                width={isPasswordConfirmShown ? 48 : 32}
-                height={isPasswordConfirmShown ? 48 : 32}
-                onClick={() =>
-                  setIsPasswordConfirmShown(!isPasswordConfirmShown)
-                }
-              />
-            </div>
+            </h2>
           </div>
 
-          <div className="flex items-center gap-2 w-full text-xs font-semibold">
-            <button className="w-full p-2 border-[1px] rounded-md hover:bg-gray-50 transition-all">
-              Cancel
-            </button>
-            <button className="w-full p-2 bg-accent-2 text-white rounded-md hover:bg-opacity-60 transition-all">
-              Update
-            </button>
+          <div className="flex flex-col gap-1 items-start w-full">
+            <label htmlFor="password" className="text-sm text-text-secondary">Password:</label>
+            <input type={isPasswordShown ? 'text' : 'password'} placeholder="Password" id="password"  className="w-full md:w-1/2 p-3 rounded-md border-[1px] text-sm text-text-primary focus:outline-none focus:border-accent-2" {...register2('password', {
+              required: 'Password is required',
+              minLength: 8
+            })}/>
+            {errors2?.password && errors2.password.type === "required" && <p className="text-xs text-error font-medium">Password is required</p>}
+            {errors2?.password && errors2.password.type === "minLength" && <p className="text-xs text-error font-medium">Password cannot be less than 8 characters</p>}
+          </div>
+
+          <div className="flex flex-col gap-1 items-start w-full">
+            <label htmlFor="password" className="text-sm text-text-secondary">Confirm:</label>
+            <input type={isPasswordShown ? 'text' : 'password'} placeholder="Password" id="password"  className="w-full md:w-1/2 p-3 rounded-md border-[1px] text-sm  text-text-primary focus:outline-none focus:border-accent-2" {...register2('passwordConfirm', {
+              required: 'Password confirmation is required',
+              minLength: 8
+            })}/>
+            {errors2?.passwordConfirm && errors2.passwordConfirm.type === "required" && <p className="text-xs text-error font-medium">Password confirmation is required</p>}
+            {errors2?.passwordConfirm && errors2.passwordConfirm.type === "minLength" && <p className="text-xs text-error font-medium">Password confirmation cannot be less than 8 characters</p>}
+          </div>
+           
+          <div className="flex items-center text-sm gap-2 text-text-primary">
+            <input type="checkbox" id="showPassword" onChange={() => setIsPasswordShown(!isPasswordShown)}/>
+            <label htmlFor="showPassword">Show password</label>
+          </div>
+
+          <div className="flex items-center gap-2 text-text-primary text-sm w-full md:w-1/2">
+            <button className=" p-2 px-3 rounded-md border-[1px] w-1/2">Cancel</button>
+            <button type="submit" className="p-2 px-3 rounded-md bg-accent-1 text-white w-1/2">Change</button>
           </div>
         </form>
-      </div>
       </div>
     </div>
+
   );
 }
 

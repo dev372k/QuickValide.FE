@@ -34,7 +34,7 @@ function DashboardHome() {
           <div className="flex flex-col gap-1 items-start">
             <p className="text-xs text-text-secondary">Select app:</p>
           <select name="apps" id="apps" className="p-2 border-[1px] rounded-md text-xs">
-            {apps?.map(app => <option value={app?.id}>{app?.name}</option>)}
+            {apps?.map(app => <option value={app?.id} className="break-words">{app?.name}</option>)}
           </select>
           </div>}
         </div>

@@ -1,14 +1,11 @@
-import LogoIcon from "../../../public/favicon.svg";
-import { Link, NavLink, useNavigate } from "react-router-dom";
 import { removeToken } from "../../helpers/jwtHelper";
 import { useDispatch } from "react-redux";
+import { useNavigate, NavLink } from "react-router-dom";
 
 import { TbBrandGoogleAnalytics } from "react-icons/tb";
 import { TbSeo } from "react-icons/tb";
 import { IoSettingsOutline } from "react-icons/io5";
 import { VscAccount } from "react-icons/vsc";
-import Wailist from "../../assets/waitlist.svg";
-import Builder from "../../assets/builder.svg";
 import { PiSignOutLight } from "react-icons/pi";
 import { FaListUl } from "react-icons/fa6";
 import { MdOutlineBuild } from "react-icons/md";
@@ -16,9 +13,34 @@ import { MdOutlineBuild } from "react-icons/md";
 
 import { IoHomeOutline } from "react-icons/io5";
 import { logoutUser } from "../../services/userSlice";
+import {Rotate as Hamburger} from 'hamburger-react'
 import Logo from '../../assets/logo-no-background.svg'
+import Backdrop from '../../components/Backdrop'
 
-function Sidebar() {
+import {motion} from 'framer-motion'
+
+const sidebarVariants = {
+  open: {
+    opacity: 1,
+    width: 'auto',
+    display: 'flex',
+    transition: {
+      ease: "easeOut",
+      duration: 0.2
+    }
+  },
+  closed: {
+    display: 'none',
+    opacity: 0,
+    width: 0,
+    transition: {
+      ease: "easeOut",
+      duration: 0.2
+    }
+  }
+}
+
+function Sidebar({isSidebarOpen, setIsSidebarOpen}) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -28,14 +50,18 @@ function Sidebar() {
     navigate("/login");
   }
   return (
-    <aside className="h-screen bg-white border-r-[1px] text-xs flex flex-col items-center justify-between">
-      <div className="p-6">
+    <motion.aside variants={sidebarVariants} initial={isSidebarOpen ? "open" : "closed"}
+    animate={isSidebarOpen ? "open" : "closed"} className="h-screen absolute md:relative z-10 top-0 left-0 bottom-0 bg-white border-r-[1px] text-xs flex flex-col items-center justify-between bg-opacity-40 backdrop-blur-lg">
+      
+      {isSidebarOpen && <div onClick={() => setIsSidebarOpen(false)} className="absolute top-1 md:hidden left-3 text-accent-2 p-[2px] rounded-full hover:bg-gray-100"><Hamburger size={18} toggled={true}/></div>}
+      <div className="p-6 mt-8 md:mt-0">
         <img src={Logo} alt="Logo" className="w-48"/>
+
       </div>
 
-      <div className="w-full px-3 my-5">
+      <div className="w-full px-3 mb-3">
 
-      <button className="p-2 text-sm rounded-full border-[1px] w-full border-accent-2 text-accent-2 font-semibold">Create App</button>
+      <button className="p-2 text-sm rounded-full border-[1px] w-full border-text-primary text-text-primary font-semibold hover:bg-text-primary hover:text-white transition-all">Create App</button>
       </div>
       <div className="flex flex-col  mb-auto w-full pr-1">
         <NavLink
@@ -101,7 +127,7 @@ function Sidebar() {
           <p className="text-[15px] font-medium">Sign out</p>
         </div>
       </div>
-    </aside>
+    </motion.aside>
   );
 }
 

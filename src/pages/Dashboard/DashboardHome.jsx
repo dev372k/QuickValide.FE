@@ -20,7 +20,7 @@ function DashboardHome() {
     getApps();
   }, []);
   return (
-    <div className="p-3 w-full">
+    <div className="p-3 w-full px-6 md:px-12 lg:px-24">
       <div className="mt-3">
         <div className="flex  items-center justify-between flex-wrap gap-8">
           <div>
@@ -52,7 +52,7 @@ function DashboardHome() {
               ))}
             </>
           ) : (
-            <div className=" w-[calc(100vw-350px)]  mt-16 flex items-center justify-center">
+            <div className=" w-full md:w-[calc(100vw-350px)]  mt-16 flex items-center justify-center">
               <GridLoader color="#00BCD4" size={15} />
 
             </div>

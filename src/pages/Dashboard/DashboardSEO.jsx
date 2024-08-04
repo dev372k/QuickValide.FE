@@ -46,6 +46,7 @@ dispatch(updateSeo(data))
   }, [appSEO, reset]);
 
   useEffect(function() {
+    document.title = "SEO | Dashboard"
     async function getSeo() {
       if (appSEO) {
         reset({

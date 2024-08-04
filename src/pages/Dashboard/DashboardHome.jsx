@@ -11,6 +11,7 @@ function DashboardHome() {
   const [apps, setApps] = useState([]);
   const [isLoading, setIsLoading] = useState(false)
   useEffect(function () {
+    document.title = "Home | Dashboard"
     async function getApps() {
       setIsLoading(true)
       const res = await request("https://api.quickvalide.com/api/App");

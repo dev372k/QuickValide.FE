@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { request } from "../../helpers/requestHelper";
 import { useDispatch } from "react-redux";
 import { saveUser } from "../../services/userSlice";
@@ -20,6 +20,10 @@ function deriveInitials(name) {
 function DashboardProfile() {
   let user =  useSelector(state => state.user.user);
   const dispatch = useDispatch();
+
+  useEffect(function() {
+    document.title = "Profile | Dashboard"
+  }, [])
 
   const {register: register1, handleSubmit: handleSubmit1, formState: {errors: errors1}, reset: reset1} = useForm()
   const {register: register2, handleSubmit: handleSubmit2, formState: {errors: errors2}, reset: reset2} = useForm()

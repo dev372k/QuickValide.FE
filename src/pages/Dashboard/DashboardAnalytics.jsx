@@ -16,6 +16,7 @@ function DashboardAnalytics() {
 
 
   useEffect(function() {
+    document.title = "Analytics | Dashboard"
     if (appId)
     handleGetAnalytics()
   }, [appId]) 

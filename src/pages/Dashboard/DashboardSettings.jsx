@@ -48,6 +48,7 @@ function DashboardSettings() {
   }
 
   useEffect(function() {
+    document.title = "Settings | Dashboard"
     domainName = appName?.trim()?.toLowerCase()?.replace(/[' ']+/g, '-')
     reset({
       domain: domainName

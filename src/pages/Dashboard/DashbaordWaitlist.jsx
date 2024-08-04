@@ -13,6 +13,7 @@ function DashboardWaitlist() {
   const [isLoading, setIsLoading] = useState(false)
 
   useEffect(function() {
+    document.title = "Waitlist | Dashboard"
     async function getWaitlist() {
 
       setIsLoading(true)

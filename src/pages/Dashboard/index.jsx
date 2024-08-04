@@ -32,6 +32,7 @@ function Dashboard() {
 
 
   useEffect(function() {
+    document.title = 'Home | Dashboard'
     async function getApps() {
       const res = await request(`https://api.quickvalide.com/api/App`)
       if (!res.status) return message.error('An error occured while fetching your apps')

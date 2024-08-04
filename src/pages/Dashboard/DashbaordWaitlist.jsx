@@ -27,7 +27,7 @@ function DashboardWaitlist() {
 
   return <div className="w-full flex flex-col gap-8 mt-3  px-6 md:px-12 lg:px-24 text-text-primary ">
    
-   <table class="w-full md:w-3/4 lg:w-[35rem] border-collapse rounded-lg overflow-hidden text-sm">
+   <table class="w-full border-collapse rounded-lg overflow-hidden text-sm">
   <thead className=" bg-gray-50">
     <tr>
       <th class="border px-4 py-2">Email</th>
@@ -49,7 +49,7 @@ function DashboardWaitlist() {
    
   </tbody>
 </table>
-<div className="w-full md:w-3/4 lg:w-[35rem] ">
+<div className="w-full">
 {isLoading ?  <div><Spin size="default" tip="Loading... Please wait" ><div className="p-24"></div></Spin></div> : !waitlist
      ? <p className="text-center p-3 text-md font-medium">No data</p> : null}
 

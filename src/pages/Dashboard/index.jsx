@@ -63,9 +63,18 @@ function Dashboard() {
           </div>
 
          <div className="flex items-center justify-between gap-2 w-full ">
-        
+         <div className="xs:flex flex-col gap-1  self-start  w-full hidden">
+        <div>
+          <p className="text-xs text-text-secondary">Select app:</p>
+          {apps.length > 0 &&  <select name="apps" id="apps" className="p-2 border-[1px] rounded-md text-xs focus:outline-accent-2" value={selectedApp} onChange={(e) => handleAppChange(e)}>
+            {apps?.map(app => <option value={app?.id && app?.id} key={app?.id} className="break-words">{app?.name}</option>)}
+          </select>}
 
-         <div className="flex gap-2 items-center self-end ml-auto ">
+        </div>
+        
+         </div>
+
+         <div className="flex gap-2 items-center  ml-auto ">
 
            <div className="w-10 h-10 text-md font-semibold bg-accent-2 rounded-full flex items-center justify-center text-white">{deriveInitials(user.name)}</div>
 
@@ -78,7 +87,7 @@ function Dashboard() {
          </div>
 
        </div>
-       <div className="flex flex-col gap-1  self-start p-4 w-full">
+       <div className="flex flex-col gap-1  self-start p-4 w-full xs:hidden">
         <div>
           <p className="text-xs text-text-secondary">Select app:</p>
           {apps.length > 0 &&  <select name="apps" id="apps" className="p-2 border-[1px] rounded-md text-xs focus:outline-accent-2" value={selectedApp} onChange={(e) => handleAppChange(e)}>

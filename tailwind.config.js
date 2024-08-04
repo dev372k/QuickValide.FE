@@ -37,6 +37,9 @@ export default {
         pinkCircle: "blob1 5s ease-in-out infinite",
         blueCircle: "blob2 5s ease-in infinite",
       },
+      screens: {
+        xs: '450px'
+      }
     },
   },
   plugins: [addIconSelectors(["hugeicons"])],

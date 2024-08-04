@@ -5,28 +5,28 @@ import { useDispatch } from "react-redux";
 import { saveUser } from "../../services/userSlice";
 import { useForm } from "react-hook-form";
 
-import { FadeLoader as Loader } from 'react-spinners'
+import { message } from "antd";
 
 function deriveInitials(name) {
   let initials = "";
-  const nameArray = name?.split(" ");
+  const nameArray = name?.trim()?.split(" ");
   for (let i in nameArray) initials += nameArray[i][0]?.toUpperCase();
 
   return initials;
 }
 
 
+
 function DashboardProfile() {
   let user =  useSelector(state => state.user.user);
   const dispatch = useDispatch();
 
-  const {register: register1, handleSubmit: handleSubmit1, formState: {errors: errors1}} = useForm()
-  const {register: register2, handleSubmit: handleSubmit2, formState: {errors: errors2}} = useForm()
+  const {register: register1, handleSubmit: handleSubmit1, formState: {errors: errors1}, reset: reset1} = useForm()
+  const {register: register2, handleSubmit: handleSubmit2, formState: {errors: errors2}, reset: reset2} = useForm()
 
   const [isPasswordShown, setIsPasswordShown] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const [successMessage, setSuccessMessage] = useState("");
-  const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false)
+  const [isLoadingPassword, setIsLoadingPassword] = useState(false)
 
   async function refreshUser() {
     const res = await request(
@@ -39,36 +39,35 @@ function DashboardProfile() {
   async function handleNameChange(data) {
       const { name } = data
 
-      setSuccessMessage('')
-      setError('')
       setIsLoading(true)
-
       const res = await request(`https://api.quickvalide.com/api/Auth/${user.id}`, 'PUT', { name })
 
       if (res.status) {
-        setSuccessMessage('success')
-
+        message.success('Profile updated successfully')
         refreshUser()
-        
-        setTimeout(function() {
-          setSuccessMessage('')
-        }, 2000)
+       
       } else {
-        setError('')
-
-        setTimeout(function() {
-          setError('')
-        }, 2000)
+        message.error('An error occured while updating profile')
       }
 
       setIsLoading(false)
   }
 
-  function handlePasswordChange(data) {
-
+  async function handlePasswordChange(data) {
+    if (data.password !== data.passwordConfirm) return message.error('Passwords don\'t match')
+    setIsLoadingPassword(true)
+    const res = await request('https://api.quickvalide.com/api/Auth/change-password', 'PATCH', {password: data.password, confirmPassword: data.passwordConfirm})
+    setIsLoadingPassword(false)
+    
+    if (res.status) {
+      message.success('Password changed successfully')
+    } else {
+      message.error('An error occured while changing password')
+    }
+    reset2()
   }
   return (
-    <div className="w-full overflow-y-scroll h-[calc(100vh-72px)]">
+    <div className="w-full overflow-y-scroll h-[calc(100vh-157px)]">
       <div className="w-full h-32 bg-gray-50 border-b-2 relative">
         <div className="absolute w-24 h-24 md:w-28 md:h-28 left-5 top-full -translate-y-1/2  bg-gradient-to-r from-accent-1 to-accent-2 rounded-full">
 
@@ -84,8 +83,6 @@ function DashboardProfile() {
             </h2>
           </div>
 
-          {successMessage && <p className="text-sm w-full md:w-1/2 text-white p-2 bg-success rounded-md">Profile updated successfully</p>}
-          {error && <p className="text-sm text-white w-full md:w-1/2 p-2 bg-error rounded-md">An error occured</p>}
 
           <div className="flex flex-col gap-1 items-start w-full">
             <label htmlFor="name" className="text-sm text-text-secondary">Name:</label>
@@ -129,7 +126,7 @@ function DashboardProfile() {
 
           <div className="flex flex-col gap-1 items-start w-full">
             <label htmlFor="password" className="text-sm text-text-secondary">Confirm:</label>
-            <input type={isPasswordShown ? 'text' : 'password'} placeholder="Password" id="password"  className="w-full md:w-1/2 p-3 rounded-md border-[1px] text-sm  text-text-primary focus:outline-none focus:border-accent-2" {...register2('passwordConfirm', {
+            <input type={isPasswordShown ? 'text' : 'password'} placeholder="Password Confirm" id="passwordConfirm"  className="w-full md:w-1/2 p-3 rounded-md border-[1px] text-sm  text-text-primary focus:outline-none focus:border-accent-2" {...register2('passwordConfirm', {
               required: 'Password confirmation is required',
               minLength: 8
             })}/>
@@ -138,13 +135,13 @@ function DashboardProfile() {
           </div>
            
           <div className="flex items-center text-sm gap-2 text-text-primary">
-            <input type="checkbox" id="showPassword" onChange={() => setIsPasswordShown(!isPasswordShown)}/>
+            <input type="checkbox" id="showPassword" onChange={() => setIsPasswordShown(prev => !prev)}/>
             <label htmlFor="showPassword">Show password</label>
           </div>
 
           <div className="flex items-center gap-2 text-text-primary text-sm w-full md:w-1/2">
             <button className=" p-2 px-3 rounded-md border-[1px] w-1/2">Cancel</button>
-            <button type="submit" className="p-2 px-3 rounded-md bg-accent-1 text-white w-1/2">Change</button>
+            <button type="submit" className="p-2 px-3 rounded-md bg-accent-1 text-white w-1/2 disabled:bg-gray-700 " disabled={isLoadingPassword}>{isLoadingPassword ?  'Loading...' : 'Change'}</button>
           </div>
         </form>
       </div>

@@ -1,6 +1,7 @@
 import { request } from "../../helpers/requestHelper";
 import { useState, useEffect } from "react";
 import { GridLoader} from 'react-spinners'
+import {Spin} from 'antd'
 
 
 import { IoMdAdd } from "react-icons/io";
@@ -30,35 +31,27 @@ function DashboardHome() {
             Your awesome apps for your awesome businesses
           </p>
           </div>
-          {apps?.length > 0 &&
-          <div className="flex flex-col gap-1 items-start">
-            <p className="text-xs text-text-secondary">Select app:</p>
-          <select name="apps" id="apps" className="p-2 border-[1px] rounded-md text-xs">
-            {apps?.map(app => <option value={app?.id} className="break-words">{app?.name}</option>)}
-          </select>
-          </div>}
         </div>
 
-        <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3  gap-4 mt-12">
         
-          {apps.length > 0 ? (
-            <>
+          {!isLoading ? (
+            <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3  gap-4 mt-12">
               <div className="p-4 rounded-md flex flex-col border-dashed border-2 border-accent-2 bg-white text-sm  items-center justify-center text-accent-1 font-semibold hover:bg-section-background hover:cursor-pointer">
                 <IoMdAdd size={36} />
                 <span>Create New App</span>
               </div>
               {apps.map((app) => (
-                <AppCard />
+                <AppCard app={app} key={app?.id}/>
               ))}
-            </>
+            </div>
           ) : (
-            <div className=" w-full md:w-[calc(100vw-350px)]  mt-16 flex items-center justify-center">
-              <GridLoader color="#00BCD4" size={15} />
+            <div className="w-full flex items-center justify-center h-96">
+              <Spin size="large" tip="Loading... Please wait" ><div className="p-24"></div></Spin>
 
             </div>
           )}
           
-        </div>
+       
       </div>
     </div>
   );

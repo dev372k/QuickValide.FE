@@ -19,7 +19,7 @@ const appSlice = createSlice({
       state.seo = action.payload
     },
     updateWaitlist: (state, action) => {
-      state.seo = action.payload
+      state.waitlist = action.payload
     },
     updateApps: (state, action) => {
       state.apps = action.payload

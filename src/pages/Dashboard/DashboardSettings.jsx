@@ -16,6 +16,7 @@ function DashboardSettings() {
   const [appData, setAppData] = useState(null)
 
   const appId = useSelector(state => state.app.appId)
+  console.log('App id from settings', appId)
 
   const dispatch = useDispatch()
 
@@ -35,6 +36,7 @@ function DashboardSettings() {
         domain: domainName
       }
       
+      console.log('App id before update', appId)
       
       setIsLoading(true)
       const res = await request(`https://api.quickvalide.com/api/Setting/${appId}`, 'PUT', data)

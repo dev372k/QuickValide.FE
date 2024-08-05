@@ -14,7 +14,7 @@ function DashboardHome() {
   const dispatch = useDispatch()
 
   const [isLoading, setIsLoading] = useState(false)
-  const [showCreateAppModal, setShowCreateAppModal] = useState(true)
+  const [showCreateAppModal, setShowCreateAppModal] = useState(false)
 
   async function refreshApps() {
     const res = await request("https://api.quickvalide.com/api/App");

@@ -91,7 +91,7 @@ dispatch(updateSeo(data))
     <div className="flex flex-col gap-1">
       <label htmlFor="title">Title:</label>
       <p className="text-xs">This is the title which will be shown in browsers</p>
-      <input type="text" placeholder="Title" disabled={!appSEO?.title} className="text-sm p-3 rounded-lg border-[1px] text-text-primary focus:outline-none focus:border-accent-2" id="title" {...register('title', {
+      <input type="text" placeholder="Title" className="text-sm p-3 rounded-lg border-[1px] text-text-primary focus:outline-none focus:border-accent-2" id="title" {...register('title', {
         required: 'Title is required',
        
       })}/>
@@ -100,7 +100,7 @@ dispatch(updateSeo(data))
     <div className="flex flex-col gap-1">
       <label htmlFor="description">Description:</label>
       <p className="text-xs">This is the description which will help in your SEO</p>
-      <textarea type="text" disabled={!appSEO?.description} placeholder="Description" className="text-sm p-3 rounded-lg border-[1px] text-text-primary focus:outline-none focus:border-accent-2" id="description" rows={5} {...register('description', {
+      <textarea type="text" placeholder="Description" className="text-sm p-3 rounded-lg border-[1px] text-text-primary focus:outline-none focus:border-accent-2" id="description" rows={5} {...register('description', {
         required: 'Description is required'
       })}></textarea>
       {errors?.description && <p className="text-xs font-medium text-error">{errors.description.message}</p>}
@@ -108,7 +108,7 @@ dispatch(updateSeo(data))
     <div className="flex flex-col gap-1">
       <label htmlFor="og:title">OG Title:</label>
       <p className="text-xs">This title will be shown when you share your site on Social Media</p>
-      <input type="text" disabled={!appSEO?.ogTitle} placeholder="OG Title" className="text-sm p-3 rounded-lg border-[1px] text-text-primary focus:outline-none focus:border-accent-2" id="og:title"  {...register('ogTitle', {
+      <input type="text" placeholder="OG Title" className="text-sm p-3 rounded-lg border-[1px] text-text-primary focus:outline-none focus:border-accent-2" id="og:title"  {...register('ogTitle', {
         required: 'OG title is required'
       })}/>
       {errors?.ogTitle && <p className="text-xs font-medium text-error">{errors.ogTitle.message}</p>}
@@ -116,7 +116,7 @@ dispatch(updateSeo(data))
     <div className="flex flex-col gap-1">
       <label htmlFor="og:description">OG Description:</label>
       <p className="text-xs">This description will be shown when you share your site on Social Media</p>
-      <textarea type="text" disabled={!appSEO?.ogDescription} placeholder="OG Description" className="text-sm p-3 rounded-lg border-[1px] text-text-primary focus:outline-none focus:border-accent-2" id="og:description"  rows={5} {...register('ogDescription', {
+      <textarea type="text"  placeholder="OG Description" className="text-sm p-3 rounded-lg border-[1px] text-text-primary focus:outline-none focus:border-accent-2" id="og:description"  rows={5} {...register('ogDescription', {
         required: 'OG Description is required',
         
       })}></textarea>

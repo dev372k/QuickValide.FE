@@ -69,7 +69,7 @@ function DashboardAnalytics() {
       <div className="w-full flex flex-col gap-1">
 
       <label htmlFor="url" className="text-text-secondary text-xs">URL:</label>
-      <input type="text" placeholder="Enter url" disabled={!url} className="p-3 text-sm rounded-lg border text-text-primary focus:outline-none focus:border-accent-2" {...register('url', {required: 'URL is required'})}/>
+      <input type="text" placeholder="Enter url" className="p-3 text-sm rounded-lg border text-text-primary focus:outline-none focus:border-accent-2" {...register('url', {required: 'URL is required'})}/>
       {errors?.url && <p className="text-xs font-medium text-error">{errors.url.message}</p>}
       </div>
       <div className="text-sm flex items-center gap-3 font-medium">

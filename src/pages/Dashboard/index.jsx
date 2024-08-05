@@ -51,7 +51,7 @@ function Dashboard() {
 
   function handleAppChange(e) {
     setSelectedApp(+e.target.value)
-    dispatch(changeApp(selectedApp))
+    dispatch(changeApp(+e.target.value))
   }
 
   return (

@@ -28,7 +28,7 @@ function AppCard({app, refreshApps}) {
     }
 
 
-    return <div className="border-[1px] relative rounded-lg p-5 text-sm break-words flex flex-col gap-2">
+    return <div className="border-[1px] relative rounded-lg p-5 text-sm break-words flex flex-col justify-between gap-2">
         <DeleteModal showDeleteModal={showDeleteModal} setShowDeleteModal={setShowDeleteModal} appId={app?.id} handleDelete={handleDelete} isLoading={isLoading}/>
         <RxExternalLink size={22} className="absolute top-3 right-3 text-accent-2"/>
         <div>
@@ -37,9 +37,14 @@ function AppCard({app, refreshApps}) {
             <p className="text-xs text-text-secondary mt-3">Created: {new Date(app.createdAt).toLocaleDateString()}</p>
         </div>
 
-        <div className="flex items-center justify-end border-t-[1px] pt-3 text-error ">
-            <MdDeleteOutline size={36} onClick={askDeleteConfirmation} className="p-2 cursor-pointer rounded-full hover:bg-error hover:bg-opacity-10 transition-all"/>
+        {app?.isDefault ?  <div className="flex items-center justify-end border-t-[1px] pt-3 text-text-primary ">
+            <MdDeleteOutline size={36} onClick={() => message.error('You can\'t delete this app, because it is default app.')} className="p-2 cursor-pointer rounded-full bg-gray-100 hover:bg-opacity-50 transition-all"/>
         </div>
+        :  <div className="flex items-center justify-end border-t-[1px] pt-3 text-error ">
+            <MdDeleteOutline size={36} onClick={askDeleteConfirmation} className="p-2 cursor-pointer rounded-full hover:bg-error hover:bg-opacity-10 transition-all"/>
+        </div>}
+
+       
     </div>
 } 
 export default AppCard

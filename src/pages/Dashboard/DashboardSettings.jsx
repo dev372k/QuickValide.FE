@@ -8,6 +8,8 @@ import { useForm } from "react-hook-form";
 
 import { updateApps } from "../../services/appSlice";
 
+import CustomLoader from "../../components/CustomLoader";
+
 function DashboardSettings() {
   const [isLive, setIsLive] = useState(true)
   const [isLoading, setIsLoading] = useState(false)
@@ -24,16 +26,17 @@ function DashboardSettings() {
 
   async function handleAppUpdate(e) {
       e.preventDefault()
-      setIsLoading(true)
-
+      
       let app = getValues().name
-      domainName = app?.trim()?.toLowerCase()?.replace(/[' ']+/g, '-')
+      if (!app) return message.error('App name is required')
+        domainName = app?.trim()?.toLowerCase()?.replace(/[' ']+/g, '-')
       const data = {
         name: app,
         domain: domainName
       }
-
-
+      
+      
+      setIsLoading(true)
       const res = await request(`https://api.quickvalide.com/api/Setting/${appId}`, 'PUT', data)
       setIsLoading(false)
       
@@ -72,6 +75,7 @@ function DashboardSettings() {
 
 
   return <div className="w-full flex flex-col gap-8 mt-3 pb-6  px-6 md:px-12 lg:px-24 text-text-primary">
+    {isLoading &&<CustomLoader />}
     <div>
       <h2 className="text-2xl font-bold tracking-wider">Settings</h2>
     </div>
@@ -113,7 +117,7 @@ function DashboardSettings() {
 
       <div className="flex w-full md:w-1/2 gap-2">
         <button type="button" onClick={handleCancelUpdate} className="w-full p-2 text-xs border-[1px] rounded-lg text-text-primary hover:bg-gray-50 transition-all">Cancel</button>
-        <button type="submit" className="w-full p-2 text-xs bg-accent-1 rounded-lg font-semibold text-white hover:bg-opacity-80 disabled:bg-gray-600" disabled={isLoading}>{isLoading ? 'Loading...' : 'Update'}</button>
+        <button type="submit" className="w-full p-2 text-xs bg-accent-1 rounded-lg font-semibold text-white hover:bg-opacity-80 disabled:bg-gray-600" >Update</button>
       </div>
     </form>
   </div>;

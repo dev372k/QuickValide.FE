@@ -6,6 +6,7 @@ import { saveUser } from "../../services/userSlice";
 import { useForm } from "react-hook-form";
 
 import { message } from "antd";
+import CustomLoader from "../../components/CustomLoader";
 
 function deriveInitials(name) {
   let initials = "";
@@ -85,6 +86,9 @@ function DashboardProfile() {
   }
   return (
     <div className="w-full overflow-y-scroll h-[calc(100vh-157px)]">
+      {isLoading && <CustomLoader />}
+      {isLoadingPassword && <CustomLoader />}
+
       <div className="w-full h-32 bg-gray-50 border-b-2 relative">
         <div className="absolute w-24 h-24 md:w-28 md:h-28 left-5 top-full -translate-y-1/2  bg-gradient-to-r from-accent-1 to-accent-2 rounded-full">
 
@@ -119,7 +123,7 @@ function DashboardProfile() {
 
           <div className="flex items-center gap-2 text-text-primary text-sm w-full md:w-1/2">
             <button type="button" onClick={handleCancelNameUpdate} className=" p-2 px-3 rounded-md border-[1px] w-1/2">Cancel</button>
-            <button type="submit" className="p-2 px-3 rounded-md bg-accent-1 text-white w-1/2 flex items-center justify-center gap-2 disabled:bg-gray-600" disabled={isLoading}>{isLoading ? 'Loading...' : 'Update'}</button>
+            <button type="submit" className="p-2 px-3 rounded-md bg-accent-1 text-white w-1/2 flex items-center justify-center gap-2 ">Update</button>
           </div>
         </form>
         
@@ -158,7 +162,7 @@ function DashboardProfile() {
 
           <div className="flex items-center gap-2 text-text-primary text-sm w-full md:w-1/2">
             <button type="button" onClick={handleCancelPasswordUpdate} className=" p-2 px-3 rounded-md border-[1px] w-1/2">Cancel</button>
-            <button type="submit" className="p-2 px-3 rounded-md bg-accent-1 text-white w-1/2 disabled:bg-gray-700 " disabled={isLoadingPassword}>{isLoadingPassword ?  'Loading...' : 'Change'}</button>
+            <button type="submit" className="p-2 px-3 rounded-md bg-accent-1 text-white w-1/2" >Change</button>
           </div>
         </form>
       </div>

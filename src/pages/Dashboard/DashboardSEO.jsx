@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 import {request} from '../../helpers/requestHelper'
 import { message } from "antd";
 import { updateSeo } from "../../services/appSlice";
+import CustomLoader from "../../components/CustomLoader";
 
 
 function DashboardSEO() {
@@ -69,7 +70,9 @@ dispatch(updateSeo(data))
         console.log(appSEO)
         setKeywords(appSEO.keywords ? appSEO.keywords.split(',') : []);
       }
+      setIsLoading(true)
       const res = await request(`https://api.quickvalide.com/api/App/${appId}/seo`)
+      setIsLoading(false)
       if (!res.status) return message.error('An error occured while getting SEO data')
         dispatch(updateSeo(res.data))
     }
@@ -78,6 +81,8 @@ dispatch(updateSeo(data))
   }, [appId])
 
   return  <div className="w-full flex flex-col gap-8 mt-3 pb-8  px-6 md:px-12 lg:px-24 text-text-primary overflow-y-scroll h-[calc(100vh-170px)]">
+  {isLoading && <CustomLoader />}
+  
   <div>
     <h2 className="text-2xl font-bold tracking-wider">SEO <span className="text-xl font-medium text-text-secondary">(Search Engine Optimization)</span></h2>
   </div>

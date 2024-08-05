@@ -9,16 +9,14 @@ import EyeOpen from "../assets/eye-open.svg";
 import EyeClosed from "../assets/eye-closed.svg";
 import { request } from "../helpers/requestHelper";
 import { useSelector } from "react-redux";
+import { message } from "antd";
 
 function Register() {
   const navigate = useNavigate();
 
   const [isPasswordShown, setIsPasswordShown] = useState(false);
   const [isPasswordConfirmShown, setIsPasswordConfirmShown] = useState(false);
-  const [doPasswordsMatch, setDoPasswordsMatch] = useState(true);
-  const [message, setMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [successMessage, setSuccessMessage] = useState("");
 
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
 
@@ -39,10 +37,9 @@ function Register() {
   );
 
   async function onSubmit(data) {
-    if (getValues().password !== getValues().passwordConfirm) {
-      setDoPasswordsMatch(false);
-      return;
-    }
+    if (getValues().password !== getValues().passwordConfirm)
+      return message.error('Passwords don\'t match')
+
 
     const dataModified = {
       name: data.name,
@@ -50,9 +47,6 @@ function Register() {
       password: data.password,
     };
     setIsLoading(true);
-    setMessage("");
-    setSuccessMessage("");
-    setDoPasswordsMatch(true);
     const res = await request(
       "https://api.quickvalide.com/api/Auth",
       "POST",
@@ -60,10 +54,10 @@ function Register() {
     );
     setIsLoading(false);
 
-    if (!res.status) setMessage(res.message);
+    if (!res.status) message.error(res?.message);
 
     if (res.status) {
-      setSuccessMessage("registered");
+      message.success('Successfully registered. Redirecting...')
       setTimeout(function () {
         navigate("/login");
       }, 3000);
@@ -90,11 +84,7 @@ function Register() {
             className="flex flex-col gap-4"
             onSubmit={handleSubmit(onSubmit)}
           >
-            {successMessage && (
-              <p className="text-sm font-medium text-white bg-success rounded-md p-2">
-                Registered Successfully. Redirecting...
-              </p>
-            )}
+           
             <div className="flex flex-col items-center gap-1">
               <h2 className="text-2xl text-center font-medium text-text-primary">
                 Hi there, let's start
@@ -115,18 +105,6 @@ function Register() {
               <div className="bg-text-secondary bg-opacity-75 w-full h-[1px] my-1 flex items-center justify-center text-text-secondary text-sm">
                 <span className="p-1 bg-white">or</span>
               </div>
-
-              {!doPasswordsMatch && (
-                <p className="text-sm font-medium text-white bg-error rounded-md p-2">
-                  Passwords don't match
-                </p>
-              )}
-
-              {message && (
-                <p className="text-sm font-medium text-white bg-error rounded-md p-2">
-                  {message}
-                </p>
-              )}
 
               <div className="relative">
                 <input

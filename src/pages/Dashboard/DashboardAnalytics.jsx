@@ -4,6 +4,7 @@ import { message } from "antd";
 import { useState, useEffect } from "react";
 
 import { useForm } from "react-hook-form";
+import CustomLoader from "../../components/CustomLoader";
 
 function DashboardAnalytics() {
   const appId = useSelector(state => state.app.appId)
@@ -58,6 +59,8 @@ function DashboardAnalytics() {
 
 
   return <div className="w-full flex flex-col gap-8 mt-3  px-6 md:px-12 lg:px-24 text-text-primary">
+    {isLoadingGet && <CustomLoader />}
+    {isLoadingUpdate && <CustomLoader />}
     <div>
       <h2 className="text-2xl font-bold tracking-wider">Analytics</h2>
     </div>
@@ -71,7 +74,7 @@ function DashboardAnalytics() {
       </div>
       <div className="text-sm flex items-center gap-3 font-medium">
       <button type="button" className="p-2 px-3 rounded-lg border-[1px] hover:bg-gray-50 disabled:bg-gray-200 " onClick={handleCancelUpdate}  >Cancel</button>
-      <button type="submit" className="p-2 px-3 rounded-lg bg-accent-1 text-white hover:bg-opcaity-80 disabled:bg-gray-600" disabled={isLoadingUpdate}  >{isLoadingUpdate ? 'Loading...' : 'Update Analytics'}</button>
+      <button type="submit" className="p-2 px-3 rounded-lg bg-accent-1 text-white hover:bg-opcaity-80 " >Update</button>
     </div>
     </form>
 

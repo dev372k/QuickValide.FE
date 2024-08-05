@@ -14,6 +14,8 @@ import { decodeToken, setToken } from "../helpers/jwtHelper";
 import { useDispatch, useSelector } from "react-redux";
 import { saveUser } from "../services/userSlice";
 
+import { message } from "antd";
+
 const clientId =
   "933017194074-dp2kaj9jolvebu8u14uluqms0mibj9e2.apps.googleusercontent.com";
 
@@ -24,7 +26,6 @@ function Login() {
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
 
   const [isPasswordShown, setIsPasswordShown] = useState(false);
-  const [message, setMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const {
     register,
@@ -42,7 +43,6 @@ function Login() {
 
   async function onSubmit(data) {
     setIsLoading(true);
-    setMessage("");
     const res = await request(
       "https://api.quickvalide.com/api/Auth/login",
       "POST",
@@ -50,7 +50,7 @@ function Login() {
     );
     setIsLoading(false);
 
-    if (!res.status) setMessage(res.message);
+    if (!res.status) message.error(res.message);
 
     if (res.status) {
       setToken(res?.data);
@@ -152,11 +152,7 @@ function Login() {
               <div className="bg-text-secondary bg-opacity-75 w-full h-[1px] my-1 flex items-center justify-center text-text-secondary text-sm">
                 <span className="p-1 bg-white">or</span>
               </div>
-              {message && (
-                <p className="w-full p-2 bg-error text-white text-sm text-medium rounded-md">
-                  {message}
-                </p>
-              )}
+              
 
               <div className="relative">
                 <input

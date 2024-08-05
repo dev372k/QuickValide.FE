@@ -1,21 +1,32 @@
 import { request } from "../../helpers/requestHelper";
 import { useState, useEffect } from "react";
-import { GridLoader} from 'react-spinners'
 import {Spin} from 'antd'
-
+import { useSelector, useDispatch } from "react-redux";
 
 import { IoMdAdd } from "react-icons/io";
 import AppCard from "../../components/AppCard";
+import { updateApps } from "../../services/appSlice";
+
+import CreateAppModal  from "../../components/CreateAppModal";
 
 function DashboardHome() {
-  const [apps, setApps] = useState([]);
+  const apps = useSelector(state => state.app.apps)
+  const dispatch = useDispatch()
+
   const [isLoading, setIsLoading] = useState(false)
+  const [showCreateAppModal, setShowCreateAppModal] = useState(true)
+
+  async function refreshApps() {
+    const res = await request("https://api.quickvalide.com/api/App");
+    dispatch(updateApps(res?.data))
+  }
+
   useEffect(function () {
     document.title = "Home | Dashboard"
     async function getApps() {
       setIsLoading(true)
       const res = await request("https://api.quickvalide.com/api/App");
-      setApps(res.data);
+      dispatch(updateApps(res?.data))
       setIsLoading(false)
     }
 
@@ -34,15 +45,18 @@ function DashboardHome() {
           </div>
         </div>
 
-        
+           <CreateAppModal showCreateAppModal={showCreateAppModal}
+              setShowCreateAppModal={setShowCreateAppModal}
+              refreshApps={refreshApps}
+          />
           {!isLoading ? (
             <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3  gap-4 mt-12">
-              <div className="p-4 rounded-md flex flex-col border-dashed border-2 border-accent-2 bg-white text-sm  items-center justify-center text-accent-1 font-semibold hover:bg-section-background hover:cursor-pointer">
+              <div onClick={() => setShowCreateAppModal(true)} className="p-4 rounded-md flex flex-col border-dashed border-2 border-accent-2 bg-white text-sm  items-center justify-center text-accent-1 font-semibold hover:bg-section-background hover:cursor-pointer">
                 <IoMdAdd size={36} />
                 <span>Create New App</span>
               </div>
               {apps.map((app) => (
-                <AppCard app={app} key={app?.id}/>
+                <AppCard refreshApps={refreshApps} app={app} key={app?.id}/>
               ))}
             </div>
           ) : (

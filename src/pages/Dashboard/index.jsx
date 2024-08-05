@@ -10,6 +10,7 @@ import useWindowWidth from "../../hooks/useWindowWidth";
 import { request } from "../../helpers/requestHelper";
 import { message } from "antd";
 import { changeApp, updateApps } from "../../services/appSlice";
+import Modal from "../../components/Modal";
 
 
 function Dashboard() {
@@ -65,13 +66,14 @@ function Dashboard() {
 
          <div className="flex items-center justify-between gap-2 w-full ">
          <div className="xs:flex flex-col gap-1  self-start  w-full hidden">
-        <div>
+        {apps.length > 0 && <div>
+         
           <p className="text-xs text-text-secondary">Select app:</p>
-          {apps.length > 0 &&  <select name="apps" id="apps" className="p-2 border-[1px] rounded-md text-xs focus:outline-accent-2" value={selectedApp} onChange={(e) => handleAppChange(e)}>
+          <select name="apps" id="apps" className="p-2 border-[1px] rounded-md text-xs focus:outline-accent-2" value={selectedApp} onChange={(e) => handleAppChange(e)}>
             {apps?.map(app => <option value={app?.id && app?.id} key={app?.id} className="break-words">{app?.name}</option>)}
-          </select>}
+          </select>
 
-        </div>
+        </div>}
         
          </div>
 
@@ -89,13 +91,13 @@ function Dashboard() {
 
        </div>
        <div className="flex flex-col gap-1  self-start p-4 w-full xs:hidden">
-        <div>
+        {apps.length > 0 && <div>
           <p className="text-xs text-text-secondary">Select app:</p>
-          {apps.length > 0 &&  <select name="apps" id="apps" className="p-2 border-[1px] rounded-md text-xs focus:outline-accent-2" value={selectedApp} onChange={(e) => handleAppChange(e)}>
+          <select name="apps" id="apps" className="p-2 border-[1px] rounded-md text-xs focus:outline-accent-2" value={selectedApp} onChange={(e) => handleAppChange(e)}>
             {apps?.map(app => <option value={app?.id && app?.id} key={app?.id} className="break-words">{app?.name}</option>)}
-          </select>}
+          </select>
 
-        </div>
+        </div>}
         
          </div>
          <div>

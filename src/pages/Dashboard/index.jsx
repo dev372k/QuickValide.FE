@@ -55,7 +55,7 @@ function Dashboard() {
   }
 
   return (
-    <main className="w-full h-full  flex ">
+    <main className="w-full h-full  flex selection:bg-accent-1 selection:text-white">
          <Sidebar isSidebarOpen={isSidebarOpen} setIsSidebarOpen={setIsSidebarOpen}/>
 
         <div className="flex flex-col h-full w-full ">

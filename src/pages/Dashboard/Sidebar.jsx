@@ -1,6 +1,6 @@
 import { removeToken } from "../../helpers/jwtHelper";
 import { useDispatch } from "react-redux";
-import { useNavigate, NavLink } from "react-router-dom";
+import { useNavigate, NavLink, Link } from "react-router-dom";
 
 import { TbBrandGoogleAnalytics } from "react-icons/tb";
 import { TbSeo } from "react-icons/tb";
@@ -54,10 +54,10 @@ function Sidebar({isSidebarOpen, setIsSidebarOpen}) {
     animate={isSidebarOpen ? "open" : "closed"} className="h-screen absolute md:relative z-10 top-0 left-0 bottom-0 bg-white border-r-[1px] text-xs flex flex-col items-center justify-between bg-opacity-40 backdrop-blur-lg">
       
       {isSidebarOpen && <div onClick={() => setIsSidebarOpen(false)} className="absolute top-1 md:hidden left-3 text-accent-2 p-[2px] rounded-full hover:bg-gray-100"><Hamburger size={18} toggled={true}/></div>}
-      <div className="p-6 mt-8 md:mt-0">
+      <Link to="/" className="p-6 mt-8 md:mt-0">
         <img src={Logo} alt="Logo" className="w-48"/>
 
-      </div>
+      </Link>
 
       <div className="w-full px-3 mb-3">
 

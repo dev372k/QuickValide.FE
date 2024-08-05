@@ -70,6 +70,19 @@ function DashboardProfile() {
     }
     reset2()
   }
+
+  function handleCancelNameUpdate() {
+    reset1({
+      name: user?.name
+    })
+  }
+
+  function handleCancelPasswordUpdate() {
+    reset2({
+      password: '',
+      passwordConfirm: ''
+    })
+  }
   return (
     <div className="w-full overflow-y-scroll h-[calc(100vh-157px)]">
       <div className="w-full h-32 bg-gray-50 border-b-2 relative">
@@ -90,7 +103,7 @@ function DashboardProfile() {
 
           <div className="flex flex-col gap-1 items-start w-full">
             <label htmlFor="name" className="text-sm text-text-secondary">Name:</label>
-            <input type="text" placeholder="Name" id="name" defaultValue={user.name}  className="w-full md:w-1/2 p-3 rounded-md border-[1px] text-sm  text-text-primary focus:outline-none focus:border-accent-2" {...register1('name', {
+            <input type="text" placeholder="Name" id="name" defaultValue={user.name}  className="w-full md:w-1/2 p-3 rounded-md border-[1px] text-sm  text-text-primary focus:outline-none focus:border-accent-2" disabled={!user.name}  {...register1('name', {
               required: 'Name is required',
               minLength: 3,
               value: user.name
@@ -105,7 +118,7 @@ function DashboardProfile() {
           </div>
 
           <div className="flex items-center gap-2 text-text-primary text-sm w-full md:w-1/2">
-            <button className=" p-2 px-3 rounded-md border-[1px] w-1/2">Cancel</button>
+            <button type="button" onClick={handleCancelNameUpdate} className=" p-2 px-3 rounded-md border-[1px] w-1/2">Cancel</button>
             <button type="submit" className="p-2 px-3 rounded-md bg-accent-1 text-white w-1/2 flex items-center justify-center gap-2 disabled:bg-gray-600" disabled={isLoading}>{isLoading ? 'Loading...' : 'Update'}</button>
           </div>
         </form>
@@ -144,7 +157,7 @@ function DashboardProfile() {
           </div>
 
           <div className="flex items-center gap-2 text-text-primary text-sm w-full md:w-1/2">
-            <button className=" p-2 px-3 rounded-md border-[1px] w-1/2">Cancel</button>
+            <button type="button" onClick={handleCancelPasswordUpdate} className=" p-2 px-3 rounded-md border-[1px] w-1/2">Cancel</button>
             <button type="submit" className="p-2 px-3 rounded-md bg-accent-1 text-white w-1/2 disabled:bg-gray-700 " disabled={isLoadingPassword}>{isLoadingPassword ?  'Loading...' : 'Change'}</button>
           </div>
         </form>

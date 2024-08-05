@@ -8,7 +8,6 @@ import { Spin } from "antd";
 function DashboardWaitlist() {
   const appId = useSelector(state => state.app.appId)
   const waitlist = useSelector(state => state.app.waitlist)
-  const dispatch = useDispatch()
 
   const [isLoading, setIsLoading] = useState(false)
 
@@ -19,7 +18,6 @@ function DashboardWaitlist() {
       setIsLoading(true)
       const res = await request(`https://api.quickvalide.com/api/Waitlist/${appId}`)
       setIsLoading(false)
-      console.log(res)
     }
 
     getWaitlist()

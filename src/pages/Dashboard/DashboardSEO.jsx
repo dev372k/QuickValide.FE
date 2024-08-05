@@ -33,6 +33,17 @@ dispatch(updateSeo(data))
 
   }
 
+  function handleCancelUpdate(e) {
+    reset({
+      title: appSEO?.title,
+      description: appSEO?.description,
+      ogTitle: appSEO?.ogTitle,
+      ogDescription: appSEO?.ogDescription
+    })
+    setKeywords(appSEO.keywords ? appSEO.keywords.split(',') : []);
+
+  }
+
   useEffect(() => {
     if (appSEO) {
       reset({
@@ -75,7 +86,7 @@ dispatch(updateSeo(data))
     <div className="flex flex-col gap-1">
       <label htmlFor="title">Title:</label>
       <p className="text-xs">This is the title which will be shown in browsers</p>
-      <input type="text" placeholder="Title" className="text-sm p-3 rounded-lg border-[1px] text-text-primary focus:outline-none focus:border-accent-2" id="title" {...register('title', {
+      <input type="text" placeholder="Title" disabled={!appSEO?.title} className="text-sm p-3 rounded-lg border-[1px] text-text-primary focus:outline-none focus:border-accent-2" id="title" {...register('title', {
         required: 'Title is required',
        
       })}/>
@@ -84,7 +95,7 @@ dispatch(updateSeo(data))
     <div className="flex flex-col gap-1">
       <label htmlFor="description">Description:</label>
       <p className="text-xs">This is the description which will help in your SEO</p>
-      <textarea type="text" placeholder="Description" className="text-sm p-3 rounded-lg border-[1px] text-text-primary focus:outline-none focus:border-accent-2" id="description" rows={5} {...register('description', {
+      <textarea type="text" disabled={!appSEO?.description} placeholder="Description" className="text-sm p-3 rounded-lg border-[1px] text-text-primary focus:outline-none focus:border-accent-2" id="description" rows={5} {...register('description', {
         required: 'Description is required'
       })}></textarea>
       {errors?.description && <p className="text-xs font-medium text-error">{errors.description.message}</p>}
@@ -92,7 +103,7 @@ dispatch(updateSeo(data))
     <div className="flex flex-col gap-1">
       <label htmlFor="og:title">OG Title:</label>
       <p className="text-xs">This title will be shown when you share your site on Social Media</p>
-      <input type="text" placeholder="OG Title" className="text-sm p-3 rounded-lg border-[1px] text-text-primary focus:outline-none focus:border-accent-2" id="og:title"  {...register('ogTitle', {
+      <input type="text" disabled={!appSEO?.ogTitle} placeholder="OG Title" className="text-sm p-3 rounded-lg border-[1px] text-text-primary focus:outline-none focus:border-accent-2" id="og:title"  {...register('ogTitle', {
         required: 'OG title is required'
       })}/>
       {errors?.ogTitle && <p className="text-xs font-medium text-error">{errors.ogTitle.message}</p>}
@@ -100,7 +111,7 @@ dispatch(updateSeo(data))
     <div className="flex flex-col gap-1">
       <label htmlFor="og:description">OG Description:</label>
       <p className="text-xs">This description will be shown when you share your site on Social Media</p>
-      <textarea type="text" placeholder="OG Description" className="text-sm p-3 rounded-lg border-[1px] text-text-primary focus:outline-none focus:border-accent-2" id="og:description"  rows={5} {...register('ogDescription', {
+      <textarea type="text" disabled={!appSEO?.ogDescription} placeholder="OG Description" className="text-sm p-3 rounded-lg border-[1px] text-text-primary focus:outline-none focus:border-accent-2" id="og:description"  rows={5} {...register('ogDescription', {
         required: 'OG Description is required',
         
       })}></textarea>
@@ -108,12 +119,12 @@ dispatch(updateSeo(data))
     </div>
     <div className="flex flex-col gap-1">
       <label htmlFor="keywords">Keywords:</label>
-      <TagsInput value={keywords} onChange={setKeywords} name="keywords" placeHolder="Enter keywords" classNames={{input: 'p-2'}}/>
+      <TagsInput disabled={!keywords} value={keywords} onChange={setKeywords} name="keywords" placeHolder="Enter keywords" classNames={{input: 'p-2'}}/>
     </div>
 
     <div className="flex w-full text-sm items-center gap-2">
-      <button className="w-full p-2 border-[1px] font-semibold rounded-lg hover:bg-gray-50">Cancel</button>
-      <button className="w-full p-2 font-semibold rounded-lg bg-accent-1 text-white hover:bg-opacity-80 disabled:bg-gray-600" disabled={isLoading}>{isLoading ? 'Loading...' : 'Update'}</button>
+      <button type="button" className="w-full p-2 border-[1px] font-semibold rounded-lg hover:bg-gray-50" onClick={handleCancelUpdate}>Cancel</button>
+      <button type="submit" className="w-full p-2 font-semibold rounded-lg bg-accent-1 text-white hover:bg-opacity-80 disabled:bg-gray-600" disabled={isLoading}>{isLoading ? 'Loading...' : 'Update'}</button>
     </div>
   </form>
 </div>;

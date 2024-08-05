@@ -11,8 +11,10 @@ import { updateApps } from "../../services/appSlice";
 function DashboardSettings() {
   const [isLive, setIsLive] = useState(true)
   const [isLoading, setIsLoading] = useState(false)
+  const [appData, setAppData] = useState(null)
 
   const appId = useSelector(state => state.app.appId)
+
   const dispatch = useDispatch()
 
   const {register, formState: {errors}, watch, reset, getValues} = useForm()
@@ -61,15 +63,13 @@ function DashboardSettings() {
         if (res.status) message.success('Changed app running status successfully')
           else message.error('An error occured while changing the app status')
       }
-  // useEffect(function() {
-  //   async function updateAppStatus() {
-  //     const res = await request(`https://api.quickvalide.com/api/Setting/${appId}/${isLive}`, 'PUT')
-  //     if (res.status) message.success('Changed app running status successfully')
-  //       else message.error('An error occured while changing the app status')
-  //   }
 
-  //   if (appId) updateAppStatus()
-  // }, [isLive])
+      function handleCancelUpdate() {
+        reset({
+          name: ''
+        })
+      }
+
 
   return <div className="w-full flex flex-col gap-8 mt-3 pb-6  px-6 md:px-12 lg:px-24 text-text-primary">
     <div>
@@ -102,18 +102,18 @@ function DashboardSettings() {
       
       <div className="text-sm flex flex-col gap-1">
         <label htmlFor="name" className="text-xs">App name:</label>
-        <input type="text" placeholder="App name"  className="w-full md:w-1/2 p-3 rounded-lg border-[1px] focus:outline-none focus:border-accent-2" {...register('name', {required: 'App name is required'})} />
+        <input type="text" placeholder="App name" className="w-full md:w-1/2 p-3 rounded-lg border-[1px] focus:outline-none focus:border-accent-2" {...register('name', {required: 'App name is required'})}/>
         {errors?.name && <p className="text-xs font-medium text-error">{errors.name.message}</p>}
       </div>
       <div className="text-sm flex flex-col gap-1">
         <label htmlFor="name" className="text-xs">Domain:</label>
-        <input type="text" placeholder="App domain" className="w-full md:w-1/2 p-3 rounded-lg border-[1px] focus:outline-none focus:border-accent-2" disabled  {...register('domain', {required: 'App domain is required'})}/>
+        <input type="text" placeholder="App domain" value={appData?.domain} className="w-full md:w-1/2 p-3 rounded-lg border-[1px] focus:outline-none focus:border-accent-2" disabled  {...register('domain', {required: 'App domain is required'})}/>
 
       </div>
 
       <div className="flex w-full md:w-1/2 gap-2">
-        <button className="w-full p-2 text-xs border-[1px] rounded-lg text-text-primary hover:bg-gray-50 transition-all">Cancel</button>
-        <button className="w-full p-2 text-xs bg-accent-1 rounded-lg font-semibold text-white hover:bg-opacity-80 disabled:bg-gray-600" disabled={isLoading}>{isLoading ? 'Loading...' : 'Update'}</button>
+        <button type="button" onClick={handleCancelUpdate} className="w-full p-2 text-xs border-[1px] rounded-lg text-text-primary hover:bg-gray-50 transition-all">Cancel</button>
+        <button type="submit" className="w-full p-2 text-xs bg-accent-1 rounded-lg font-semibold text-white hover:bg-opacity-80 disabled:bg-gray-600" disabled={isLoading}>{isLoading ? 'Loading...' : 'Update'}</button>
       </div>
     </form>
   </div>;

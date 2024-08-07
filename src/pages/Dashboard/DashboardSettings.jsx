@@ -20,35 +20,40 @@ function DashboardSettings() {
 	const appId = useSelector((state) => state.app.appId);
 	const apps = useSelector((state) => state.app.apps);
 
+	const { register, handleSubmit, reset, setValue, watch } = useForm();
+
+	const name = watch("name");
+
 	useEffect(
 		function () {
 			const app = apps.filter((app) => app.id === appId)[0];
 			setCurrentApp(app);
-			setAppName(app?.name);
-			setAppDomain(app?.domain);
+			reset({
+				name: app?.name,
+				domain: app?.domain,
+			});
 		},
 		[apps, appId]
 	);
 
+	useEffect(
+		function () {
+			setValue(
+				"domain",
+				name
+					?.trim()
+					?.toLowerCase()
+					?.replace(/[' ']+/g, "-")
+			);
+		},
+		[name, setValue]
+	);
+
 	const dispatch = useDispatch();
 
-	function handleNameChange(e) {
-		const val = e.target.value;
-		const domain = val
-			.trim()
-			.toLowerCase()
-			.replace(/[' ']+/g, "-");
-		setAppName(val);
-		setAppDomain(domain);
-	}
-
-	async function handleAppUpdate(e) {
-		e.preventDefault();
-
+	async function handleAppUpdate(data) {
 		try {
-			if (!appName) throw new Error("App name is required");
-
-			const data = { name: appName, domain: appDomain };
+			if (!name) throw new Error("App name is required");
 
 			setIsLoading(true);
 			const res = await request(
@@ -63,6 +68,7 @@ function DashboardSettings() {
 			updateAppsData();
 		} catch (err) {
 			message.error(err?.message);
+			handleCancelUpdate();
 		} finally {
 			setIsLoading(false);
 		}
@@ -95,7 +101,8 @@ function DashboardSettings() {
 
 	function handleCancelUpdate() {
 		reset({
-			name: "",
+			name: currentApp?.name,
+			domain: currentApp?.domain,
 		});
 	}
 
@@ -132,7 +139,10 @@ function DashboardSettings() {
 				</form>
 			</div>
 
-			<form className='flex flex-col gap-2' onSubmit={handleAppUpdate}>
+			<form
+				className='flex flex-col gap-2'
+				onSubmit={handleSubmit(handleAppUpdate)}
+			>
 				<h3 className='text-xl font-medium'>App details</h3>
 
 				<div className='text-sm flex flex-col gap-1'>
@@ -143,8 +153,7 @@ function DashboardSettings() {
 						type='text'
 						placeholder='App name'
 						className='w-full md:w-1/2 p-3 rounded-lg border-[1px] focus:outline-none focus:border-accent-2'
-						defaultValue={appName}
-						onChange={handleNameChange}
+						{...register("name")}
 					/>
 				</div>
 				<div className='text-sm flex flex-col gap-1'>
@@ -154,9 +163,9 @@ function DashboardSettings() {
 					<input
 						type='text'
 						placeholder='App domain'
-						value={appDomain}
 						className='w-full md:w-1/2 p-3 rounded-lg border-[1px] focus:outline-none focus:border-accent-2'
 						disabled
+						{...register("domain")}
 					/>
 				</div>
 

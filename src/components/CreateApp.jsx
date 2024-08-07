@@ -70,7 +70,7 @@ function CreateApp({ setShowCreateAppModal, refreshApps }) {
 	}
 
 	return (
-		<div className='relative w-[95vw] xs:w-[80vw] sm:w-[32rem] max-h-[90vh] overflow-y-scroll max-w-full p-8 flex flex-col gap-8'>
+		<div className='relative w-[95vw] xs:w-[80vw] sm:w-[32rem] max-h-[90vh] overflow-y-auto max-w-full p-8 flex flex-col gap-8'>
 			{isLoading && <CustomLoader />}
 
 			<div

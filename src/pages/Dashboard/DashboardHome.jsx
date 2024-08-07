@@ -45,7 +45,7 @@ function DashboardHome() {
           </div>
         </div>
 
-           <CreateAppModal showCreateAppModal={showCreateAppModal}
+          <CreateAppModal showCreateAppModal={showCreateAppModal}
               setShowCreateAppModal={setShowCreateAppModal}
               refreshApps={refreshApps}
           />

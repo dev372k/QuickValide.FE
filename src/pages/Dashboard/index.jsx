@@ -10,7 +10,8 @@ import useWindowWidth from "../../hooks/useWindowWidth";
 import { request } from "../../helpers/requestHelper";
 import { message } from "antd";
 import { changeApp, updateApps } from "../../services/appSlice";
-import Modal from "../../components/Modal";
+
+import deriveInitials from "../../utils/deriveInitials";
 
 
 function Dashboard() {
@@ -18,13 +19,7 @@ function Dashboard() {
   const apps = useSelector((state) => state.app.apps);
   const dispatch = useDispatch()
 
-  function deriveInitials(name) {
-    let initials = "";
-    const nameArray = name?.trim()?.split(" ");
-    for (let i in nameArray) initials += nameArray[i][0]?.toUpperCase();
-
-    return initials;
-  }
+  
   const windowWidth = useWindowWidth()
 
   useEffect(function() {
@@ -56,7 +51,7 @@ function Dashboard() {
 
   return (
     <main className="w-full h-full  flex selection:bg-accent-1 selection:text-white">
-         <Sidebar isSidebarOpen={isSidebarOpen} setIsSidebarOpen={setIsSidebarOpen}/>
+        <Sidebar isSidebarOpen={isSidebarOpen} setIsSidebarOpen={setIsSidebarOpen}/>
 
         <div className="flex flex-col h-full w-full ">
         <div className="w-full p-3  flex items-center justify-between gap-1 px-8">
@@ -69,7 +64,7 @@ function Dashboard() {
         {apps.length > 0 && <div>
          
           <p className="text-xs text-text-secondary">Select app:</p>
-          <select name="apps" id="apps" className="p-2 border-[1px] rounded-md text-xs focus:outline-accent-2" value={selectedApp} onChange={(e) => handleAppChange(e)}>
+          <select name="apps" id="apps" className="p-2 border-[1px] rounded-md text-xs focus:outline-accent-2" value={selectedApp || 0} onChange={(e) => handleAppChange(e)}>
             {apps?.map(app => <option value={app?.id && app?.id} key={app?.id} className="break-words">{app?.name}</option>)}
           </select>
 
@@ -93,7 +88,7 @@ function Dashboard() {
        <div className="flex flex-col gap-1  self-start p-4 w-full xs:hidden">
         {apps.length > 0 && <div>
           <p className="text-xs text-text-secondary">Select app:</p>
-          <select name="apps" id="apps" className="p-2 border-[1px] rounded-md text-xs focus:outline-accent-2" value={selectedApp} onChange={(e) => handleAppChange(e)}>
+          <select name="apps" id="apps" className="p-2 border-[1px] rounded-md text-xs focus:outline-accent-2" value={selectedApp || 0} onChange={(e) => handleAppChange(e)}>
             {apps?.map(app => <option value={app?.id && app?.id} key={app?.id} className="break-words">{app?.name}</option>)}
           </select>
 

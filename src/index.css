@@ -176,6 +176,8 @@ html {
   @apply flex flex-col gap-1 items-center tooltip text-accent-1 hover:bg-section-background p-3 rounded-md cursor-pointer transition-all;
 }
 
-.custom-spin .ant-spin-dot-item {
-  background-color: #fff; /* Change the color */
+.ant-spin-dot-item {
+  background-color: #E91E63 !important; /* Change the color */
 }
+
+.ant-spin-text { color: #E91E63; }

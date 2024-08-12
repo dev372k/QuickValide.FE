@@ -65,12 +65,11 @@ function App() {
 	return (
 		<BrowserRouter>
 			<Routes>
-				<Route path='/theme'>
-					<Route path='0' element={<Theme0 />} />
-					<Route path='1' element={<Theme1 />} />
+				<Route path='/theme/0' element={<Theme0 />} />
+				{/* <Route path='1' element={<Theme1 />} />
 					<Route path='2' element={<Theme2 />} />
 					<Route path='3' element={<Theme3 />} />
-				</Route>
+				</Route> */}
 				<Route path='/' element={<LandingPage />} />
 				<Route path='/login' exact element={<Login />} />
 				<Route path='/register' exact element={<Register />} />

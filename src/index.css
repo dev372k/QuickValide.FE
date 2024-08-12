@@ -12,6 +12,7 @@ body {
 	top: 50%;
 	opacity: 0;
 	transition: all 0.3s;
+    visibility: hidden;
 }
 
 .hero-background {
@@ -20,13 +21,6 @@ body {
 	background-repeat: repeat-y;
 	background-size: cover;
 }
-
-/* header {
-  background-image: url("./assets//mesh.png");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-} */
 
 .bright-bulb {
 	position: relative;

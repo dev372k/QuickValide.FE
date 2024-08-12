@@ -6,7 +6,6 @@ import { request } from "../helpers/requestHelper";
 import { message } from "antd";
 
 import DeleteModal from "./DeleteModal";
-import { Link } from "react-router-dom";
 
 function AppCard({ app, refreshApps }) {
 	const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -16,19 +15,25 @@ function AppCard({ app, refreshApps }) {
 		setShowDeleteModal(true);
 	}
 
-	async function handleDelete(appId) {
-		setIsLoading(true);
-		const res = await request(
-			`https://api.quickvalide.com/api/App/${appId}`,
-			"DELETE"
-		);
-		setIsLoading(false);
-		setShowDeleteModal(false);
 
-		if (!res.status)
-			return message.error("An error occured while deleting app");
-		message.success("App deleted successfully");
-		refreshApps();
+	async function handleDelete(appId) {
+        try {
+            setIsLoading(true);
+            const res = await request(
+                `https://api.quickvalide.com/api/App/${appId}`,
+                "DELETE"
+            );
+
+            if (!res.status) throw new Error('An error occured while deleting app')
+            message.success("App deleted successfully");
+            refreshApps();
+        } catch(err) {
+            message.error(err.message)
+        } finally {
+            setIsLoading(false);
+            setShowDeleteModal(false);
+        }
+
 	}
 
 	const formattedUrl = `https://${app?.domain}`;

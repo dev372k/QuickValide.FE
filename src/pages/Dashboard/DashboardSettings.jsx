@@ -24,9 +24,13 @@ function DashboardSettings() {
 
 	const name = watch("name");
 
+    console.log(currentApp)
+
 	useEffect(
 		function () {
-			const app = apps.filter((app) => app.id === appId)[0];
+			const app = apps.filter((app) => app.id === +appId)[0];
+            console.log('App', app)
+            console.log(apps)
 			setCurrentApp(app);
 			reset({
 				name: app?.name,
@@ -43,7 +47,7 @@ function DashboardSettings() {
 				name
 					?.trim()
 					?.toLowerCase()
-					?.replace(/[' ']+/g, "-")
+					?.replace(/[' ']+/g, "-") + '.quickvalide.com'
 			);
 		},
 		[name, setValue]

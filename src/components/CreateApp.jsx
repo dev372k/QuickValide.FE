@@ -9,6 +9,7 @@ import { message } from "antd";
 import { useEffect, useState } from "react";
 import CustomLoader from "./CustomLoader";
 
+
 function CreateApp({ setShowCreateAppModal, refreshApps }) {
 	const {
 		register,
@@ -21,8 +22,8 @@ function CreateApp({ setShowCreateAppModal, refreshApps }) {
 	const userId = useSelector((state) => state.user.user.id);
 
 	const [isLoading, setIsLoading] = useState(false);
-
 	const appName = watch("name");
+
 
 	useEffect(
 		function () {
@@ -31,10 +32,7 @@ function CreateApp({ setShowCreateAppModal, refreshApps }) {
 				setValue("name", appName.charAt(0).toUpperCase() + appName.slice(1));
 				setValue(
 					"domain",
-					appName
-						.trim()
-						.toLowerCase()
-						.replace(/[' ']+/g, "-")
+					appName.trim().toLowerCase().replace(/[' ']+/g, "-") + '.quickvalide.com'
 				);
 			}
 		},
@@ -43,6 +41,9 @@ function CreateApp({ setShowCreateAppModal, refreshApps }) {
 
 	async function onSubmit(data) {
 		data["userId"] = userId;
+        data['domain'] = data.domain.replace('.quickvalide.com', '')
+
+        console.log(data)
 
 		try {
 			setIsLoading(true);
@@ -69,6 +70,8 @@ function CreateApp({ setShowCreateAppModal, refreshApps }) {
 	function handleCancleCreate() {
 		reset();
 	}
+
+
 
 	return (
 		<div className='relative w-[95vw] xs:w-[80vw] sm:w-[32rem] max-h-[90vh] overflow-y-auto max-w-full p-8 flex flex-col gap-8'>

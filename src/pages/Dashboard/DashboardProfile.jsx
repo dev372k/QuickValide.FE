@@ -2,16 +2,21 @@ import { useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import { request } from "../../helpers/requestHelper";
 import { useDispatch } from "react-redux";
-import { saveUser } from "../../services/userSlice";
+import { logoutUser, saveUser } from "../../services/userSlice";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 
 import { message } from "antd";
 import CustomLoader from "../../components/CustomLoader";
 import deriveInitials from "../../utils/deriveInitials";
+import DeleteAccountModal from "../../components/DeleteAccountModal";
+import { removeToken } from "../../helpers/jwtHelper";
 
 function DashboardProfile() {
 	let user = useSelector((state) => state.user.user);
+
 	const dispatch = useDispatch();
+    const navigate = useNavigate()
 
 	useEffect(function () {
 		document.title = "Profile | Dashboard";
@@ -33,6 +38,9 @@ function DashboardProfile() {
 	const [isPasswordShown, setIsPasswordShown] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
 	const [isLoadingPassword, setIsLoadingPassword] = useState(false);
+
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
+
 
 	async function refreshUser() {
 		const res = await request(
@@ -87,6 +95,30 @@ function DashboardProfile() {
 		}
 	}
 
+    async function handleDeleteAccount(userId) {
+        try {
+            setIsLoading(true)
+            const res = await request(`https://api.quickvalide.com/api/Auth/${userId}`, 'DELETE')
+            console.log(res)
+            if (!res.status) throw new Error('An error occured while deleting account')
+
+             message.success('Account deleted successfully')
+
+             setTimeout(() => {
+
+                 removeToken()
+                 dispatch(logoutUser())
+                 navigate('/login')
+             }, 1500);
+        } catch (err) {
+            message.error(err.message)
+        } finally {
+            setIsLoading(false)
+            setShowDeleteModal(false)
+        }
+
+    }
+
 	function handleCancelNameUpdate() {
 		reset1({
 			name: user?.name,
@@ -103,6 +135,7 @@ function DashboardProfile() {
 	return (
 		<div className='w-full overflow-y-auto h-[calc(100vh-157px)] xs:h-[calc(100vh-77px)]'>
 			{(isLoading || isLoadingPassword) && <CustomLoader />}
+            <DeleteAccountModal showDeleteModal={showDeleteModal} setShowDeleteModal={setShowDeleteModal} handleDelete={handleDeleteAccount} userId={user?.id} isLoading={isLoading}/>
 
 			<div className='w-full h-32 bg-gray-50 border-b-2 relative'>
 				<div className='absolute w-24 h-24 md:w-28 md:h-28 left-5 top-full -translate-y-1/2  bg-gradient-to-r from-accent-1 to-accent-2 rounded-full'>
@@ -180,7 +213,7 @@ function DashboardProfile() {
 				</form>
 
 				<form
-					className='flex flex-col f w-full gap-3'
+					className='flex flex-col  w-full gap-3'
 					onSubmit={handleSubmit2(handlePasswordChange)}
 				>
 					<div className='text-text-primary text-3xl tracking-wider font-bold'>
@@ -266,6 +299,27 @@ function DashboardProfile() {
 						</button>
 					</div>
 				</form>
+
+                <div
+					className='flex flex-col w-full gap-6'
+					onSubmit={handleSubmit1(handleNameChange)}
+				>
+					<div className='text-text-primary text-3xl tracking-wider font-bold'>
+						<h2 className="text-error">Delete Account</h2>
+                        <p className="text-sm text-text-primary font-normal leading-[1.5] max-w-[50ch]">Please think wisely before deleting your account, once you delete your account it can't be recovered later.</p>
+					</div>
+
+					<div className='flex items-center gap-2 text-text-primary text-sm w-full md:w-1/2'>
+
+						<button
+							type='submit'
+							className='p-2 px-3 rounded-md text-white w-full bg-error flex items-center justify-center gap-2 '
+                            onClick={() => setShowDeleteModal(true)}
+						>
+							Delete Account
+						</button>
+					</div>
+				</div>
 			</div>
 		</div>
 	);

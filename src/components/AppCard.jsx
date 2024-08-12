@@ -5,11 +5,17 @@ import { useState } from "react";
 import { request } from "../helpers/requestHelper";
 import { message } from "antd";
 
+import { useSelector, useDispatch } from "react-redux";
+
 import DeleteModal from "./DeleteModal";
+import { changeApp } from "../services/appSlice";
 
 function AppCard({ app, refreshApps }) {
 	const [showDeleteModal, setShowDeleteModal] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
+
+    const apps = useSelector(state => state.app.apps)
+    const dispatch = useDispatch()
 
 	function askDeleteConfirmation() {
 		setShowDeleteModal(true);
@@ -26,6 +32,9 @@ function AppCard({ app, refreshApps }) {
 
             if (!res.status) throw new Error('An error occured while deleting app')
             message.success("App deleted successfully");
+            localStorage.removeItem('selectedApp')
+            dispatch(changeApp(apps?.at(0)?.id))
+            localStorage.setItem('selectedApp', apps?.at(0)?.id)
             refreshApps();
         } catch(err) {
             message.error(err.message)

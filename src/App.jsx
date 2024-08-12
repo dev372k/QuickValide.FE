@@ -49,19 +49,6 @@ function App() {
 		}
 	}, []);
 
-	// if (window.location.href.split(".").length > 1) {
-	// 	return (
-	// 		<BrowserRouter>
-	// 			<Routes>
-	// 				<Route path='/0' element={<Theme0 />} />
-	// 				<Route path='/1' element={<Theme1 />} />
-	// 				<Route path='/2' element={<Theme2 />} />
-	// 				<Route path='/3' element={<Theme3 />} />
-	// 			</Routes>
-	// 		</BrowserRouter>
-	// 	);
-	// }
-
 	return (
 		<BrowserRouter>
 			<Routes>

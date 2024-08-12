@@ -1,12 +1,12 @@
 import { MdDeleteOutline } from "react-icons/md";
 import { RxExternalLink } from "react-icons/rx";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { request } from "../helpers/requestHelper";
 import { message } from "antd";
 
-import CustomLoader from "./CustomLoader";
 import DeleteModal from "./DeleteModal";
+import { Link } from "react-router-dom";
 
 function AppCard({ app, refreshApps }) {
 	const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -31,8 +31,10 @@ function AppCard({ app, refreshApps }) {
 		refreshApps();
 	}
 
+	const formattedUrl = `https://${app?.domain}`;
+
 	return (
-		<div className='border-[1px] relative rounded-lg p-5 text-sm break-words flex flex-col justify-between gap-2'>
+		<div className='border-[1px] relative rounded-lg p-5 text-sm break-words flex flex-col justify-start  '>
 			<DeleteModal
 				showDeleteModal={showDeleteModal}
 				setShowDeleteModal={setShowDeleteModal}
@@ -40,14 +42,18 @@ function AppCard({ app, refreshApps }) {
 				handleDelete={handleDelete}
 				isLoading={isLoading}
 			/>
-			<RxExternalLink
-				size={22}
-				className='absolute top-3 right-3 text-accent-2'
-			/>
-			<div>
-				<p className='font-semibold text-text-primary'>{app.name}</p>
-				<p className='text-xs text-text-secondary'>{app.domain}</p>
-				<p className='text-xs text-text-secondary mt-3'>
+			<a href={formattedUrl} target='__blank' rel='noopener noreferrer'>
+				<RxExternalLink
+					size={22}
+					className='absolute top-3 right-3 text-accent-2'
+				/>
+			</a>
+			<div className='flex flex-col gap-2 justify-between h-full'>
+				<div>
+					<p className='font-semibold text-text-primary'>{app.name}</p>
+					<p className='text-xs text-text-secondary'>{app.domain}</p>
+				</div>
+				<p className='text-xs text-text-secondary '>
 					Created: {new Date(app.createdAt).toLocaleDateString()}
 				</p>
 			</div>
@@ -63,7 +69,7 @@ function AppCard({ app, refreshApps }) {
 					/>
 				</div>
 			) : (
-				<div className='flex items-center justify-end  pt-3 text-error '>
+				<div className='flex items-center justify-end  text-error '>
 					<MdDeleteOutline
 						size={36}
 						onClick={askDeleteConfirmation}

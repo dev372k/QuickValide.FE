@@ -28,6 +28,7 @@ function CreateApp({ setShowCreateAppModal, refreshApps }) {
 		function () {
 			setValue("domain", "");
 			if (appName) {
+				setValue("name", appName.charAt(0).toUpperCase() + appName.slice(1));
 				setValue(
 					"domain",
 					appName

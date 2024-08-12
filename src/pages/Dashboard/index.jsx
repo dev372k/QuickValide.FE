@@ -35,7 +35,9 @@ function Dashboard() {
 
 			dispatch(updateApps(res?.data));
 			setSelectedApp(res.data.at(0).id);
-			dispatch(changeApp(res.data.at(0).id));
+			dispatch(
+				changeApp(localStorage.getItem("selectedApp") || res.data.at(0).id)
+			);
 		}
 
 		getApps();
@@ -45,6 +47,7 @@ function Dashboard() {
 	const [selectedApp, setSelectedApp] = useState(null);
 
 	function handleAppChange(e) {
+		localStorage.setItem("selectedApp", +e.target.value);
 		setSelectedApp(+e.target.value);
 		dispatch(changeApp(+e.target.value));
 	}
@@ -74,7 +77,7 @@ function Dashboard() {
 										name='apps'
 										id='apps'
 										className='p-2 border-[1px] w-3/4 lg:w-auto rounded-md text-xs focus:outline-accent-2 break-words'
-										value={selectedApp || 0}
+										value={localStorage.getItem("selectedApp") || 0}
 										onChange={(e) => handleAppChange(e)}
 									>
 										{apps?.map((app) => (
@@ -111,7 +114,7 @@ function Dashboard() {
 								name='apps'
 								id='apps'
 								className='p-2 border-[1px] rounded-md max-w-full text-xs focus:outline-accent-2'
-								value={selectedApp || 0}
+								value={localStorage.getItem("selectedApp") || 0}
 								onChange={(e) => handleAppChange(e)}
 							>
 								{apps?.map((app) => (

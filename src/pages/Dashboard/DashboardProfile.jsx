@@ -101,7 +101,7 @@ function DashboardProfile() {
 	}
 
 	return (
-		<div className='w-full overflow-y-scroll h-[calc(100vh-157px)]'>
+		<div className='w-full overflow-y-auto h-[calc(100vh-157px)] xs:h-[calc(100vh-77px)]'>
 			{(isLoading || isLoadingPassword) && <CustomLoader />}
 
 			<div className='w-full h-32 bg-gray-50 border-b-2 relative'>
@@ -148,7 +148,7 @@ function DashboardProfile() {
 					</div>
 
 					<div className='flex flex-col gap-1 items-start w-full'>
-						<label htmlFor='name' className='text-sm text-text-secondary'>
+						<label htmlFor='email' className='text-sm text-text-secondary'>
 							Email address:
 						</label>
 						<input

@@ -41,7 +41,7 @@ function DashboardWaitlist() {
 	);
 
 	return (
-		<div className='w-full flex flex-col gap-8 mt-3  px-6 md:px-12 lg:px-24 text-text-primary overflow-x-auto'>
+		<div className='w-full flex flex-col gap-8 pt-3  px-6 md:px-12 lg:px-24 text-text-primary overflow-x-auto overflow-y-auto h-[calc(100vh-157px)] xs:h-[calc(100vh-77px)]'>
 			<div className='flex items-center gap-2 justify-between'>
 				<h2 className='text-2xl font-bold tracking-wider'>Waitlist</h2>
 

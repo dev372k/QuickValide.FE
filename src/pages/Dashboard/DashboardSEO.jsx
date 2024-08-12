@@ -91,7 +91,7 @@ function DashboardSEO() {
 	);
 
 	return (
-		<div className='w-full flex flex-col gap-8 mt-3 pb-8  px-6 md:px-12 lg:px-24 text-text-primary overflow-y-scroll h-[calc(100vh-170px)]'>
+		<div className='w-full overflow-y-auto h-[calc(100vh-157px)] xs:h-[calc(100vh-77px)] flex flex-col gap-8 pt-3 pb-8  px-6 md:px-12 lg:px-24 text-text-primary '>
 			{isLoading && <CustomLoader />}
 
 			<div>

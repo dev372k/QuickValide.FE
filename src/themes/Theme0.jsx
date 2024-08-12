@@ -1,6 +1,12 @@
+import { useEffect } from "react";
+
 function Theme0() {
+	useEffect(function () {
+		console.log("This is theme ");
+		document.title = "Theme 0";
+	}, []);
 	return (
-		<main className='relative z-10 text-text-primary'>
+		<main className='relative z-10 text-text-primary w-full min-h-screen'>
 			<div className='absolute w-full h-[30vh] bg-red-100 -z-10 clip'></div>
 			<nav className='w-full relative z-10 p-4 px-8 max-w-[70rem] mx-auto text-text-primary flex items-center justify-between'>
 				<div className='text-xl font-bold'>

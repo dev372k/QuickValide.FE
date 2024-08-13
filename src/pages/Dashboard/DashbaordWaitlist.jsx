@@ -63,12 +63,10 @@ function DashboardWaitlist() {
 				<tbody>
 					{waitlist &&
 						waitlist.map((listItem, index) => (
-							<tr>
+							<tr className="text-center">
 								<td class='border px-4 py-2'>{index + 1}</td>
 								<td class='border px-4 py-2'>
-									{new Date(listItem?.time).toLocaleDateString() +
-										" " +
-										new Date(listItem?.time).toLocaleTimeString()}
+									{listItem?.createdOn}
 								</td>
 								<td class='border px-4 py-2'>{listItem?.email}</td>
 								<td class='border px-4 py-2'>{listItem?.selectedPlan}</td>
@@ -83,7 +81,7 @@ function DashboardWaitlist() {
 							<div className='p-24'></div>
 						</Spin>
 					</div>
-				) : !waitlist ? (
+				) : waitlist?.length === 0 ? (
 					<p className='text-center p-3 text-md font-medium'>No data</p>
 				) : null}
 			</div>

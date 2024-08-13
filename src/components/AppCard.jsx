@@ -68,6 +68,7 @@ function AppCard({ app, refreshApps }) {
 					<p className='text-xs text-text-secondary'>{app.domain}</p>
 				</div>
 				<p className='text-xs text-text-secondary '>
+
 					Created: {new Date(app.createdAt).toLocaleDateString()}
 				</p>
 			</div>

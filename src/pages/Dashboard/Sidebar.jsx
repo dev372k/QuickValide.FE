@@ -9,6 +9,7 @@ import { VscAccount } from "react-icons/vsc";
 import { PiSignOutLight } from "react-icons/pi";
 import { FaListUl } from "react-icons/fa6";
 import { MdOutlineBuild } from "react-icons/md";
+import { RxExternalLink } from "react-icons/rx";
 
 import { IoHomeOutline } from "react-icons/io5";
 import { logoutUser } from "../../services/userSlice";
@@ -153,12 +154,13 @@ function Sidebar({ isSidebarOpen, setIsSidebarOpen }) {
 						to='builder'
 						className={({ isActive }) =>
 							isActive
-								? "w-full px-16 py-3 flex items-center gap-2 text-md  hover:bg-opacity-75 bg-accent-1 text-white rounded-r-full transition-all"
-								: "transition-all w-full px-16 py-3 flex items-center gap-2 text-md text-text-primary hover:bg-opacity-75 rounded-r-full"
+								? "w-full pl-16 pr-4 py-3 flex items-center gap-2 text-md  hover:bg-opacity-75 bg-accent-1 text-white rounded-r-full transition-all"
+								: "transition-all w-full pl-16 pr-4 py-3 flex items-center gap-2 text-md text-text-primary hover:bg-gray-100 rounded-r-full"
 						}
 					>
 						<MdOutlineBuild size={20} />
-						<p className='text-[15px] font-medium'>Builder</p>
+						<p className='text-[15px] font-medium mr-auto'>Builder</p>
+                        <RxExternalLink size={20} className="text-accent-2"/>
 					</NavLink>
 				</div>
 

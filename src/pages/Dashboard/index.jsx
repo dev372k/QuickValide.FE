@@ -34,7 +34,7 @@ function Dashboard() {
 				return message.error("An error occured while fetching your apps");
 
 			dispatch(updateApps(res?.data));
-			setSelectedApp(res.data.at(0).id);
+			setSelectedApp(localStorage.getItem('selectedApp') || res.data.at(0).id);
 			dispatch(
 				changeApp(localStorage.getItem("selectedApp") || res.data.at(0).id)
 			);
@@ -70,14 +70,14 @@ function Dashboard() {
 
 					<div className='flex items-center justify-between gap-2 w-full '>
 						<div className='xs:flex flex-col gap-1  self-start  w-full hidden'>
-							{apps.length > 0 && (
+							{apps?.length > 0 && (
 								<div className='w-full'>
 									<p className='text-xs text-text-secondary'>Select app:</p>
 									<select
 										name='apps'
 										id='apps'
 										className='p-2 border-[1px] w-3/4 lg:w-auto rounded-md text-xs focus:outline-accent-2 break-words'
-										value={localStorage.getItem("selectedApp") || 0}
+										value={localStorage.getItem("selectedApp")}
 										onChange={(e) => handleAppChange(e)}
 									>
 										{apps?.map((app) => (
@@ -107,17 +107,18 @@ function Dashboard() {
 					</div>
 				</div>
 				<div className='flex flex-col gap-1  self-start p-4 w-full xs:hidden'>
-					{apps.length > 0 && (
+					{apps?.length > 0 && (
 						<div className=''>
 							<p className='text-xs text-text-secondary'>Select app:</p>
 							<select
 								name='apps'
 								id='apps'
 								className='p-2 border-[1px] rounded-md max-w-full text-xs focus:outline-accent-2'
-								value={localStorage.getItem("selectedApp") || 0}
+								value={localStorage.getItem("selectedApp")}
 								onChange={(e) => handleAppChange(e)}
 							>
 								{apps?.map((app) => (
+
 									<option
 										value={app?.id && app?.id}
 										key={app?.id}

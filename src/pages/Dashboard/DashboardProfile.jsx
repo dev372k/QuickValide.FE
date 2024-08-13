@@ -11,6 +11,7 @@ import CustomLoader from "../../components/CustomLoader";
 import deriveInitials from "../../utils/deriveInitials";
 import DeleteAccountModal from "../../components/DeleteAccountModal";
 import { removeToken } from "../../helpers/jwtHelper";
+import { resetAll } from "../../services/appSlice";
 
 function DashboardProfile() {
 	let user = useSelector((state) => state.user.user);
@@ -103,11 +104,13 @@ function DashboardProfile() {
             if (!res.status) throw new Error('An error occured while deleting account')
 
              message.success('Account deleted successfully')
+            localStorage.removeItem('selectedApp')
 
              setTimeout(() => {
 
                  removeToken()
                  dispatch(logoutUser())
+                 dispatch(resetAll())
                  navigate('/login')
              }, 1500);
         } catch (err) {
@@ -305,7 +308,7 @@ function DashboardProfile() {
 					onSubmit={handleSubmit1(handleNameChange)}
 				>
 					<div className='text-text-primary text-3xl tracking-wider font-bold'>
-						<h2 className="text-error">Delete Account</h2>
+						<h2 className="text-text-primary">Delete Account</h2>
                         <p className="text-sm text-text-primary font-normal leading-[1.5] max-w-[50ch]">Please think wisely before deleting your account, once you delete your account it can't be recovered later.</p>
 					</div>
 

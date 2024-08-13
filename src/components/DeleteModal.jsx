@@ -29,7 +29,7 @@ function DeleteModal({showDeleteModal, setShowDeleteModal, handleDelete, appId, 
         </div>
         </div>
         </Modal>
- 
+
 }
 
 export default DeleteModal

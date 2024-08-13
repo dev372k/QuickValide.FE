@@ -23,9 +23,15 @@ const appSlice = createSlice({
 		updateApps: (state, action) => {
 			state.apps = action.payload;
 		},
+        resetAll: (state, action) => {
+            state.appId = null
+            state.apps = null
+            state.waitlist = null
+            state.seo = null
+        }
 	},
 });
 
-export const { changeApp, updateSeo, updateWaitlist, updateApps } =
+export const { changeApp, updateSeo, updateWaitlist, updateApps, resetAll } =
 	appSlice.actions;
 export default appSlice.reducer;

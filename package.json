@@ -20,6 +20,8 @@
     "antd": "^5.19.3",
     "axios": "^1.7.2",
     "framer-motion": "^11.3.21",
+    "grapesjs": "^0.21.12",
+    "grapesjs-preset-webpage": "^1.0.3",
     "hamburger-react": "^2.5.1",
     "jwt-decode": "^4.0.0",
     "qrcode.react": "^3.1.0",

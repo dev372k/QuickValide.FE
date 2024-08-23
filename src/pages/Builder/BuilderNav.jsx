@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Logo from '../../assets/logo-no-background.svg';
 import { CiDesktop } from 'react-icons/ci';
 import { CiMobile1 } from 'react-icons/ci';
@@ -26,7 +26,9 @@ function BuilderNav() {
                         className={`p-1 rounded-md hover:bg-gray-200 text-text-primary ${
                             activeScreenSize === 'mobile' && 'bg-accent-2 text-white'
                         }`}
-                        onClick={() => setActiveScreenSize('mobile')}
+                        onClick={() => {
+                            setActiveScreenSize('mobile');
+                        }}
                     >
                         <CiMobile1 size={24} />
                     </div>

@@ -1,11 +1,18 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
+    logo: '',
     hero: {
         heading: 'Big Dreams Start with a Single Click, Start Now',
-        description:
-            'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quo ea odio eveniet inventore tempora hic suscipit sequi dolore optio voluptatum, modi veniam amet. Corrupti voluptatem inventore saepe, expedita, ratione commodi obcaecati repellendus reprehenderit voluptatibus officiis esse enim.',
+        description: '',
     },
+    aboutUs: {
+        text: 'About us text would go here',
+    },
+    logo: '',
+    email: '',
+    playstoreLink: '',
+    appstoreLink: '',
 };
 
 const builderSlice = createSlice({
@@ -16,8 +23,17 @@ const builderSlice = createSlice({
             state.hero.heading = action.payload.heroHeading;
             state.hero.description = action.payload.heroDescription;
         },
+        updateAboutUs: (state, action) => {
+            state.aboutUs.text = action.payload;
+        },
+        updateGeneralInfo: (state, action) => {
+            state.logo = action.payload.logo;
+            state.email = action.payload.email;
+            state.playstoreLink = action.payload.playstoreLink;
+            state.appstoreLink = action.payload.appstoreLink;
+        },
     },
 });
 
-export const { updateHero } = builderSlice.actions;
+export const { updateHero, updateAboutUs, appstoreLink } = builderSlice.actions;
 export default builderSlice.reducer;

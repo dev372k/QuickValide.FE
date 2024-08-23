@@ -1,9 +1,9 @@
 import { useForm } from 'react-hook-form';
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { updateHero } from '../../services/builderSlice';
+import { updateAboutUs } from '../../services/builderSlice';
 
-function HeroSection() {
+function AboutUsSection() {
     const {
         register,
         handleSubmit,
@@ -12,66 +12,49 @@ function HeroSection() {
         formState: { errors },
     } = useForm();
 
-    const heroData = useSelector((state) => state.builder.hero);
+    const aboutUsData = useSelector((state) => state.builder.aboutUs);
     const dispatch = useDispatch();
 
     const onSubmit = (data) => {
         console.log(data);
     };
-    const watchedFields = watch();
+    const watchedFields = watch('text');
 
     useEffect(() => {
         console.log('Form values changed:', watchedFields);
+        console.log(watchedFields);
         // Call your custom function here
-        dispatch(updateHero(watchedFields));
-        handleInputChange(watchedFields);
+        dispatch(updateAboutUs(watchedFields));
     }, [watchedFields]);
 
     useEffect(() => {
         reset({
-            heroHeading: heroData.heading,
-            heroDescription: heroData.description,
+            text: aboutUsData.text,
         });
     }, []);
 
-    const handleInputChange = (values) => {};
     return (
         <div className='flex flex-col gap-3 mt-6'>
-            <h3 className='text-lg font-semibold text-text-primary'>Hero Section</h3>
+            <h3 className='text-lg font-semibold text-text-primary'>About Us Section</h3>
 
             <form className='flex flex-col gap-2' onSubmit={handleSubmit(onSubmit)}>
                 <div className='flex flex-col gap-1'>
                     <label htmlFor='heading' className='text-sm text-text-secondary'>
-                        Heading:
-                    </label>
-                    <textarea
-                        type='text'
-                        placeholder='Enter hero heading'
-                        className='text-sm p-2 bg-none border rounded-md'
-                        {...register('heroHeading', {
-                            required: 'This field is required',
-                        })}
-                        rows={5}
-                    ></textarea>
-                </div>
-                {/*
-                <div className='flex flex-col gap-1'>
-                    <label htmlFor='heading' className='text-sm text-text-secondary'>
-                        Description:
+                        Text:
                     </label>
                     <textarea
                         type='text'
                         placeholder='Enter hero heading'
                         className='text-sm p-2 bg-none border rounded-md'
                         rows={3}
-                        {...register('heroDescription', {
+                        {...register('text', {
                             required: 'This field is required',
                         })}
                     ></textarea>
-                </div> */}
+                </div>
             </form>
         </div>
     );
 }
 
-export default HeroSection;
+export default AboutUsSection;

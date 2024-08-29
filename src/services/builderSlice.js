@@ -9,6 +9,7 @@ const initialState = {
     aboutUs: {
         text: 'About us text would go here',
     },
+    pricing: [],
     logo: '',
     email: '',
     playstoreLink: '',
@@ -34,9 +35,18 @@ const builderSlice = createSlice({
         updateLogo: (state, action) => {
             state.logo = action.payload;
         },
+        updatePricings: (state, action) => {
+            state.pricing = action.payload;
+        },
     },
 });
 
-export const { updateHero, updateAboutUs, appstoreLink, updateLogo, updateGeneralInfo } =
-    builderSlice.actions;
+export const {
+    updateHero,
+    updateAboutUs,
+    appstoreLink,
+    updateLogo,
+    updateGeneralInfo,
+    updatePricings,
+} = builderSlice.actions;
 export default builderSlice.reducer;

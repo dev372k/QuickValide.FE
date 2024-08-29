@@ -71,7 +71,7 @@ function GeneralInfoSection() {
     };
 
     return (
-        <div className='mt-6'>
+        <div className='mt-6 h-full'>
             <div className=''>
                 <form class='flex items-start flex-col gap-8 mt-4'>
                     <div className='flex flex-col items-start gap-2'>

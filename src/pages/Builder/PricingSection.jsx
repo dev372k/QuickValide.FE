@@ -1,15 +1,17 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Modal from '../../components/Modal';
 import { RxCross1 } from 'react-icons/rx';
 import { IoIosAdd } from 'react-icons/io';
 import PricingCards from './PricingCards';
 import { useForm, useFieldArray } from 'react-hook-form';
+import { useDispatch } from 'react-redux';
+import { updatePricings } from '../../services/builderSlice';
 
 function PricingSection() {
     const [isModalShown, setIsModalShown] = useState(true);
-    const [pricingOptionsCount, setPricingOptionCount] = useState(3);
+    const dispatch = useDispatch();
 
-    const { register, control, handleSubmit, reset } = useForm({
+    const { register, control, handleSubmit, reset, watch } = useForm({
         defaultValues: {
             pricings: [
                 {
@@ -102,7 +104,15 @@ function PricingSection() {
         });
     }
 
-    console.log(pricingFields);
+    const watchedFields = watch('pricings');
+
+    useEffect(
+        function () {
+            dispatch(updatePricings(JSON.stringify(watchedFields)));
+        },
+        [watchedFields]
+    );
+
     return (
         <>
             <div className='w-full mt-6'>

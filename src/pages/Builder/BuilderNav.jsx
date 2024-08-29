@@ -12,7 +12,7 @@ function BuilderNav({ view, setView }) {
                 </div>
 
                 <div className='ml-auto mr-6 flex items-center gap-2'>
-                    <p className='text-sm text-text-secondary'>Select theme:</p>
+                    <p className='text-sm text-text-secondary hidden md:block'>Select theme:</p>
                     <select
                         name='themeId'
                         id='themeId'

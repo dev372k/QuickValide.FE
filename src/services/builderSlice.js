@@ -2,14 +2,64 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
     logo: '',
-    hero: {
-        heading: 'Big Dreams Start with a Single Click, Start Now',
-        description: '',
-    },
-    aboutUs: {
-        text: 'About us text would go here',
-    },
-    pricing: [],
+    pageContent: 'You are just a click to build great things',
+    aboutUs: 'About us text will go here',
+    pricing: JSON.stringify([
+        {
+            name: 'Pricing 1',
+            price: '0',
+            features: [
+                {
+                    feature: 'Feature 1',
+                    isIncluded: true,
+                },
+                {
+                    feature: 'Feature 2',
+                    isIncluded: true,
+                },
+                {
+                    feature: 'Feature 3',
+                    isIncluded: true,
+                },
+            ],
+        },
+        {
+            name: 'Pricing 2',
+            price: '0',
+            features: [
+                {
+                    feature: 'Feature 1',
+                    isIncluded: true,
+                },
+                {
+                    feature: 'Feature 2',
+                    isIncluded: true,
+                },
+                {
+                    feature: 'Feature 3',
+                    isIncluded: true,
+                },
+            ],
+        },
+        {
+            name: 'Pricing 3',
+            price: '0',
+            features: [
+                {
+                    feature: 'Feature 1',
+                    isIncluded: true,
+                },
+                {
+                    feature: 'Feature 2',
+                    isIncluded: true,
+                },
+                {
+                    feature: 'Feature 3',
+                    isIncluded: true,
+                },
+            ],
+        },
+    ]),
     logo: '',
     email: '',
     playstoreLink: '',
@@ -21,11 +71,10 @@ const builderSlice = createSlice({
     initialState,
     reducers: {
         updateHero: (state, action) => {
-            state.hero.heading = action.payload.heroHeading;
-            state.hero.description = action.payload.heroDescription;
+            state.pageContent = action.payload;
         },
         updateAboutUs: (state, action) => {
-            state.aboutUs.text = action.payload;
+            state.aboutUs = action.payload;
         },
         updateGeneralInfo: (state, action) => {
             state.email = action.payload.email;

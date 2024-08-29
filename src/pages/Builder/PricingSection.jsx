@@ -110,7 +110,7 @@ function PricingSection() {
         function () {
             dispatch(updatePricings(JSON.stringify(watchedFields)));
         },
-        [watchedFields]
+        [JSON.stringify(watchedFields), dispatch]
     );
 
     return (

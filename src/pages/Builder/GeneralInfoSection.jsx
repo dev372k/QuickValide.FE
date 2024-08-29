@@ -25,7 +25,6 @@ function GeneralInfoSection() {
     useEffect(
         function () {
             if (logo?.length > 0) {
-                console.log(logo);
                 const reader = new FileReader();
                 reader.onloadend = () => {
                     console.log(reader.result);
@@ -42,7 +41,7 @@ function GeneralInfoSection() {
             delete watchedFields.logo;
             dispatch(updateGeneralInfo(watchedFields));
         },
-        [watchedFields]
+        [watchedFields.email, watchedFields.appstoreLink, watchedFields.playstoreLink]
     );
 
     useEffect(function () {

@@ -1,5 +1,5 @@
 import { removeToken } from '../../helpers/jwtHelper';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, NavLink, Link } from 'react-router-dom';
 
 import { TbBrandGoogleAnalytics } from 'react-icons/tb';
@@ -47,6 +47,7 @@ const sidebarVariants = {
 function Sidebar({ isSidebarOpen, setIsSidebarOpen }) {
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const appId = useSelector((state) => state.app.appId);
 
     const [showCreateAppModal, setShowCreateAppModal] = useState(false);
 
@@ -151,7 +152,7 @@ function Sidebar({ isSidebarOpen, setIsSidebarOpen }) {
                         <p className='text-[15px] font-medium'>Waitlist</p>
                     </NavLink>
                     <a
-                        href='/builder'
+                        href={`/builder/?appId=${appId}`}
                         target='_blank'
                         className='w-full pl-16 pr-4 py-3 flex items-center gap-2 text-md  hover:bg-slate-100  text-text-primary rounded-r-full transition-all'
                     >

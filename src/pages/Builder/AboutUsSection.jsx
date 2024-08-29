@@ -21,15 +21,12 @@ function AboutUsSection() {
     const watchedFields = watch('text');
 
     useEffect(() => {
-        console.log('Form values changed:', watchedFields);
-        console.log(watchedFields);
-        // Call your custom function here
         dispatch(updateAboutUs(watchedFields));
     }, [watchedFields]);
 
     useEffect(() => {
         reset({
-            text: aboutUsData.text,
+            text: aboutUsData,
         });
     }, []);
 

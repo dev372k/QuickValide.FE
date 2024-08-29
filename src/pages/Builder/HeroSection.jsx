@@ -12,7 +12,7 @@ function HeroSection() {
         formState: { errors },
     } = useForm();
 
-    const heroData = useSelector((state) => state.builder.hero);
+    const heroData = useSelector((state) => state.builder.pageContent);
     const dispatch = useDispatch();
 
     const onSubmit = (data) => {
@@ -22,14 +22,13 @@ function HeroSection() {
 
     useEffect(() => {
         // Call your custom function here
-        dispatch(updateHero(watchedFields));
+        dispatch(updateHero(watchedFields.heroHeading));
         handleInputChange(watchedFields);
     }, [watchedFields]);
 
     useEffect(() => {
         reset({
-            heroHeading: heroData.heading,
-            heroDescription: heroData.description,
+            heroHeading: heroData,
         });
     }, []);
 

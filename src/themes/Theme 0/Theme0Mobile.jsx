@@ -4,7 +4,6 @@ import Logo from '../../assets/logo-no-background.svg';
 
 function Theme0Mobile() {
     useEffect(function () {
-        console.log('This is theme ');
         document.title = 'Theme 0';
     }, []);
 
@@ -35,7 +34,7 @@ function Theme0Mobile() {
 
             <header className='w-full leading-[1.2] tracking-tighter font-medium mx-auto text-3xl  text-center min-h-[80vh] flex flex-col gap-8 items-center justify-center'>
                 <div className='flex flex-col gap-5 items-center'>
-                    <h1 className='leading-[1.3] w-full'>{themeData.hero.heading}</h1>
+                    <h1 className='leading-[1.3] w-full'>{themeData.pageContent}</h1>
                 </div>
 
                 <button className='text-[1rem] text-white tracking-wide p-2 rounded-full bg-gradient-to-r from-pink-500 px-8 via-red-500 to-yellow-500 btn-hover transition-all'>
@@ -63,18 +62,7 @@ function Theme0Mobile() {
                 <div className='w-full  mx-auto text-center flex flex-col gap-4 px-8'>
                     <h2 className='text-3xl font-medium'>About Us</h2>
                     <div className='flex flex-col gap-2 text-text-secondary'>
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nemo quis
-                            quasi itaque accusantium repellat sint saepe cumque harum nesciunt,
-                            impedit officiis libero ipsa consectetur magni sapiente architecto
-                            laborum inventore. Sed!
-                        </p>
-                        <p>
-                            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Iste eos velit
-                            illo expedita sint quaerat sed soluta laudantium odio, reiciendis quae
-                            animi similique reprehenderit debitis, ex unde totam tempora quam id
-                            fugit, laborum possimus suscipit!
-                        </p>
+                        {themeData.aboutUs}
                     </div>
                 </div>
             </section>
@@ -152,7 +140,7 @@ function Theme0Mobile() {
                 <footer className='w-full md:max-w-[25rem] lg:max-w-[55rem] mx-auto text-center flex flex-col gap-4 px-8'>
                     <nav className='w-full relative z-10 p-4 px-8 mx-auto text-text-primary flex items-center justify-between'>
                         <div className='text-xl font-bold'>
-                            <p>LOGO</p>
+                            <img src={themeData.logo || Logo} alt='Logo' className='h-10' />
                         </div>
                         <ul className='flex flex-col items-center gap-3 text-sm text-text-secondary'>
                             <li className='hover:text-text-primary transition-all cursor-pointer hover:font-semibold'>

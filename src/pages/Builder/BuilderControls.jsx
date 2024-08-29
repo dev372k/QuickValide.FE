@@ -5,13 +5,24 @@ import { useState } from 'react';
 import PricingSection from './PricingSection';
 import { RxCross1 } from 'react-icons/rx';
 import { useSelector } from 'react-redux';
+import { message } from 'antd';
+import { request } from '../../helpers/requestHelper';
 
 function BuilderControls({ setOpenMobileBuilder }) {
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+
+    const appId = urlParams.get('appId');
+
     const [selectedSection, setSelectedSection] = useState('general');
     const themeData = useSelector((state) => state.builder);
 
-    function handleSave() {
-        console.log(themeData);
+    async function handleSave() {
+        if (!themeData.logo) return message.error('Please upload logo in general info section');
+        if (!themeData.email) return message.error('Please enter email in general info section');
+
+        const res = await request(`https://api.quickvalide.com/api/App/${appId}`, 'PUT', themeData);
+        console.log(res);
     }
     return (
         <div className='h-[calc(100vh-65px)] bg-white p-6 flex flex-col gap-2 overflow-y-auto'>

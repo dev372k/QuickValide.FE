@@ -25,9 +25,9 @@ function Theme1() {
 
                 <header className='p-3 px-6 w-full md:w-[22rem] lg:w-[47rem] mx-auto flex items-center justify-center min-h-screen flex-col gap-6'>
                     <h1 className='text-3xl md:text-4xl lg:text-6xl text-center leading-relaxed tracking-tight'>
-                        {themeData.hero.heading}
+                        {themeData.pageContent}
                     </h1>
-                    <p className='text-center'>{themeData.hero.description}</p>
+                    <p className='text-center'></p>
                     <button className='text-sm p-3 px-5 text-white  border-2 border-black rounded-sm font-medium flex items-center gap-3 relative after:contents-[""] after:w-full after:h-full bg-black z-0 after:border-2 after:border-black  after:absolute after:inset-0 after:-z-10 after:translate-y-2 after:translate-x-2 group'>
                         Get started{' '}
                         <span className='group-hover:translate-x-1 transition-all'>&rarr;</span>

@@ -7,7 +7,7 @@ import PricingSection from './PricingSection';
 function BuilderControls() {
     const [selectedSection, setSelectedSection] = useState('general');
     return (
-        <div className='min-h-screen bg-white p-3'>
+        <div className='min-h-screen bg-white p-6 px-8'>
             <div className='flex flex-col gap-1'>
                 <p className='text-sm'>Select Section</p>
                 <select

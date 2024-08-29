@@ -1,6 +1,9 @@
 import Logo from '../../assets/logo-no-background.svg';
 import { useForm } from 'react-hook-form';
 import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { updateLogo, updateGeneralInfo } from '../../services/builderSlice';
+import validator from 'validator';
 
 function GeneralInfoSection() {
     const {
@@ -9,18 +12,24 @@ function GeneralInfoSection() {
         handleSubmit,
         formState: { errors },
         setValue,
+        reset,
     } = useForm();
 
-    const [logoBase64, setLogoBase64] = useState(Logo);
+    const dispatch = useDispatch();
+    const themeData = useSelector((state) => state.builder);
+    const logoBase64 = useSelector((state) => state.builder.logo);
 
     const logo = watch('logo');
+    const watchedFields = watch();
 
     useEffect(
         function () {
-            if (logo) {
+            if (logo?.length > 0) {
+                console.log(logo);
                 const reader = new FileReader();
                 reader.onloadend = () => {
-                    setLogoBase64(reader.result);
+                    console.log(reader.result);
+                    dispatch(updateLogo(reader.result));
                 };
                 reader.readAsDataURL(logo[0]);
             }
@@ -28,14 +37,27 @@ function GeneralInfoSection() {
         [logo]
     );
 
-    const onSubmit = (data) => {
-        console.log(data);
-        // Handle form submission with the Base64 image data
-    };
+    useEffect(
+        function () {
+            delete watchedFields.logo;
+            dispatch(updateGeneralInfo(watchedFields));
+        },
+        [watchedFields]
+    );
+
+    useEffect(function () {
+        const { logo, email, playstoreLink, appstoreLink } = themeData;
+        reset({
+            logo,
+            email,
+            playstoreLink,
+            appstoreLink,
+        });
+    }, []);
 
     const handleImageChange = (e) => {
         const file = logo.files[0];
-        console.log();
+        // console.log(file);
         if (file) {
             const reader = new FileReader();
             reader.onloadend = () => {
@@ -51,17 +73,14 @@ function GeneralInfoSection() {
     return (
         <div className='mt-6'>
             <div className=''>
-                <form
-                    class='flex items-start flex-col gap-8 mt-4'
-                    onSubmit={handleSubmit(onSubmit)}
-                >
+                <form class='flex items-start flex-col gap-8 mt-4'>
                     <div className='flex flex-col items-start gap-2'>
                         <h3 className='text-lg font-semibold'>Logo</h3>
                         <div className='flex items-center justify-center'>
                             <img
-                                className='h-12 object-cover rounded-full'
-                                src={logoBase64}
-                                alt='Current profile photo'
+                                className='h-8 object-cover'
+                                src={logoBase64 || Logo}
+                                alt='App logo'
                             />
                         </div>
                         <label className='w-full'>
@@ -93,10 +112,19 @@ function GeneralInfoSection() {
                             type='text'
                             placeholder='Email address'
                             className='text-sm p-2 bg-none border rounded-md w-full mt-2'
+                            {...register('email', {
+                                required: 'Email is required',
+                                validate: (val) =>
+                                    validator.isEmail(val) || 'Please enter a valid email',
+                            })}
                         />
+
+                        {errors?.email && (
+                            <p className='text-sm text-error mt-1'>{errors.email.message}</p>
+                        )}
                     </div>
 
-                    <div>
+                    <div className='w-full'>
                         <div>
                             <h3 className='text-lg font-semibold'>Playstore Link</h3>
                         </div>
@@ -104,10 +132,11 @@ function GeneralInfoSection() {
                             type='text'
                             placeholder='Playstore Link'
                             className='text-sm p-2 bg-none border rounded-md w-full mt-2'
+                            {...register('playstoreLink')}
                         />
                     </div>
 
-                    <div>
+                    <div className='w-full'>
                         <div>
                             <h3 className='text-lg font-semibold'>Appstore Link</h3>
                         </div>
@@ -115,6 +144,7 @@ function GeneralInfoSection() {
                             type='text'
                             placeholder='Appstore Link'
                             className='text-sm p-2 bg-none border rounded-md w-full mt-2'
+                            {...register('appstoreLink')}
                         />
                     </div>
                 </form>

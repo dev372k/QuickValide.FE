@@ -21,7 +21,6 @@ function HeroSection() {
     const watchedFields = watch();
 
     useEffect(() => {
-        console.log('Form values changed:', watchedFields);
         // Call your custom function here
         dispatch(updateHero(watchedFields));
         handleInputChange(watchedFields);

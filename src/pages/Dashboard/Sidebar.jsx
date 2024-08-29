@@ -150,18 +150,15 @@ function Sidebar({ isSidebarOpen, setIsSidebarOpen }) {
                         <FaListUl size={20} />
                         <p className='text-[15px] font-medium'>Waitlist</p>
                     </NavLink>
-                    <NavLink
-                        to='/builder'
-                        className={({ isActive }) =>
-                            isActive
-                                ? 'w-full pl-16 pr-4 py-3 flex items-center gap-2 text-md  hover:bg-opacity-75 bg-accent-1 text-white rounded-r-full transition-all'
-                                : 'transition-all w-full pl-16 pr-4 py-3 flex items-center gap-2 text-md text-text-primary hover:bg-gray-100 rounded-r-full'
-                        }
+                    <a
+                        href='/builder'
+                        target='_blank'
+                        className='w-full pl-16 pr-4 py-3 flex items-center gap-2 text-md  hover:bg-slate-100  text-text-primary rounded-r-full transition-all'
                     >
                         <MdOutlineBuild size={20} />
                         <p className='text-[15px] font-medium mr-auto'>Builder</p>
                         <RxExternalLink size={20} className='text-accent-2' />
-                    </NavLink>
+                    </a>
                 </div>
 
                 <div className='flex flex-col text-accent-1 w-full pr-1'>

@@ -27,13 +27,16 @@ const builderSlice = createSlice({
             state.aboutUs.text = action.payload;
         },
         updateGeneralInfo: (state, action) => {
-            state.logo = action.payload.logo;
             state.email = action.payload.email;
             state.playstoreLink = action.payload.playstoreLink;
             state.appstoreLink = action.payload.appstoreLink;
         },
+        updateLogo: (state, action) => {
+            state.logo = action.payload;
+        },
     },
 });
 
-export const { updateHero, updateAboutUs, appstoreLink } = builderSlice.actions;
+export const { updateHero, updateAboutUs, appstoreLink, updateLogo, updateGeneralInfo } =
+    builderSlice.actions;
 export default builderSlice.reducer;

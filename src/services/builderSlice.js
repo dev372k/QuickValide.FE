@@ -87,6 +87,9 @@ const builderSlice = createSlice({
         updatePricings: (state, action) => {
             state.pricing = action.payload;
         },
+        updateApp: (state, action) => {
+            action.payload;
+        },
     },
 });
 
@@ -97,5 +100,6 @@ export const {
     updateLogo,
     updateGeneralInfo,
     updatePricings,
+    updateApp,
 } = builderSlice.actions;
 export default builderSlice.reducer;

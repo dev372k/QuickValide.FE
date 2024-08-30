@@ -88,7 +88,7 @@ const builderSlice = createSlice({
             state.pricing = action.payload;
         },
         updateApp: (state, action) => {
-            action.payload;
+            return action.payload;
         },
     },
 });

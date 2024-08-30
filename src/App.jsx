@@ -34,6 +34,9 @@ function App() {
     const dispatch = useDispatch();
     useEffect(function () {
         const token = getToken();
+        document.cookie = `token=${token}; path=/; domain=.quickvalide.com`;
+
+        console.log(document.cookie);
         if (token) {
             const userId = JSON.parse(
                 decodeToken(token)[
@@ -56,7 +59,7 @@ function App() {
     // const subdomain = hostnameParts[0];
     console.log(subdomain);
 
-    if (isSubdomain) return <UserApp subdomain={subdomain} token={localStorage.getItem('token')} />;
+    if (isSubdomain) return <UserApp subdomain={subdomain} />;
 
     return (
         <BrowserRouter>

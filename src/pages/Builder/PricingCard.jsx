@@ -75,7 +75,10 @@ function PricingCard({ index, pricingFields, append, remove, register, update, r
                     <div className='w-full flex flex-col gap-3'>
                         {pricingFields.at(index).features.map((feature, featuresIndex) => {
                             return (
-                                <div className='flex items-center justify-between text-sm w-full'>
+                                <div
+                                    className='flex items-center justify-between text-sm w-full'
+                                    key={featuresIndex}
+                                >
                                     <input
                                         type='text'
                                         className='bg-transparent focus:outline-none'

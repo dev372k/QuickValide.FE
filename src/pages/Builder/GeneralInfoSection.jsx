@@ -25,6 +25,7 @@ function GeneralInfoSection() {
     useEffect(
         function () {
             if (logo?.length > 0) {
+                console.log('Hello');
                 const reader = new FileReader();
                 reader.onloadend = () => {
                     console.log(reader.result);

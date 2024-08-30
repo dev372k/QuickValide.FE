@@ -82,9 +82,12 @@ function Theme0Desktop() {
             <section className='flex flex-col gap-8 py-16' id='pricings'>
                 <h2 className='text-3xl font-medium text-center'>Pricing</h2>
                 <div className='max-w-[55rem] mx-auto text-center grid grid-cols-[repeat(auto-fit,_minmax(200px,_1fr))] px-6 gap-8'>
-                    {pricings.map((pricing) => {
+                    {pricings.map((pricing, pricingIndex) => {
                         return (
-                            <div className='p-5 rounded-sm border flex flex-col gap-5 w-full'>
+                            <div
+                                className='p-5 rounded-sm border flex flex-col gap-5 w-full'
+                                key={pricingIndex}
+                            >
                                 <div className='flex flex-col gap-1'>
                                     <h3 className='text-2xl font-medium'>{pricing.name}</h3>
                                     <p className='text-lg font-normal'>
@@ -100,9 +103,12 @@ function Theme0Desktop() {
                                 </button>
 
                                 <ul className='flex flex-col gap-2 self-start text-left'>
-                                    {pricing.features.map((feature) => {
+                                    {pricing.features.map((feature, featureIndex) => {
                                         return (
-                                            <li className='flex items-center gap-2 '>
+                                            <li
+                                                className='flex items-center gap-2'
+                                                key={featureIndex}
+                                            >
                                                 {feature.isIncluded ? (
                                                     <TiTick size={16} />
                                                 ) : (

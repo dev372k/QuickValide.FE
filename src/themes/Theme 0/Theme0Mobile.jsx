@@ -1,6 +1,8 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Logo from '../../assets/logo-no-background.svg';
+import { RxCross1 } from 'react-icons/rx';
+import { TiTick } from 'react-icons/ti';
 
 function Theme0Mobile() {
     useEffect(function () {
@@ -8,6 +10,7 @@ function Theme0Mobile() {
     }, []);
 
     const themeData = useSelector((state) => state.builder);
+    const pricings = JSON.parse(useSelector((state) => state.builder.pricing));
 
     return (
         <main className='relative z-10 text-text-primary w-full min-h-screen bg-white '>
@@ -70,69 +73,46 @@ function Theme0Mobile() {
             <section className='flex flex-col gap-8 py-16'>
                 <h2 className='text-3xl font-medium text-center'>Pricing</h2>
                 <div className='w-full mx-auto text-center grid grid-cols-[repeat(auto-fit,_minmax(200px,_1fr))] px-6 gap-8'>
-                    <div className='p-5 rounded-sm border flex flex-col gap-5 w-full'>
-                        <div className='flex flex-col gap-1'>
-                            <h3 className='text-2xl font-medium'>Basic</h3>
-                            <p className='text-lg font-normal'>
-                                <span className='text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 font-bold text-3xl'>
-                                    $5
-                                </span>
-                                <span className='text-sm text-text-secondary'>/month</span>
-                            </p>
-                        </div>
+                    {pricings.map((pricing, pricingIndex) => {
+                        return (
+                            <div
+                                className='p-5 rounded-sm border flex flex-col gap-5 w-full'
+                                key={pricingIndex}
+                            >
+                                <div className='flex flex-col gap-1'>
+                                    <h3 className='text-2xl font-medium'>{pricing.name}</h3>
+                                    <p className='text-lg font-normal'>
+                                        <span className='text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 font-bold text-3xl'>
+                                            ${pricing.price}
+                                        </span>
+                                        <span className='text-sm text-text-secondary'>/month</span>
+                                    </p>
+                                </div>
 
-                        <button className='text-sm text-white tracking-wide p-2 px-6 rounded-full bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 btn-hover transition-all'>
-                            Subscribe
-                        </button>
+                                <button className='text-sm text-white tracking-wide p-2 px-6 rounded-full bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 btn-hover transition-all'>
+                                    Subscribe
+                                </button>
 
-                        <ul className='flex flex-col gap-2 text-sm self-start text-left'>
-                            <li>Lorem, ipsum dolor.</li>
-                            <li>Lorem ipsum dolor sit.</li>
-                            <li>Lorem, ipsum.</li>
-                        </ul>
-                    </div>
-                    <div className='p-5 rounded-sm border flex flex-col gap-5 w-full'>
-                        <div className='flex flex-col gap-1'>
-                            <h3 className='text-2xl font-medium'>Basic</h3>
-                            <p className='text-lg font-normal'>
-                                <span className='text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 font-bold text-3xl'>
-                                    $5
-                                </span>
-                                <span className='text-sm text-text-secondary'>/month</span>
-                            </p>
-                        </div>
-
-                        <button className='text-sm text-white tracking-wide p-2 px-6 rounded-full bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 btn-hover transition-all'>
-                            Subscribe
-                        </button>
-
-                        <ul className='flex flex-col gap-2 text-sm self-start text-left'>
-                            <li>Lorem, ipsum dolor.</li>
-                            <li>Lorem ipsum dolor sit.</li>
-                            <li>Lorem, ipsum.</li>
-                        </ul>
-                    </div>
-                    <div className='p-5 rounded-sm border flex flex-col gap-5 w-full'>
-                        <div className='flex flex-col gap-1'>
-                            <h3 className='text-2xl font-medium'>Basic</h3>
-                            <p className='text-lg font-normal'>
-                                <span className='text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 font-bold text-3xl'>
-                                    $5
-                                </span>
-                                <span className='text-sm text-text-secondary'>/month</span>
-                            </p>
-                        </div>
-
-                        <button className='text-sm text-white tracking-wide p-2 px-6 rounded-full bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 btn-hover transition-all'>
-                            Subscribe
-                        </button>
-
-                        <ul className='flex flex-col gap-2 text-sm self-start text-left'>
-                            <li>Lorem, ipsum dolor.</li>
-                            <li>Lorem ipsum dolor sit.</li>
-                            <li>Lorem, ipsum.</li>
-                        </ul>
-                    </div>
+                                <ul className='flex flex-col gap-2 self-start text-left'>
+                                    {pricing.features.map((feature, featureIndex) => {
+                                        return (
+                                            <li
+                                                className='flex items-center gap-2'
+                                                key={featureIndex}
+                                            >
+                                                {feature.isIncluded ? (
+                                                    <TiTick size={16} />
+                                                ) : (
+                                                    <RxCross1 size={16} />
+                                                )}
+                                                <p>{feature.feature}</p>
+                                            </li>
+                                        );
+                                    })}
+                                </ul>
+                            </div>
+                        );
+                    })}
                 </div>
             </section>
 

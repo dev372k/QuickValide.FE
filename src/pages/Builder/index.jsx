@@ -5,7 +5,7 @@ import BuilderNav from './BuilderNav';
 import { MdBuild } from 'react-icons/md';
 import Modal from '../../components/Modal';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { RxCross1 } from 'react-icons/rx';
 
@@ -41,6 +41,20 @@ const modalVariants = {
 function Builder() {
     const [view, setView] = useState('desktop');
     const [openMobileBuilder, setOpenMobileBuilder] = useState(false);
+
+    useEffect(function () {
+        const handleBeforeUnload = (event) => {
+            event.preventDefault();
+            event.returnValue =
+                'You may have unsaved changes. Kindly save them before closing the window.';
+        };
+
+        window.addEventListener('beforeunload', handleBeforeUnload);
+
+        return () => {
+            window.removeEventListener('beforeunload', handleBeforeUnload);
+        };
+    }, []);
 
     return (
         <main className='h-screen'>

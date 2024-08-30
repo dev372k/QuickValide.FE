@@ -19,6 +19,8 @@ import DashboardAnalytics from './pages/Dashboard/DashboardAnalytics.jsx';
 import DashboardSEO from './pages/Dashboard/DashboardSEO.jsx';
 import DashboardWaitlist from './pages/Dashboard/DashbaordWaitlist.jsx';
 
+import UserApp from './pages/UserApp/index.jsx';
+
 import { request } from './helpers/requestHelper.js';
 import { saveUser } from './services/userSlice.js';
 
@@ -51,8 +53,10 @@ function App() {
     const hostnameParts = window.location.hostname.split('.');
     const isSubdomain = hostnameParts.length > 2;
     const subdomain = isSubdomain ? hostnameParts.slice(0, -2).join('.') : null;
-
+    // const subdomain = hostnameParts[0];
     console.log(subdomain);
+
+    if (isSubdomain) return <UserApp subdomain={subdomain} token={localStorage.getItem('token')} />;
 
     return (
         <BrowserRouter>

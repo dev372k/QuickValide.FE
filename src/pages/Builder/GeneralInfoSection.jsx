@@ -119,13 +119,12 @@ function GeneralInfoSection({ data }) {
     );
 
     useEffect(() => {
-        dispatch(
-            updateGeneralInfo({
-                email: watchedEmail,
-                playstoreLink: watchedPlaystoreLink,
-                appstoreLink: watchedAppstoreLink,
-            })
-        );
+        const updatedInfo = {
+            email: watchedEmail,
+            playstoreLink: watchedAppstoreLink,
+            appStoreLink: watchedAppstoreLink,
+        };
+        dispatch(updateGeneralInfo(updatedInfo));
     }, [watchedEmail, watchedPlaystoreLink, watchedAppstoreLink, dispatch]);
 
     const handleImageChange = (e) => {

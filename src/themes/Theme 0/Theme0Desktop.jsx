@@ -9,10 +9,10 @@ import { FaAppStoreIos } from 'react-icons/fa6';
 import { IoLogoGooglePlaystore } from 'react-icons/io5';
 
 function Theme0Desktop() {
-    const themeData = useSelector((state) => state.builder);
-    const pricings = themeData.pricing ? JSON.parse(themeData.pricing) : [];
+    const themeData = useSelector((state) => state?.builder);
+    const pricings = themeData?.pricing ? JSON.parse(themeData?.pricing) : [];
 
-    const businessEmail = useSelector((state) => state.builder.email);
+    const businessEmail = useSelector((state) => state?.builder?.email);
 
     const hexToRgb = (hex) => {
         let r = 0,
@@ -30,15 +30,15 @@ function Theme0Desktop() {
         return `${r}, ${g}, ${b}`;
     };
 
-    const shadeRgb = hexToRgb(themeData.style.shade);
-    const colorRgb = hexToRgb(themeData.style.color);
-    const backgroundRgb = hexToRgb(themeData.style.background);
+    const shadeRgb = hexToRgb(themeData?.style?.shade);
+    const colorRgb = hexToRgb(themeData?.style?.color);
+    const backgroundRgb = hexToRgb(themeData?.style?.background);
 
     return (
         <main
             className={`relative z-10 text-text-primary w-full min-h-screen `}
             style={{
-                fontFamily: themeData.style.font,
+                fontFamily: themeData?.style?.font,
                 color: `rgb(${colorRgb})`,
                 background: `rgb(${backgroundRgb})`,
             }}
@@ -46,7 +46,7 @@ function Theme0Desktop() {
             <div
                 className='absolute w-full h-[80vh] -z-10 clip'
                 style={{
-                    background: `radial-gradient(circle at 30% 30%, ${themeData.style.background}, transparent),
+                    background: `radial-gradient(circle at 30% 30%, ${themeData?.style?.background}, transparent),
                     radial-gradient(circle at 70% 70%, rgba(${backgroundRgb}, 0.4), transparent),
                     radial-gradient(circle at 30% 70%, rgba(${backgroundRgb}, 0.5), transparent),
                     radial-gradient(circle at 70% 30%,rgba(${backgroundRgb}, 0.9), transparent),
@@ -58,7 +58,7 @@ function Theme0Desktop() {
                 style={{ color: themeData.style.shade }}
             >
                 <div className='text-xl font-bold'>
-                    <img src={themeData.logo || Logo} alt='Logo' className='h-10' />
+                    <img src={themeData?.logo || Logo} alt='Logo' className='h-10' />
                 </div>
                 <ul className='flex flex-row items-center gap-3 text-sm '>
                     <li className='hover:opacity-75 transition-all cursor-pointer hover:font-semibold'>
@@ -136,7 +136,7 @@ function Theme0Desktop() {
                 </div>
             </section>
 
-            {pricings.length > 0 && (
+            {pricings?.length > 0 && (
                 <section className='flex flex-col gap-8 py-16' id='pricings'>
                     <h2 className='text-3xl font-medium text-center'>Pricing</h2>
                     <div className='max-w-[55rem] mx-auto text-center grid grid-cols-[repeat(auto-fit,_minmax(200px,_1fr))] px-6 gap-8'>
@@ -209,7 +209,7 @@ function Theme0Desktop() {
                 <footer className='max-w-[55rem] mx-auto text-center flex flex-col gap-4 sm:px-8 '>
                     <nav className='w-full relative z-10 p-4 px-8 max-w-[70rem] mx-auto text-text-primary flex flex-col sm:flex-row items-center justify-between gap-8'>
                         <div className='text-xl font-bold flex flex-col gap-4 sm:items-start'>
-                            <img src={themeData.logo || Logo} alt='Logo' className='h-10' />
+                            <img src={themeData?.logo || Logo} alt='Logo' className='h-10' />
 
                             <div
                                 className='flex items-center text-center gap-4'

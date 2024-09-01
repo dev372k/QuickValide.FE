@@ -8,8 +8,8 @@ import { IoLogoGooglePlaystore } from 'react-icons/io5';
 
 function Theme0Mobile() {
     const themeData = useSelector((state) => state.builder);
-    const pricings = themeData.pricing
-        ? JSON.parse(useSelector((state) => state.builder.pricing))
+    const pricings = themeData?.pricing
+        ? JSON.parse(useSelector((state) => state.builder?.pricing))
         : [];
     const businessEmail = useSelector((state) => state.builder.email);
 
@@ -57,7 +57,7 @@ function Theme0Mobile() {
                 style={{ color: themeData.style.shade }}
             >
                 <div className='text-xl font-bold'>
-                    <img src={themeData.logo || Logo} alt='Logo' className='h-10' />
+                    <img src={themeData?.logo || Logo} alt='Logo' className='h-10' />
                 </div>
                 <ul className='flex flex-col  items-center gap-3 text-sm text-text-secondary'>
                     <li className='hover:opacity-75 transition-all cursor-pointer hover:font-semibold'>
@@ -206,7 +206,7 @@ function Theme0Mobile() {
                 <footer className='w-full md:max-w-[25rem] lg:max-w-[55rem] mx-auto text-center flex flex-col gap-4 px-8'>
                     <nav className='w-full relative z-10 p-4 px-8 mx-auto text-text-primary flex items-center justify-between'>
                         <div className='text-xl font-bold flex flex-col gap-4 sm:items-start'>
-                            <img src={themeData.logo || Logo} alt='Logo' className='h-10' />
+                            <img src={themeData?.logo || Logo} alt='Logo' className='h-10' />
 
                             <div
                                 className='flex items-center text-center gap-4'

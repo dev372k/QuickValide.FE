@@ -8,6 +8,8 @@ import { message } from 'antd';
 import { useForm } from 'react-hook-form';
 import validator from 'validator';
 import CustomLoader from '../../components/CustomLoader';
+import { FaAppStoreIos } from 'react-icons/fa6';
+import { IoLogoGooglePlaystore } from 'react-icons/io5';
 
 function Theme0Actual() {
     const app = useSelector((state) => state.builder);

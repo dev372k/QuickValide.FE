@@ -75,7 +75,7 @@ function Builder() {
         }
 
         getUserApp();
-    });
+    }, []);
 
     return (
         <main className='h-screen'>

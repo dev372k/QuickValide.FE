@@ -38,6 +38,7 @@ function BuilderControls({ setOpenMobileBuilder }) {
             setIsLoading(false);
         }
     }
+
     return (
         <div className='h-[calc(100vh-65px)] bg-white p-6 flex flex-col gap-2 overflow-y-auto'>
             {isLoading && <CustomLoader />}

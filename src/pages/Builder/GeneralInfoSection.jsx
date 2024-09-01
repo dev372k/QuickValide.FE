@@ -23,8 +23,6 @@ function GeneralInfoSection({ data }) {
         playStoreLink: '',
     });
 
-    // const [isInitialLoad, setIsInitialLoad] = useState(true);
-
     const {
         register,
         watch,

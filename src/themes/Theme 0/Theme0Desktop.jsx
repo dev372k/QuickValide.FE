@@ -14,7 +14,7 @@ function Theme0Desktop() {
     }, []);
 
     const themeData = useSelector((state) => state.builder);
-    const pricings = JSON.parse(useSelector((state) => state.builder.pricing));
+    const pricing = app.pricing ? JSON.parse(useSelector((state) => state.builder.pricing)) : [];
 
     const businessEmail = useSelector((state) => state.builder.email);
 

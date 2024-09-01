@@ -4,19 +4,50 @@ import { RxCross1 } from 'react-icons/rx';
 import { IoIosAdd } from 'react-icons/io';
 import PricingCards from './PricingCards';
 import { useForm, useFieldArray } from 'react-hook-form';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { updatePricings } from '../../services/builderSlice';
 
+const modalVariants = {
+    show: {
+        opacity: 1,
+        scale: 1,
+    },
+    hide: {
+        opacity: 0,
+        scale: 0.6,
+    },
+};
+
 function PricingSection() {
-    const [isModalShown, setIsModalShown] = useState(true);
+    const [isModalShown, setIsModalShown] = useState(false);
     const dispatch = useDispatch();
+
+    const appPricings = JSON.parse(useSelector((state) => state.builder.pricing));
 
     const { register, control, handleSubmit, reset, watch } = useForm({
         defaultValues: {
-            pricings: [
+            pricings: appPricings || [
                 {
-                    name: 'Pricing 1',
-                    price: '0',
+                    name: 'Basic',
+                    price: '5',
+                    features: [
+                        {
+                            feature: 'Feature 1',
+                            isIncluded: true,
+                        },
+                        {
+                            feature: 'Feature 2',
+                            isIncluded: false,
+                        },
+                        {
+                            feature: 'Feature 3',
+                            isIncluded: false,
+                        },
+                    ],
+                },
+                {
+                    name: 'Standard',
+                    price: '10',
                     features: [
                         {
                             feature: 'Feature 1',
@@ -28,31 +59,13 @@ function PricingSection() {
                         },
                         {
                             feature: 'Feature 3',
-                            isIncluded: true,
+                            isIncluded: false,
                         },
                     ],
                 },
                 {
-                    name: 'Pricing 2',
-                    price: '0',
-                    features: [
-                        {
-                            feature: 'Feature 1',
-                            isIncluded: true,
-                        },
-                        {
-                            feature: 'Feature 2',
-                            isIncluded: true,
-                        },
-                        {
-                            feature: 'Feature 3',
-                            isIncluded: true,
-                        },
-                    ],
-                },
-                {
-                    name: 'Pricing 3',
-                    price: '0',
+                    name: 'Premium',
+                    price: '25',
                     features: [
                         {
                             feature: 'Feature 1',
@@ -125,7 +138,12 @@ function PricingSection() {
             </div>
 
             <main>
-                <Modal isShown={isModalShown}>
+                <Modal
+                    isShown={isModalShown}
+                    variants={modalVariants}
+                    animate={isModalShown ? 'show' : 'hide'}
+                    initial={isModalShown ? 'show' : 'hide'}
+                >
                     <div className='p-6 relative'>
                         {/* Close Icon  */}
                         <div

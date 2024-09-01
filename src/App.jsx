@@ -24,19 +24,13 @@ import UserApp from './pages/UserApp/index.jsx';
 import { request } from './helpers/requestHelper.js';
 import { saveUser } from './services/userSlice.js';
 
-import Theme0 from './themes/Theme0.jsx';
-import Theme1 from './themes/Theme1.jsx';
-import Theme2 from './themes/Theme2.jsx';
-import Theme3 from './themes/Theme3.jsx';
 import Builder from './pages/Builder/index.jsx';
 
 function App() {
     const dispatch = useDispatch();
     useEffect(function () {
         const token = getToken();
-        document.cookie = `token=${token}; path=/; domain=.quickvalide.com`;
 
-        console.log(document.cookie);
         if (token) {
             const userId = JSON.parse(
                 decodeToken(token)[
@@ -57,19 +51,12 @@ function App() {
     const isSubdomain = hostnameParts.length > 2;
     const subdomain = isSubdomain ? hostnameParts.slice(0, -2).join('.') : null;
     // const subdomain = hostnameParts[0];
-    console.log(subdomain);
 
     if (isSubdomain) return <UserApp subdomain={subdomain} />;
 
     return (
         <BrowserRouter>
             <Routes>
-                <Route path='/theme'>
-                    <Route path='0' element={<Theme0 />} />
-                    <Route path='1' element={<Theme1 />} />
-                    <Route path='2' element={<Theme2 />} />
-                    <Route path='3' element={<Theme3 />} />
-                </Route>
                 <Route path='/' element={<LandingPage />} />
                 <Route path='/login' exact element={<Login />} />
                 <Route path='/register' exact element={<Register />} />

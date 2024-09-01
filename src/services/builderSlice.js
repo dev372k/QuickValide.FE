@@ -6,8 +6,26 @@ const initialState = {
     aboutUs: 'About us text will go here',
     pricing: JSON.stringify([
         {
-            name: 'Pricing 1',
-            price: '0',
+            name: 'Basic',
+            price: '5',
+            features: [
+                {
+                    feature: 'Feature 1',
+                    isIncluded: true,
+                },
+                {
+                    feature: 'Feature 2',
+                    isIncluded: false,
+                },
+                {
+                    feature: 'Feature 3',
+                    isIncluded: false,
+                },
+            ],
+        },
+        {
+            name: 'Standard',
+            price: '10',
             features: [
                 {
                     feature: 'Feature 1',
@@ -19,31 +37,13 @@ const initialState = {
                 },
                 {
                     feature: 'Feature 3',
-                    isIncluded: true,
+                    isIncluded: false,
                 },
             ],
         },
         {
-            name: 'Pricing 2',
-            price: '0',
-            features: [
-                {
-                    feature: 'Feature 1',
-                    isIncluded: true,
-                },
-                {
-                    feature: 'Feature 2',
-                    isIncluded: true,
-                },
-                {
-                    feature: 'Feature 3',
-                    isIncluded: true,
-                },
-            ],
-        },
-        {
-            name: 'Pricing 3',
-            price: '0',
+            name: 'Premium',
+            price: '25',
             features: [
                 {
                     feature: 'Feature 1',
@@ -64,6 +64,7 @@ const initialState = {
     email: '',
     playstoreLink: '',
     appstoreLink: '',
+    style: {},
 };
 
 const builderSlice = createSlice({
@@ -87,6 +88,10 @@ const builderSlice = createSlice({
         updatePricings: (state, action) => {
             state.pricing = action.payload;
         },
+        updateStyle: (state, action) => {
+            const updatedStyles = action.payload;
+            state.style = updatedStyles;
+        },
         updateApp: (state, action) => {
             return action.payload;
         },
@@ -100,6 +105,7 @@ export const {
     updateLogo,
     updateGeneralInfo,
     updatePricings,
+    updateStyle,
     updateApp,
 } = builderSlice.actions;
 export default builderSlice.reducer;

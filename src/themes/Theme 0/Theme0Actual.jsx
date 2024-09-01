@@ -4,80 +4,151 @@ import Logo from '../../assets/logo-no-background.svg';
 import { RxCross1 } from 'react-icons/rx';
 import { TiTick } from 'react-icons/ti';
 import { request } from '../../helpers/requestHelper';
+import { message } from 'antd';
+import { useForm } from 'react-hook-form';
+import validator from 'validator';
+import CustomLoader from '../../components/CustomLoader';
 
 function Theme0Actual() {
     const app = useSelector((state) => state.builder);
 
+    const themeData = useSelector((state) => state.builder);
     const pricing = app.pricing ? JSON.parse(useSelector((state) => state.builder.pricing)) : [];
 
     const inputRef = useRef(null);
 
     const [selectedPlan, setSelectedPlan] = useState('');
-    const [email, setEmail] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
 
     useEffect(function () {
         document.title = app?.name || 'Quickvalide | App';
     }, []);
 
+    useEffect(() => {
+        if (selectedPlan) {
+            inputRef.current?.focus();
+        }
+    }, [selectedPlan]);
+
     function focusInput() {
+        console.log('I am in focus input');
         if (inputRef.current) {
             inputRef.current.focus();
+            console.log('I am here :sad');
         }
     }
 
-    async function handleJoinWaitlist() {
+    async function handleJoinWaitlist(data) {
+        if (!data.email) return;
+        setIsLoading(true);
         const res = await request('https://api.quickvalide.com/api/Waitlist', 'POST', {
             appId: app.id,
-            email,
+            email: data.email,
             selectedPlan,
         });
+        setIsLoading(false);
 
-        console.log(res);
+        if (res?.status) message.success(res.message);
+        else message.error(res.message);
     }
 
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm();
+
+    const hexToRgb = (hex) => {
+        let r = 0,
+            g = 0,
+            b = 0;
+        if (hex?.length === 4) {
+            r = parseInt(hex[1] + hex[1], 16);
+            g = parseInt(hex[2] + hex[2], 16);
+            b = parseInt(hex[3] + hex[3], 16);
+        } else if (hex?.length === 7) {
+            r = parseInt(hex[1] + hex[2], 16);
+            g = parseInt(hex[3] + hex[4], 16);
+            b = parseInt(hex[5] + hex[6], 16);
+        }
+        return `${r}, ${g}, ${b}`;
+    };
+
+    const shadeRgb = hexToRgb(themeData.style.shade);
+    const colorRgb = hexToRgb(themeData.style.color);
+    const backgroundRgb = hexToRgb(themeData.style.background);
     return (
-        <main className='relative z-10 text-text-primary w-full min-h-screen bg-white '>
-            <div className='absolute w-full h-[30vh] bg-red-100 -z-10 clip'></div>
-            <nav className='w-full relative z-10 p-4 px-8 max-w-7xl mx-auto text-text-primary flex items-center justify-between'>
+        <main
+            className={`relative z-10 text-text-primary w-full min-h-screen `}
+            style={{
+                fontFamily: themeData.style.font,
+                color: `rgb(${colorRgb})`,
+                background: `rgb(${backgroundRgb})`,
+            }}
+        >
+            {isLoading && <CustomLoader />}
+            <div
+                className='absolute w-full h-[80vh] -z-10 clip'
+                style={{
+                    background: `radial-gradient(circle at 30% 30%, ${themeData.style.background}, transparent),
+                    radial-gradient(circle at 70% 70%, rgba(${backgroundRgb}, 0.4), transparent),
+                    radial-gradient(circle at 30% 70%, rgba(${backgroundRgb}, 0.5), transparent),
+                    radial-gradient(circle at 70% 30%,rgba(${backgroundRgb}, 0.9), transparent),
+                    radial-gradient(circle at 50% 50%, rgba(${shadeRgb}, 0.1), transparent)`,
+                }}
+            ></div>
+            <nav
+                className='w-full relative z-10 p-4 px-8 max-w-7xl mx-auto text-text-primary flex items-center justify-between'
+                style={{ color: themeData.style.shade }}
+            >
                 <a href='#' className='text-xl font-bold'>
                     <img src={app.logo || Logo} alt='Logo' className='h-10' />
                 </a>
-                <ul className='flex flex-col sm:flex-row items-center gap-3 text-sm text-text-secondary'>
+                <ul className='flex flex-col sm:flex-row items-center gap-3 text-sm '>
                     <a
                         href='#'
-                        className='hover:text-text-primary transition-all cursor-pointer hover:font-semibold'
+                        className='hover:opacity-75 transition-all cursor-pointer hover:font-semibold'
                     >
                         Home
                     </a>
                     <a
                         href='#about'
-                        className='hover:text-text-primary transition-all cursor-pointer hover:font-semibold'
+                        className='hover:opacity-75 transition-all cursor-pointer hover:font-semibold'
                     >
                         About Us
                     </a>
-                    <a
-                        href='#pricing'
-                        className='hover:text-text-primary transition-all cursor-pointer hover:font-semibold'
-                    >
-                        Pricing
-                    </a>
+                    {pricing.length > 0 && (
+                        <a
+                            href='#pricing'
+                            className='hover:opacity-75 transition-all cursor-pointer hover:font-semibold'
+                        >
+                            Pricing
+                        </a>
+                    )}
+
                     <a
                         href={`mailto:${app?.email}`}
-                        className='hover:text-text-primary p-2  bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 transition-all cursor-pointer rounded-sm text-white hover:font-semibold'
+                        className='hover:opacity-80 p-2  bg-gradient-to-r f transition-all cursor-pointer rounded-sm text-white hover:font-semibold'
+                        style={{
+                            backgroundImage: `linear-gradient(to right, rgba(${shadeRgb}, 1), rgba(${shadeRgb}, 0.4)`,
+                        }}
                     >
                         Contact Us
                     </a>
                 </ul>
             </nav>
 
-            <header className='w-full md:max-w-[25rem] px-8 lg:max-w-[55rem] leading-[1.2] tracking-tighter font-medium mx-auto text-3xl md:text-4x  text-center min-h-[80vh] flex flex-col gap-8 items-center justify-center'>
+            <header className='w-full md:max-w-[25rem] px-8 lg:px-16 lg:max-w-[50rem] leading-[1.2] tracking-tighter font-medium mx-auto text-3xl md:text-4xl lg:text-5xl  text-center min-h-[80vh] flex flex-col gap-8 items-center justify-center'>
                 <div className='flex flex-col gap-5 items-center'>
                     <h1 className='leading-[1.3]'>{app.pageContent}</h1>
                 </div>
 
                 <a
                     href={app.pricing ? '#pricing' : '#'}
-                    className='text-[1rem] text-white tracking-wide p-2 px-6 rounded-full bg-gradient-to-r from-pink-500  via-red-500 to-yellow-500 btn-hover transition-all'
+                    className='text-[1rem] text-white tracking-wide p-2 px-6 rounded-full bg-gradient-to-r  btn-hover transition-all'
+                    style={{
+                        backgroundImage: `linear-gradient(to right, rgba(${shadeRgb}, 1), rgba(${shadeRgb}, 0.4))`,
+                    }}
                     onClick={() => {
                         if (!app.pricing) focusInput();
                     }}
@@ -87,37 +158,55 @@ function Theme0Actual() {
             </header>
 
             <section className='py-24'>
-                <div className='w-full md:max-w-[25rem] lg:max-w-[55rem] mx-auto text-center flex flex-col gap-4 bg-gray-50 p-8 rounded-md'>
-                    <div className='flex flex-col w-full items-center gap-4 justify-center'>
+                <div
+                    className='w-full md:max-w-[25rem] lg:max-w-[55rem] mx-auto text-center flex flex-col gap-4 p-8 rounded-md'
+                    style={{ backgroundColor: 'rgba(0, 0, 0, .2)' }}
+                >
+                    <form
+                        className='flex flex-col w-full items-center gap-4 justify-center'
+                        onSubmit={handleSubmit(handleJoinWaitlist)}
+                    >
                         <h2 className='text-xl font-medium'>Join Wailist</h2>
                         <input
                             type='text'
                             placeholder='example@email.com'
                             className='max-w-96 min-w-48 w-72 text-sm border p-3 bg-white'
                             ref={inputRef}
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
+                            {...register('email', {
+                                required: 'Email is required',
+                                validate: (val) =>
+                                    validator.isEmail(val) || 'Please enter a valid email address',
+                            })}
                         />
+                        {errors?.email && (
+                            <p className='text-sm text-error -mt-2'>{errors.email.message}</p>
+                        )}
                         <button
                             onClick={handleJoinWaitlist}
-                            className='text-sm text-white tracking-wide p-2 px-6 rounded-full bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 btn-hover transition-all'
+                            className='text-sm text-white tracking-wide p-2 px-6 rounded-full bg-gradient-to-r  btn-hover transition-all'
+                            style={{
+                                backgroundImage: `linear-gradient(to right, rgba(${shadeRgb}, 1), rgba(${shadeRgb}, 0.4))`,
+                            }}
                         >
                             Join <span className='transition-all'>&rarr;</span>
                         </button>
-                    </div>
+                    </form>
                 </div>
             </section>
 
             <section className='py-24' id='about'>
                 <div className='w-full md:max-w-[25rem] lg:max-w-[55rem] mx-auto text-center flex flex-col gap-4 px-8'>
                     <h2 className='text-3xl font-medium'>About Us</h2>
-                    <div className='flex flex-col gap-2 text-text-secondary'>
+                    <div
+                        className='flex flex-col gap-2 '
+                        style={{ color: `rgba(${colorRgb}, 0.8)` }}
+                    >
                         <p>{app?.aboutUs}</p>
                     </div>
                 </div>
             </section>
 
-            {app.pricing && (
+            {pricing?.length > 0 && (
                 <section className='flex flex-col gap-8 py-16' id='pricing'>
                     <h2 className='text-3xl font-medium text-center'>Pricing</h2>
                     <div className='w-full md:max-w-[25rem] lg:max-w-[55rem] mx-auto text-center grid grid-cols-[repeat(auto-fit,_minmax(200px,_1fr))] px-6 gap-8'>
@@ -125,12 +214,18 @@ function Theme0Actual() {
                             return (
                                 <div
                                     className='p-5 rounded-sm border flex flex-col gap-5 w-full'
+                                    style={{ borderColor: `rgba(0, 0, 0, .2)` }}
                                     key={pricingIndex}
                                 >
                                     <div className='flex flex-col gap-1'>
                                         <h3 className='text-2xl font-medium'>{pricing.name}</h3>
                                         <p className='text-lg font-normal'>
-                                            <span className='text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 font-bold text-3xl'>
+                                            <span
+                                                className='text-transparent bg-clip-text bg-gradient-to-r  font-bold text-3xl'
+                                                style={{
+                                                    backgroundImage: `linear-gradient(to right, rgba(${shadeRgb}, 1), rgba(${shadeRgb}, 0.4))`,
+                                                }}
+                                            >
                                                 ${pricing.price}
                                             </span>
                                             <span className='text-sm text-text-secondary'>
@@ -141,15 +236,18 @@ function Theme0Actual() {
 
                                     <button
                                         onClick={() => {
-                                            setSelectedPlan(pricing.name);
                                             focusInput();
+                                            setSelectedPlan(pricing.name);
                                         }}
-                                        className='text-sm text-white tracking-wide p-2 px-6 rounded-full bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 btn-hover transition-all'
+                                        className='text-sm text-white tracking-wide p-2 px-6 rounded-full bg-gradient-to-r  btn-hover transition-all'
+                                        style={{
+                                            backgroundImage: `linear-gradient(to right, rgba(${shadeRgb}, 1), rgba(${shadeRgb}, 0.4))`,
+                                        }}
                                     >
                                         Subscribe
                                     </button>
 
-                                    <ul className='flex flex-col gap-2 self-start text-left'>
+                                    <ul className='flex flex-col gap-2 text-sm self-start text-left'>
                                         {pricing.features.map((feature, featureIndex) => {
                                             return (
                                                 <li
@@ -173,34 +271,71 @@ function Theme0Actual() {
                 </section>
             )}
 
-            <section className='py-24 bg-gray-100'>
+            <section
+                className='py-24'
+                style={{
+                    backgroundColor: `rgba(0, 0, 0, .2)`,
+                }}
+            >
                 <footer className='w-full md:max-w-[25rem] lg:max-w-[55rem] mx-auto text-center flex flex-col gap-4 px-8'>
                     <nav className='w-full relative z-10 p-4 px-8 max-w-[70rem] mx-auto text-text-primary flex items-center justify-between'>
-                        <a href='#' className='text-xl font-bold'>
-                            <img src={app.logo || Logo} alt='Logo' className='h-10' />
+                        <a
+                            href='#'
+                            className='text-xl font-bold flex flex-col gap-4 sm:items-start'
+                        >
+                            <img src={themeData.logo || Logo} alt='Logo' className='h-10' />
+
+                            <div
+                                className='flex items-center text-center gap-4'
+                                style={{ color: `rgb(${shadeRgb})` }}
+                            >
+                                {themeData.appstoreLink && (
+                                    <a href={themeData.appstoreLink}>
+                                        <div className='flex flex-col items-center'>
+                                            <FaAppStoreIos size={28} />
+                                            <p className='text-xs'>App Store</p>
+                                        </div>
+                                    </a>
+                                )}
+                                {themeData.playstoreLink && (
+                                    <a href={themeData.playstoreLink}>
+                                        <div className='flex flex-col items-center'>
+                                            <IoLogoGooglePlaystore size={28} />
+                                            <p className='text-xs'>Play Store</p>
+                                        </div>
+                                    </a>
+                                )}
+                            </div>
                         </a>
-                        <ul className='flex flex-col sm:flex-row items-center gap-3 text-sm text-text-secondary'>
+
+                        <ul
+                            className='flex flex-col sm:flex-row items-center gap-3 text-sm '
+                            style={{ color: `rgb(${shadeRgb})` }}
+                        >
                             <a
                                 href='#'
-                                className='hover:text-text-primary transition-all cursor-pointer hover:font-semibold'
+                                className='hover:opacity-75 transition-all cursor-pointer hover:font-semibold'
                             >
                                 Home
                             </a>
                             <a
                                 href='#about'
-                                className='hover:text-text-primary transition-all cursor-pointer hover:font-semibold'
+                                className='hover:opacity-75 transition-all cursor-pointer hover:font-semibold'
                             >
                                 About Us
                             </a>
                             <a
                                 href='#pricing'
-                                className='hover:text-text-primary transition-all cursor-pointer hover:font-semibold'
+                                className='hover:opacity-75 transition-all cursor-pointer hover:font-semibold'
                             >
                                 Pricing
                             </a>
                             <a
                                 href={`mailto:${app?.email}`}
-                                className='hover:text-text-primary p-2  bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 transition-all cursor-pointer rounded-sm text-white hover:font-semibold'
+                                className='hover:opacity-80 p-2  bg-gradient-to-r  transition-all cursor-pointer rounded-sm text-white hover:font-semibold'
+                                style={{
+                                    backgroundImage: `linear-gradient(to right, rgba(${shadeRgb}, 1), rgba(${shadeRgb}, 0.4))`,
+                                }}
                             >
                                 Contact Us
                             </a>

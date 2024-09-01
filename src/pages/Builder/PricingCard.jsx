@@ -112,7 +112,7 @@ function PricingCard({ index, pricingFields, append, remove, register, update, r
             <div className='mt-6'>
                 <button
                     type='button'
-                    className='text-sm p-2 text-center border rounded-sm w-full bg-accent-1 text-white cursor-not-allowed'
+                    className='text-sm p-2 text-center border w-full bg-accent-1 text-white cursor-not-allowed rounded-lg'
                 >
                     Subscribe Button
                 </button>

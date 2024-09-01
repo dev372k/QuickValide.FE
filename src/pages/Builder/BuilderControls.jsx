@@ -7,6 +7,7 @@ import { RxCross1 } from 'react-icons/rx';
 import { useSelector } from 'react-redux';
 import { message } from 'antd';
 import { request } from '../../helpers/requestHelper';
+import CustomLoader from '../../components/CustomLoader';
 
 function BuilderControls({ setOpenMobileBuilder }) {
     const queryString = window.location.search;
@@ -15,17 +16,31 @@ function BuilderControls({ setOpenMobileBuilder }) {
     const appId = urlParams.get('appId');
 
     const [selectedSection, setSelectedSection] = useState('general');
+    const [isLoading, setIsLoading] = useState(false);
     const themeData = useSelector((state) => state.builder);
 
     async function handleSave() {
         if (!themeData.logo) return message.error('Please upload logo in general info section');
         if (!themeData.email) return message.error('Please enter email in general info section');
 
-        const res = await request(`https://api.quickvalide.com/api/App/${appId}`, 'PUT', themeData);
-        console.log(res);
+        try {
+            setIsLoading(true);
+            const res = await request(
+                `https://api.quickvalide.com/api/App/${appId}`,
+                'PUT',
+                themeData
+            );
+            if (!res.status) throw new Error(res?.message);
+            message.success(res?.message);
+        } catch (err) {
+            message.error(err.message);
+        } finally {
+            setIsLoading(false);
+        }
     }
     return (
         <div className='h-[calc(100vh-65px)] bg-white p-6 flex flex-col gap-2 overflow-y-auto'>
+            {isLoading && <CustomLoader />}
             <div
                 onClick={() => setOpenMobileBuilder(false)}
                 className='self-end mb-4 p-1 hover:bg-slate-100 hover:text-accent-1 rounded-full cursor-pointer md:hidden'
@@ -57,7 +72,7 @@ function BuilderControls({ setOpenMobileBuilder }) {
             {(() => {
                 switch (selectedSection) {
                     case 'general':
-                        return <GeneralInfoSection />;
+                        return <GeneralInfoSection data={themeData} />;
 
                     case 'hero':
                         return <HeroSection />;

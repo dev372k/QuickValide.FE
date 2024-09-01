@@ -8,6 +8,10 @@ import Modal from '../../components/Modal';
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { RxCross1 } from 'react-icons/rx';
+import { request } from '../../helpers/requestHelper';
+import { useSelector, useDispatch } from 'react-redux';
+import { updateApp } from '../../services/builderSlice';
+import { message } from 'antd';
 
 const viewVariants = {
     mobile: {
@@ -42,6 +46,9 @@ function Builder() {
     const [view, setView] = useState('desktop');
     const [openMobileBuilder, setOpenMobileBuilder] = useState(false);
 
+    const appId = useSelector((state) => state.app.appId);
+    const dispatch = useDispatch();
+
     useEffect(function () {
         const handleBeforeUnload = (event) => {
             event.preventDefault();
@@ -55,6 +62,20 @@ function Builder() {
             window.removeEventListener('beforeunload', handleBeforeUnload);
         };
     }, []);
+
+    useEffect(function () {
+        async function getUserApp() {
+            try {
+                const res = await request(`https://api.quickvalide.com/api/App/${appId}`);
+                console.log(res.data);
+                dispatch(updateApp(res.data));
+            } catch (err) {
+                message.error(err.message);
+            }
+        }
+
+        getUserApp();
+    });
 
     return (
         <main className='h-screen'>

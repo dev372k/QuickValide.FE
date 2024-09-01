@@ -18,10 +18,11 @@ import Logo from '../../assets/logo-no-background.svg';
 import { request } from '../../helpers/requestHelper';
 
 import { useState } from 'react';
-import { updateApps } from '../../services/appSlice';
+import { changeApp, resetAll, updateApps } from '../../services/appSlice';
 import CreateAppModal from '../../components/CreateAppModal';
 
 import { motion } from 'framer-motion';
+import { updateApp } from '../../services/builderSlice';
 
 const sidebarVariants = {
     open: {
@@ -60,6 +61,8 @@ function Sidebar({ isSidebarOpen, setIsSidebarOpen }) {
     function handleLogout() {
         removeToken();
         dispatch(logoutUser());
+        dispatch(resetAll());
+        dispatch(updateApp([]));
         navigate('/login');
     }
     return (

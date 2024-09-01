@@ -6,7 +6,9 @@ import { TiTick } from 'react-icons/ti';
 
 function Theme0Mobile() {
     const themeData = useSelector((state) => state.builder);
-    const pricings = app.pricing ? JSON.parse(useSelector((state) => state.builder.pricing)) : [];
+    const pricings = themeData.pricing
+        ? JSON.parse(useSelector((state) => state.builder.pricing))
+        : [];
     const businessEmail = useSelector((state) => state.builder.email);
 
     const hexToRgb = (hex) => {

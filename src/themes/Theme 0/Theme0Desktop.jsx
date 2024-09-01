@@ -9,14 +9,8 @@ import { FaAppStoreIos } from 'react-icons/fa6';
 import { IoLogoGooglePlaystore } from 'react-icons/io5';
 
 function Theme0Desktop() {
-    useEffect(function () {
-        document.title = 'Builder | Theme 0';
-    }, []);
-
     const themeData = useSelector((state) => state.builder);
-    const pricings = themeData.pricing
-        ? JSON.parse(useSelector((state) => state.builder.pricing))
-        : [];
+    const pricings = themeData.pricing ? JSON.parse(themeData.pricing) : [];
 
     const businessEmail = useSelector((state) => state.builder.email);
 

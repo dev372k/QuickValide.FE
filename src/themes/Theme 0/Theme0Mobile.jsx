@@ -3,6 +3,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import Logo from '../../assets/logo-no-background.svg';
 import { RxCross1 } from 'react-icons/rx';
 import { TiTick } from 'react-icons/ti';
+import { FaAppStoreIos } from 'react-icons/fa6';
+import { IoLogoGooglePlaystore } from 'react-icons/io5';
 
 function Theme0Mobile() {
     const themeData = useSelector((state) => state.builder);

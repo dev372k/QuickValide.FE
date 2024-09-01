@@ -22,7 +22,12 @@ function PricingSection() {
     const [isModalShown, setIsModalShown] = useState(false);
     const dispatch = useDispatch();
 
-    const appPricings = JSON.parse(useSelector((state) => state.builder.pricing));
+    const themeData = useSelector((state) => state.builder);
+
+    const appPricings = themeData.pricing ? JSON.parse(themeData.pricing) : [];
+
+    console.log('Theme Data', themeData);
+    console.log('App Pricings', appPricings);
 
     const { register, control, handleSubmit, reset, watch } = useForm({
         defaultValues: {

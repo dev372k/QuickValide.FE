@@ -16,7 +16,8 @@ function UserApp({ subdomain, token }) {
         async function getUserApp() {
             setIsLoading(true);
             const res = await request(`https://api.quickvalide.com/api/App/${appName}/GetByName`);
-            setThemeId(res.data.themeId);
+            console.log(res);
+            setThemeId(res.data?.themeId);
             dispatch(updateApp(res.data));
             setIsLoading(false);
         }

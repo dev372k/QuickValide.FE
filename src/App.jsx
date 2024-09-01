@@ -48,9 +48,9 @@ function App() {
     }, []);
 
     const hostnameParts = window.location.hostname.split('.');
-    const isSubdomain = hostnameParts.length >= 2;
-    // const subdomain = isSubdomain ? hostnameParts.slice(0, -2).join('.') : null;
-    const subdomain = hostnameParts[0];
+    const isSubdomain = hostnameParts.length > 2;
+    const subdomain = isSubdomain ? hostnameParts.slice(0, -2).join('.') : null;
+    // const subdomain = hostnameParts[0];
 
     if (isSubdomain) return <UserApp subdomain={subdomain} />;
 

@@ -23,7 +23,7 @@ function GeneralInfoSection({ data }) {
         playStoreLink: '',
     });
 
-    const [isInitialLoad, setIsInitialLoad] = useState(true);
+    // const [isInitialLoad, setIsInitialLoad] = useState(true);
 
     const {
         register,
@@ -32,16 +32,7 @@ function GeneralInfoSection({ data }) {
         formState: { errors },
         setValue,
         reset,
-    } = useForm({
-        defaultValues: {
-            email: themeData.email,
-            appstoreLink: themeData.appstoreLink,
-            playstoreLink: themeData.playstoreLink,
-            style: {
-                color: style.color,
-            },
-        },
-    });
+    } = useForm();
 
     const logo = watch('logo');
     const watchedEmail = watch('email');
@@ -98,7 +89,7 @@ function GeneralInfoSection({ data }) {
             setAppDetails({
                 email: themeData.email,
                 appStoreLink: themeData.appstoreLink,
-                playstoreLink: themeData.playstoreLink,
+                playStoreLink: themeData.playstoreLink,
             });
         },
         [themeData]
@@ -130,17 +121,13 @@ function GeneralInfoSection({ data }) {
     );
 
     useEffect(() => {
-        if (!isInitialLoad) {
-            dispatch(
-                updateGeneralInfo({
-                    email: watchedEmail,
-                    playstoreLink: watchedPlaystoreLink,
-                    appstoreLink: watchedAppstoreLink,
-                })
-            );
-        } else {
-            setIsInitialLoad(false);
-        }
+        dispatch(
+            updateGeneralInfo({
+                email: watchedEmail,
+                playstoreLink: watchedPlaystoreLink,
+                appstoreLink: watchedAppstoreLink,
+            })
+        );
     }, [watchedEmail, watchedPlaystoreLink, watchedAppstoreLink, dispatch]);
 
     const handleImageChange = (e) => {

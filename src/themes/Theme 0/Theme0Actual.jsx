@@ -23,10 +23,6 @@ function Theme0Actual() {
     const [selectedPlan, setSelectedPlan] = useState('');
     const [isLoading, setIsLoading] = useState(false);
 
-    // useEffect(function () {
-    //     document.title = app?.name || 'Quickvalide | App';
-    // }, []);
-
     useEffect(() => {
         if (selectedPlan) {
             inputRef.current?.focus();
@@ -89,20 +85,15 @@ function Theme0Actual() {
         >
             {isLoading && <CustomLoader />}
             <Helmet>
-                <title>My Page Title</title>
-                <meta name='description' content='This is the description of my page' />
+                <title>{themeData?.seo?.title}</title>
+                <meta name='description' content={themeData?.seo?.description} />
                 <meta name='keywords' content='React, SEO, Meta Tags, Helmet' />
-                <meta property='og:title' content='My Open Graph Title' />
-                <meta property='og:description' content='This is the OG description of my page' />
-                <meta property='og:type' content='website' />
-                <meta property='og:url' content='https://example.com/my-page' />
-                <meta property='og:image' content='https://example.com/my-image.jpg' />
             </Helmet>
             <div
                 className='absolute w-full h-[80vh] -z-10 clip'
                 style={{
                     background: `radial-gradient(circle at 30% 30%, ${themeData.style.background}, transparent),
-                    radial-gradient(circle at 70% 70%, rgba(${backgroundRgb}, 0.4), transparent),
+                    radial-gradient(circle at 70% 70%, rgba(${backgroundRgb}, 0.9), transparent),
                     radial-gradient(circle at 30% 70%, rgba(${backgroundRgb}, 0.5), transparent),
                     radial-gradient(circle at 70% 30%,rgba(${backgroundRgb}, 0.9), transparent),
                     radial-gradient(circle at 50% 50%, rgba(${shadeRgb}, 0.1), transparent)`,
@@ -141,7 +132,7 @@ function Theme0Actual() {
                         href={`mailto:${app?.email}`}
                         className='hover:opacity-80 p-2  bg-gradient-to-r f transition-all cursor-pointer rounded-sm text-white hover:font-semibold'
                         style={{
-                            backgroundImage: `linear-gradient(to right, rgba(${shadeRgb}, 1), rgba(${shadeRgb}, 0.4)`,
+                            backgroundImage: `linear-gradient(to right, rgba(${shadeRgb}, 1), rgba(${shadeRgb}, 0.9)`,
                         }}
                     >
                         Contact Us
@@ -158,7 +149,7 @@ function Theme0Actual() {
                     href={app.pricing ? '#pricing' : '#'}
                     className='text-[1rem] text-white tracking-wide p-2 px-6 rounded-full bg-gradient-to-r  btn-hover transition-all'
                     style={{
-                        backgroundImage: `linear-gradient(to right, rgba(${shadeRgb}, 1), rgba(${shadeRgb}, 0.4))`,
+                        backgroundImage: `linear-gradient(to right, rgba(${shadeRgb}, 1), rgba(${shadeRgb}, 0.9))`,
                     }}
                     onClick={() => {
                         if (!app.pricing) focusInput();
@@ -196,7 +187,7 @@ function Theme0Actual() {
                             onClick={handleJoinWaitlist}
                             className='text-sm text-white tracking-wide p-2 px-6 rounded-full bg-gradient-to-r  btn-hover transition-all'
                             style={{
-                                backgroundImage: `linear-gradient(to right, rgba(${shadeRgb}, 1), rgba(${shadeRgb}, 0.4))`,
+                                backgroundImage: `linear-gradient(to right, rgba(${shadeRgb}, 1), rgba(${shadeRgb}, 0.9))`,
                             }}
                         >
                             Join <span className='transition-all'>&rarr;</span>
@@ -234,7 +225,7 @@ function Theme0Actual() {
                                             <span
                                                 className='text-transparent bg-clip-text bg-gradient-to-r  font-bold text-3xl'
                                                 style={{
-                                                    backgroundImage: `linear-gradient(to right, rgba(${shadeRgb}, 1), rgba(${shadeRgb}, 0.4))`,
+                                                    backgroundImage: `linear-gradient(to right, rgba(${shadeRgb}, 1), rgba(${shadeRgb}, 0.9))`,
                                                 }}
                                             >
                                                 ${pricing.price}
@@ -252,7 +243,7 @@ function Theme0Actual() {
                                         }}
                                         className='text-sm text-white tracking-wide p-2 px-6 rounded-full bg-gradient-to-r  btn-hover transition-all'
                                         style={{
-                                            backgroundImage: `linear-gradient(to right, rgba(${shadeRgb}, 1), rgba(${shadeRgb}, 0.4))`,
+                                            backgroundImage: `linear-gradient(to right, rgba(${shadeRgb}, 1), rgba(${shadeRgb}, 0.9))`,
                                         }}
                                     >
                                         Subscribe
@@ -345,7 +336,7 @@ function Theme0Actual() {
                                 href={`mailto:${app?.email}`}
                                 className='hover:opacity-80 p-2  bg-gradient-to-r  transition-all cursor-pointer rounded-sm text-white hover:font-semibold'
                                 style={{
-                                    backgroundImage: `linear-gradient(to right, rgba(${shadeRgb}, 1), rgba(${shadeRgb}, 0.4))`,
+                                    backgroundImage: `linear-gradient(to right, rgba(${shadeRgb}, 1), rgba(${shadeRgb}, 0.9))`,
                                 }}
                             >
                                 Contact Us

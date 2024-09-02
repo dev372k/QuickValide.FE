@@ -93,9 +93,9 @@ function Theme0Actual() {
                 className='absolute w-full h-[80vh] -z-10 clip'
                 style={{
                     background: `radial-gradient(circle at 30% 30%, ${themeData.style.background}, transparent),
-                    radial-gradient(circle at 70% 70%, rgba(${backgroundRgb}, 0.9), transparent),
+                    radial-gradient(circle at 70% 70%, rgba(${backgroundRgb}, 0.1), transparent),
                     radial-gradient(circle at 30% 70%, rgba(${backgroundRgb}, 0.5), transparent),
-                    radial-gradient(circle at 70% 30%,rgba(${backgroundRgb}, 0.9), transparent),
+                    radial-gradient(circle at 70% 30%,rgba(${backgroundRgb}, 0.4), transparent),
                     radial-gradient(circle at 50% 50%, rgba(${shadeRgb}, 0.1), transparent)`,
                 }}
             ></div>

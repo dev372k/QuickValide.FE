@@ -15,7 +15,7 @@ function BuilderControls({ setOpenMobileBuilder }) {
 
     const appId = urlParams.get('appId');
 
-    const [selectedSection, setSelectedSection] = useState('general');
+    const [selectedSection, setSelectedSection] = useState('select');
     const [isLoading, setIsLoading] = useState(false);
     const themeData = useSelector((state) => state.builder);
 
@@ -63,6 +63,7 @@ function BuilderControls({ setOpenMobileBuilder }) {
                     value={selectedSection}
                     onChange={(e) => setSelectedSection(e.target.value)}
                 >
+                    <option value='select'>Select Section</option>
                     <option value='general'>General Info</option>
 
                     <option value='hero'>Hero</option>
@@ -72,6 +73,8 @@ function BuilderControls({ setOpenMobileBuilder }) {
             </div>
             {(() => {
                 switch (selectedSection) {
+                    case 'select':
+                        return;
                     case 'general':
                         return <GeneralInfoSection data={themeData} />;
 

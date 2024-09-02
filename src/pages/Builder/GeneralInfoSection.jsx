@@ -16,22 +16,7 @@ function GeneralInfoSection() {
     const logoBase64 = useSelector((state) => state.builder.logo);
     true;
 
-    const initialThemeData = useMemo(() => {
-        if (themeData) {
-            return {
-                email: themeData.email,
-                appstoreLink: themeData.appstoreLink,
-                playstoreLink: themeData.playstoreLink,
-                style: {
-                    color: themeData.style.color,
-                    background: themeData.style.background,
-                    shade: themeData.style.shade,
-                    font: themeData.style.font,
-                },
-            };
-        }
-        return {};
-    }, []);
+    const initialThemeData = useMemo(() => (themeData ? themeData : {}), []);
 
     const {
         register,
@@ -43,6 +28,22 @@ function GeneralInfoSection() {
     } = useForm({
         defaultValues: initialThemeData,
     });
+
+    useEffect(() => {
+        if (initialThemeData) {
+            reset({
+                email: initialThemeData.email,
+                appstoreLink: initialThemeData.appstoreLink,
+                playstoreLink: initialThemeData.playstoreLink,
+                style: {
+                    color: initialThemeData.style.color,
+                    background: initialThemeData.style.background,
+                    shade: initialThemeData.style.shade,
+                    font: initialThemeData.style.font,
+                },
+            });
+        }
+    }, [initialThemeData, reset]);
 
     useEffect(() => {
         if (Object.keys(initialThemeData).length > 0) {

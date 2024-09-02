@@ -32,6 +32,7 @@ function GeneralInfoSection({ data }) {
         reset,
     } = useForm();
 
+    const allWatchedInfo = watch();
     const logo = watch('logo');
     const watchedEmail = watch('email');
     const watchedPlaystoreLink = watch('playstoreLink');
@@ -64,6 +65,8 @@ function GeneralInfoSection({ data }) {
                 shade: watchedStylesShade,
                 font: watchedStylesFont,
             };
+
+            console.log('Updated Styles', updatedStyles);
 
             dispatch(updateStyle(updatedStyles));
         },
@@ -124,8 +127,11 @@ function GeneralInfoSection({ data }) {
             playstoreLink: watchedAppstoreLink,
             appStoreLink: watchedAppstoreLink,
         };
+
+        console.log(updatedInfo);
+        // console;
         dispatch(updateGeneralInfo(updatedInfo));
-    }, [watchedEmail, watchedPlaystoreLink, watchedAppstoreLink, dispatch]);
+    }, [watchedEmail, watchedPlaystoreLink, watchedAppstoreLink]);
 
     const handleImageChange = (e) => {
         const file = logo.files[0];

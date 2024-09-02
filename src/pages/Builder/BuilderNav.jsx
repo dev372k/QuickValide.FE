@@ -12,7 +12,12 @@ function BuilderNav({ view, setView }) {
                 </div>
 
                 <div className='ml-auto mr-6 flex items-center gap-2'>
-                    <p className='text-sm text-text-secondary hidden md:block'>Select theme:</p>
+                    <p className='text-xs text-text-secondary'>
+                        Exciting themes
+                        <br />
+                        Coming soon ✨
+                    </p>
+                    {/* <p className='text-sm text-text-secondary hidden md:block'>Select theme:</p>
                     <select
                         name='themeId'
                         id='themeId'
@@ -22,7 +27,7 @@ function BuilderNav({ view, setView }) {
                         <option value='1'>Theme 2</option>
                         <option value='2'>Theme 3</option>
                         <option value='3'>Theme 4</option>
-                    </select>
+                    </select> */}
                 </div>
 
                 <div className='flex items-center gap-3'>

@@ -10,6 +10,7 @@ import validator from 'validator';
 import CustomLoader from '../../components/CustomLoader';
 import { FaAppStoreIos } from 'react-icons/fa6';
 import { IoLogoGooglePlaystore } from 'react-icons/io5';
+import { Helmet } from 'react-helmet';
 
 function Theme0Actual() {
     const app = useSelector((state) => state.builder);
@@ -89,6 +90,16 @@ function Theme0Actual() {
             }}
         >
             {isLoading && <CustomLoader />}
+            <Helmet>
+                <title>My Page Title</title>
+                <meta name='description' content='This is the description of my page' />
+                <meta name='keywords' content='React, SEO, Meta Tags, Helmet' />
+                <meta property='og:title' content='My Open Graph Title' />
+                <meta property='og:description' content='This is the OG description of my page' />
+                <meta property='og:type' content='website' />
+                <meta property='og:url' content='https://example.com/my-page' />
+                <meta property='og:image' content='https://example.com/my-image.jpg' />
+            </Helmet>
             <div
                 className='absolute w-full h-[80vh] -z-10 clip'
                 style={{

@@ -123,6 +123,7 @@ function GeneralInfoSection({ data }) {
 
     useEffect(() => {
         const updatedInfo = {
+            ...allWatchedInfo,
             email: watchedEmail,
             playstoreLink: watchedAppstoreLink,
             appStoreLink: watchedAppstoreLink,

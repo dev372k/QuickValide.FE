@@ -23,9 +23,9 @@ function Theme0Actual() {
     const [selectedPlan, setSelectedPlan] = useState('');
     const [isLoading, setIsLoading] = useState(false);
 
-    useEffect(function () {
-        document.title = app?.name || 'Quickvalide | App';
-    }, []);
+    // useEffect(function () {
+    //     document.title = app?.name || 'Quickvalide | App';
+    // }, []);
 
     useEffect(() => {
         if (selectedPlan) {
@@ -34,10 +34,8 @@ function Theme0Actual() {
     }, [selectedPlan]);
 
     function focusInput() {
-        console.log('I am in focus input');
         if (inputRef.current) {
             inputRef.current.focus();
-            console.log('I am here :sad');
         }
     }
 

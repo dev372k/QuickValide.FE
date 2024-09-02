@@ -68,7 +68,7 @@ const initialState = {
 };
 
 const builderSlice = createSlice({
-    name: 'user',
+    name: 'builder',
     initialState,
     reducers: {
         updateHero: (state, action) => {

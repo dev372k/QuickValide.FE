@@ -1,27 +1,37 @@
 import Logo from '../../assets/logo-no-background.svg';
 import { useForm } from 'react-hook-form';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { updateLogo, updateGeneralInfo, updateStyle } from '../../services/builderSlice';
+import {
+    updateLogo,
+    updateGeneralInfo,
+    updateStyle,
+    appstoreLink,
+} from '../../services/builderSlice';
 import validator from 'validator';
 
-function GeneralInfoSection({ data }) {
+function GeneralInfoSection() {
     const dispatch = useDispatch();
     const themeData = useSelector((state) => state.builder);
     const logoBase64 = useSelector((state) => state.builder.logo);
+    true;
 
-    const [style, setStyle] = useState({
-        color: '',
-        background: '',
-        shade: '',
-        font: '',
-    });
-
-    const [appDetails, setAppDetails] = useState({
-        email: '',
-        appStoreLink: '',
-        playStoreLink: '',
-    });
+    const initialThemeData = useMemo(() => {
+        if (themeData) {
+            return {
+                email: themeData.email,
+                appstoreLink: themeData.appstoreLink,
+                playstoreLink: themeData.playstoreLink,
+                style: {
+                    color: themeData.style.color,
+                    background: themeData.style.background,
+                    shade: themeData.style.shade,
+                    font: themeData.style.font,
+                },
+            };
+        }
+        return {};
+    }, []);
 
     const {
         register,
@@ -30,19 +40,35 @@ function GeneralInfoSection({ data }) {
         formState: { errors },
         setValue,
         reset,
-    } = useForm();
+    } = useForm({
+        defaultValues: initialThemeData,
+    });
 
-    const allWatchedInfo = watch();
+    useEffect(() => {
+        if (Object.keys(initialThemeData).length > 0) {
+            reset(initialThemeData);
+        }
+    }, [initialThemeData, reset]);
+
+    useEffect(() => {
+        watch((values) => {
+            dispatch(
+                updateGeneralInfo({
+                    email: values.email,
+                    appstoreLink: values.appstoreLink,
+                    playstoreLink: values.playstoreLink,
+                })
+            );
+        });
+    }, [watch('email'), watch('appstoreLink'), watch('playstoreLink'), dispatch]);
+
+    useEffect(() => {
+        watch((values) => {
+            dispatch(updateStyle({ ...values?.style }));
+        });
+    }, [watch('style'), dispatch]);
+
     const logo = watch('logo');
-    const watchedEmail = watch('email');
-    const watchedPlaystoreLink = watch('playstoreLink');
-    const watchedAppstoreLink = watch('appstoreLink');
-
-    const watchedStyles = watch('style');
-    const watchedStylesColor = watch('style.color');
-    const watchedStylesBackground = watch('style.background');
-    const watchedStylesShade = watch('style.shade');
-    const watchedStylesFont = watch('style.font');
 
     useEffect(() => {
         if (logo && logo[0] instanceof Blob) {
@@ -55,84 +81,6 @@ function GeneralInfoSection({ data }) {
             dispatch(updateLogo(themeData.logo));
         }
     }, [logo]);
-
-    useEffect(
-        function () {
-            const updatedStyles = {
-                ...watchedStyles,
-                color: watchedStylesColor,
-                background: watchedStylesBackground,
-                shade: watchedStylesShade,
-                font: watchedStylesFont,
-            };
-
-            console.log('Updated Styles', updatedStyles);
-
-            dispatch(updateStyle(updatedStyles));
-        },
-        [watchedStylesColor, watchedStylesBackground, watchedStylesShade, watchedStylesFont]
-    );
-
-    useEffect(
-        function () {
-            setStyle({
-                color: themeData.style.color,
-                background: themeData.style.background,
-                shade: themeData.style.shade,
-                font: themeData.style.font,
-            });
-        },
-        [themeData]
-    );
-
-    useEffect(
-        function () {
-            setAppDetails({
-                email: themeData.email,
-                appStoreLink: themeData.appstoreLink,
-                playStoreLink: themeData.playstoreLink,
-            });
-        },
-        [themeData]
-    );
-
-    useEffect(
-        function () {
-            reset({
-                email: appDetails.email,
-                appstoreLink: appDetails.appStoreLink,
-                playstoreLink: appDetails.playStoreLink,
-            });
-        },
-        [appDetails.email, appDetails.appStoreLink, appDetails.playStoreLink]
-    );
-
-    useEffect(
-        function () {
-            reset({
-                style: {
-                    color: style.color,
-                    background: style.background,
-                    shade: style.shade,
-                    font: style.font,
-                },
-            });
-        },
-        [style.color, style.background, style.shade, style.font]
-    );
-
-    useEffect(() => {
-        const updatedInfo = {
-            ...allWatchedInfo,
-            email: watchedEmail,
-            playstoreLink: watchedAppstoreLink,
-            appStoreLink: watchedAppstoreLink,
-        };
-
-        console.log(updatedInfo);
-        // console;
-        dispatch(updateGeneralInfo(updatedInfo));
-    }, [watchedEmail, watchedPlaystoreLink, watchedAppstoreLink]);
 
     const handleImageChange = (e) => {
         const file = logo.files[0];
@@ -312,147 +260,3 @@ function GeneralInfoSection({ data }) {
 }
 
 export default GeneralInfoSection;
-
-// import Logo from '../../assets/logo-no-background.svg';
-// import { useForm } from 'react-hook-form';
-// import { useEffect, useState } from 'react';
-// import { useDispatch, useSelector } from 'react-redux';
-// import { updateLogo, updateGeneralInfo } from '../../services/builderSlice';
-// import validator from 'validator';
-
-// function GeneralInfoSection({ data }) {
-//     const dispatch = useDispatch();
-//     const themeData = useSelector((state) => state.builder);
-//     const logoBase64 = useSelector((state) => state.builder.logo);
-
-//     const [isInitialLoad, setIsInitialLoad] = useState(true); // Flag to track initial load
-
-//     const {
-//         register,
-//         watch,
-//         handleSubmit,
-//         formState: { errors },
-//         setValue,
-//         reset,
-//     } = useForm({
-//         defaultValues: {
-//             email: data.email,
-//         },
-//     });
-
-//     const logo = watch('logo');
-//     const watchedFields = watch();
-
-//     useEffect(() => {
-//         if (logo && logo[0] instanceof Blob) {
-//             const reader = new FileReader();
-//             reader.onloadend = () => {
-//                 dispatch(updateLogo(reader.result));
-//             };
-//             reader.readAsDataURL(logo[0]);
-//         } else {
-//             dispatch(updateLogo(themeData.logo));
-//         }
-//     }, [logo]);
-
-//     useEffect(() => {
-//         delete watchedFields.logo;
-//         dispatch(updateGeneralInfo(watchedFields));
-//     }, [watchedFields, dispatch]);
-
-//     const handleImageChange = (e) => {
-//         const file = logo.files[0];
-//         if (file) {
-//             const reader = new FileReader();
-//             reader.onloadend = () => {
-//                 setValue('logoBase64', reader.result); // Set the Base64 string in the form data
-//             };
-//             reader.readAsDataURL(file);
-//         }
-//     };
-
-//     return (
-//         <div className='mt-6 h-full'>
-//             <div className=''>
-//                 <form className='flex items-start flex-col gap-8 mt-4'>
-//                     <div className='flex flex-col items-start gap-2'>
-//                         <h3 className='text-lg font-semibold'>Logo</h3>
-//                         <div className='flex items-center justify-center'>
-//                             <img
-//                                 className='h-8 object-cover'
-//                                 src={logoBase64 || Logo}
-//                                 alt='App logo'
-//                             />
-//                         </div>
-//                         <label className='w-full'>
-//                             <span className='sr-only'>Choose logo</span>
-//                             <input
-//                                 type='file'
-//                                 className='block w-full text-sm text-text-primary
-//                                   file:mr-4 file:py-1 file:px-3
-//                                   file:rounded-sm file:border-0
-//                                   file:text-sm file:font-semibold
-//                                   file:bg-accent-1/10 file:text-accent-1
-//                                   hover:file:bg-accent-1/20
-//                                 '
-//                                 onChange={handleImageChange}
-//                                 {...register('logo')}
-//                             />
-//                         </label>
-//                     </div>
-
-//                     <div>
-//                         <div>
-//                             <h3 className='text-lg font-semibold'>Email Address</h3>
-//                             <p className='text-sm text-text-secondary'>
-//                                 Please make sure to use correct email, people will use this email to
-//                                 contact you.
-//                             </p>
-//                         </div>
-//                         <input
-//                             type='text'
-//                             placeholder={data?.email || 'Email address'}
-//                             className='text-sm p-2 bg-none border rounded-md w-full mt-2'
-//                             {...register('email', {
-//                                 required: 'Email is required',
-
-//                                 validate: (val) =>
-//                                     validator.isEmail(val) || 'Please enter a valid email',
-//                             })}
-//                         />
-
-//                         {errors?.email && (
-//                             <p className='text-sm text-error mt-1'>{errors.email.message}</p>
-//                         )}
-//                     </div>
-
-//                     <div className='w-full'>
-//                         <div>
-//                             <h3 className='text-lg font-semibold'>Playstore Link</h3>
-//                         </div>
-//                         <input
-//                             type='text'
-//                             placeholder='Playstore Link'
-//                             className='text-sm p-2 bg-none border rounded-md w-full mt-2'
-//                             {...register('playstoreLink')}
-//                         />
-//                     </div>
-
-//                     <div className='w-full'>
-//                         <div>
-//                             <h3 className='text-lg font-semibold'>Appstore Link</h3>
-//                         </div>
-//                         <input
-//                             type='text'
-//                             placeholder='Appstore Link'
-//                             className='text-sm p-2 bg-none border rounded-md w-full mt-2'
-//                             {...register('appstoreLink')}
-//                         />
-//                     </div>
-//                 </form>
-//             </div>
-//         </div>
-//     );
-// }
-
-// export default GeneralInfoSection;

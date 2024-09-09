@@ -17,6 +17,7 @@ function Theme1Actual() {
 
     const themeData = useSelector((state) => state.builder);
     const pricing = app.pricing ? JSON.parse(useSelector((state) => state.builder.pricing)) : [];
+    const svglink = useSelector((state) => state.builder.svglink);
 
     const inputRef = useRef(null);
 

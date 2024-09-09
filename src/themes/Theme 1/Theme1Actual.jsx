@@ -260,7 +260,7 @@ function Theme1Actual() {
                                         <h3 className='text-2xl font-medium'>{pricing.name}</h3>
                                         <p className='text-lg font-normal'>
                                             <span
-                                                className='text-transparent bg-clip-text bg-gradient-to-r  font-bold text-3xl'
+                                                className='text-blue-500 font-bold text-3xl'
                                                 // style={{
                                                 //     backgroundImage: `linear-gradient(to right, rgba(${shadeRgb}, 1), rgba(${shadeRgb}, 0.9))`,
                                                 // }}

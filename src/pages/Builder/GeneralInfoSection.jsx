@@ -17,6 +17,9 @@ function GeneralInfoSection() {
     true;
 
     const initialThemeData = useMemo(() => (themeData ? themeData : {}), []);
+    const themeId = useSelector((state) => state.builder.themeId);
+
+    console.log(initialThemeData);
 
     const {
         register,
@@ -35,6 +38,7 @@ function GeneralInfoSection() {
                 email: initialThemeData.email,
                 appstoreLink: initialThemeData.appstoreLink,
                 playstoreLink: initialThemeData.playstoreLink,
+                svglink: initialThemeData.svglink,
                 style: {
                     color: initialThemeData.style.color,
                     background: initialThemeData.style.background,
@@ -57,11 +61,20 @@ function GeneralInfoSection() {
                 updateGeneralInfo({
                     email: values.email,
                     appstoreLink: values.appstoreLink,
+                    svglink: values.svglink,
                     playstoreLink: values.playstoreLink,
+                    videLink: values.videoLink,
                 })
             );
         });
-    }, [watch('email'), watch('appstoreLink'), watch('playstoreLink'), dispatch]);
+    }, [
+        watch('email'),
+        watch('appstoreLink'),
+        watch('playstoreLink'),
+        watch('svglink'),
+        watch('videoLink'),
+        dispatch,
+    ]);
 
     useEffect(() => {
         watch((values) => {
@@ -135,6 +148,23 @@ function GeneralInfoSection() {
                         <div className='flex flex-col gap-4'>
                             <h3 className='text-lg font-semibold'>Styles</h3>
 
+                            {themeId === 2 && (
+                                <div className='flex flex-col gap-2'>
+                                    <div className='flex flex-col text-sm'>
+                                        <h4 className='font-semibold'>Wave SVG color</h4>
+                                        <p className='text-text-secondary'>
+                                            The following color will be applied to the svg in
+                                            background at the top
+                                        </p>
+                                    </div>
+                                    <input
+                                        type='color'
+                                        className='w-10 h-10 border-2 border-gray-300  cursor-pointer p-0 focus:outline-none'
+                                        {...register('svglink')}
+                                    />
+                                </div>
+                            )}
+
                             <div className='flex flex-col gap-2'>
                                 <div className='flex flex-col text-sm'>
                                     <h4 className='font-semibold'>Text color</h4>
@@ -204,6 +234,21 @@ function GeneralInfoSection() {
                                 </select>
                             </div>
                         </div>
+                    </div>
+
+                    <div>
+                        <div>
+                            <h3 className=' font-semibold'>Video Link</h3>
+                            <p className='text-sm text-text-secondary'>
+                                If you got any video which you think can describe your business
+                                more, feel free to paste its link below.
+                            </p>
+                        </div>
+                        <input
+                            type='text'
+                            className='text-sm p-2 bg-none border rounded-md w-full mt-2'
+                            {...register('videoLink')}
+                        />
                     </div>
 
                     <div>

@@ -5,6 +5,7 @@ import { updateApp } from '../../services/builderSlice';
 import Theme0Desktop from '../../themes/Theme 0/Theme0Desktop';
 import Theme0Actual from '../../themes/Theme 0/Theme0Actual';
 import CustomLoader from '../../components/CustomLoader';
+import Theme1Actual from '../../themes/Theme 1/Theme1Actual';
 
 function UserApp({ subdomain, token }) {
     const [themeId, setThemeId] = useState(1);
@@ -36,6 +37,8 @@ function UserApp({ subdomain, token }) {
                     switch (themeId) {
                         case 1:
                             return <Theme0Actual />;
+                        case 2:
+                            return <Theme1Actual />;
 
                         default:
                             return <p>Unknown status</p>;

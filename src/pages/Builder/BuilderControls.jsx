@@ -84,9 +84,6 @@ function BuilderControls({ setOpenMobileBuilder }) {
                         return <AboutUsSection />;
                     case 'pricings':
                         return <PricingSection />;
-
-                    default:
-                        return <p>Unknown status</p>;
                 }
             })()}
         </div>

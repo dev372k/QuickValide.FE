@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
     logo: '',
+    themeId: 1,
     pageContent: 'You are just a click to build great things',
     aboutUs: 'About us text will go here',
     pricing: JSON.stringify([
@@ -62,6 +63,8 @@ const initialState = {
     ]),
     logo: '',
     email: '',
+    svglink: '#ff0080',
+    videoLink: '',
     playstoreLink: '',
     appstoreLink: '',
     style: {},
@@ -81,6 +84,7 @@ const builderSlice = createSlice({
             state.email = action.payload.email;
             state.playstoreLink = action.payload.playstoreLink;
             state.appstoreLink = action.payload.appstoreLink;
+            state.svglink = action.payload.svglink;
         },
         updateLogo: (state, action) => {
             state.logo = action.payload;
@@ -95,6 +99,9 @@ const builderSlice = createSlice({
         updateApp: (state, action) => {
             return action.payload;
         },
+        updateTheme: (state, action) => {
+            state.themeId = action.payload;
+        },
     },
 });
 
@@ -107,5 +114,6 @@ export const {
     updatePricings,
     updateStyle,
     updateApp,
+    updateTheme,
 } = builderSlice.actions;
 export default builderSlice.reducer;

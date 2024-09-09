@@ -12,6 +12,9 @@ import { request } from '../../helpers/requestHelper';
 import { useSelector, useDispatch } from 'react-redux';
 import { updateApp } from '../../services/builderSlice';
 import { message } from 'antd';
+import HeroSection from './HeroSection';
+import Theme1Desktop from '../../themes/Theme 1/Theme1Desktop';
+import Theme1Mobile from '../../themes/Theme 1/Theme1Mobile';
 
 const viewVariants = {
     mobile: {
@@ -47,6 +50,7 @@ function Builder() {
     const [openMobileBuilder, setOpenMobileBuilder] = useState(false);
 
     const appId = useSelector((state) => state.app.appId);
+    const themeId = useSelector((state) => state.builder.themeId);
     const dispatch = useDispatch();
 
     useEffect(function () {
@@ -109,7 +113,16 @@ function Builder() {
                         initial={view}
                         animate={view === 'desktop' ? 'desktop' : 'mobile'}
                     >
-                        {view === 'desktop' ? <Theme0Desktop /> : <Theme0Mobile />}
+                        {(() => {
+                            switch (themeId) {
+                                case 1:
+                                    if (view === 'desktop') return <Theme0Desktop />;
+                                    return <Theme0Mobile />;
+                                case 2:
+                                    if (view === 'desktop') return <Theme1Desktop />;
+                                    return <Theme1Mobile />;
+                            }
+                        })()}
                     </motion.div>
                 </div>
                 <div className='w-96 hidden md:block'>

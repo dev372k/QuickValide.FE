@@ -208,19 +208,6 @@ function Theme1Actual() {
                 </section>
             )}
 
-            <section className='py-24 max-w-[55rem] mx-auto flex items-center justify-center'>
-                <iframe
-                    width='700'
-                    height='400'
-                    src='https://www.youtube.com/embed/-nsJoqO8F64'
-                    title='Take Me In Your Arms - Dr.Lamar - TikTok Viral - Song Music'
-                    frameborder='0'
-                    allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
-                    referrerpolicy='strict-origin-when-cross-origin'
-                    allowfullscreen
-                ></iframe>
-            </section>
-
             <section className='py-24 bg-gray-50'>
                 <div
                     className='w-full md:max-w-[25rem] lg:max-w-[55rem] mx-auto text-center flex flex-col gap-4 p-8 rounded-md bg-white'

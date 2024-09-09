@@ -89,7 +89,40 @@ function Theme1Actual() {
                 <meta name='description' content={themeData?.seo?.description} />
                 <meta name='keywords' content='React, SEO, Meta Tags, Helmet' />
             </Helmet>
-
+            <svg
+                id='svg'
+                viewBox='0 0 1440 690'
+                xmlns='http://www.w3.org/2000/svg'
+                class='transition duration-300 ease-in-out delay-150 absolute top-0 left-0 right-0 -z-10'
+            >
+                <path
+                    d='M 0,700 L 0,131 C 70.19348306332843,106.92001104565539 140.38696612665686,82.84002209131077 195,111 C 249.61303387334314,139.15997790868923 288.645618556701,219.55992268041234 338,264 C 387.354381443299,308.44007731958766 447.030559646539,316.92028718703983 519,338 C 590.969440353461,359.07971281296017 675.232142857143,392.75892857142856 741,405 C 806.767857142857,417.24107142857144 854.0408689248894,408.043998527246 901,416 C 947.9591310751106,423.956001472754 994.6043814432992,449.06507731958754 1058,487 C 1121.3956185567008,524.9349226804125 1201.5416053019146,575.6956921944036 1268,606 C 1334.4583946980854,636.3043078055964 1387.2291973490428,646.1521539027982 1440,656 L 1440,700 L 0,700 Z'
+                    stroke='none'
+                    stroke-width='0'
+                    fill={svglink || '#ff0080'}
+                    fill-opacity='0.4'
+                    class='transition-all duration-300 ease-in-out delay-150 path-0'
+                    transform='rotate(-180 720 350)'
+                ></path>
+                <path
+                    d='M 0,700 L 0,306 C 53.293630338733436,278.4443114874816 106.58726067746687,250.8886229749632 176,265 C 245.41273932253313,279.1113770250368 330.94458762886603,334.8898195876289 393,358 C 455.05541237113397,381.1101804123711 493.6343888070692,371.5520986745214 542,408 C 590.3656111929308,444.4479013254786 648.5178571428572,526.9017857142858 701,562 C 753.4821428571428,597.0982142857142 800.2941826215022,584.8407584683358 874,615 C 947.7058173784978,645.1592415316642 1048.3054123711343,717.735180412371 1106,735 C 1163.6945876288657,752.264819587629 1178.4841678939615,714.2185198821797 1227,721 C 1275.5158321060385,727.7814801178203 1357.7579160530192,779.3907400589101 1440,831 L 1440,700 L 0,700 Z'
+                    stroke='none'
+                    stroke-width='0'
+                    fill={svglink || '#ff0080'}
+                    fill-opacity='0.53'
+                    class='transition-all duration-300 ease-in-out delay-150 path-1'
+                    transform='rotate(-180 720 350)'
+                ></path>
+                <path
+                    d='M 0,700 L 0,481 C 44.45360824742268,451.2767857142857 88.90721649484536,421.55357142857144 156,446 C 223.09278350515464,470.44642857142856 312.82474226804123,549.0625 372,591 C 431.17525773195877,632.9375 459.7938144329896,638.1964285714286 511,647 C 562.2061855670104,655.8035714285714 636,668.1517857142857 696,685 C 756,701.8482142857143 802.2061855670103,723.1964285714287 870,756 C 937.7938144329897,788.8035714285713 1027.175257731959,833.0625 1100,871 C 1172.824742268041,908.9375 1229.0927835051546,940.5535714285714 1283,962 C 1336.9072164948454,983.4464285714286 1388.4536082474228,994.7232142857142 1440,1006 L 1440,700 L 0,700 Z'
+                    stroke='none'
+                    stroke-width='0'
+                    fill={svglink || '#ff0080'}
+                    fill-opacity='1'
+                    class='transition-all duration-300 ease-in-out delay-150 path-2'
+                    transform='rotate(-180 720 350)'
+                ></path>
+            </svg>
             <nav
                 className='w-full relative z-10 p-4 px-8 max-w-7xl mx-auto text-text-primary flex items-center justify-between'
                 // style={{ color: themeData.style.shade }}
@@ -163,7 +196,7 @@ function Theme1Actual() {
                 ></iframe>
             </section>
 
-            <section className='py-24'>
+            <section className='py-24 bg-gray-50'>
                 <div
                     className='w-full md:max-w-[25rem] lg:max-w-[55rem] mx-auto text-center flex flex-col gap-4 p-8 rounded-md bg-white'
                     // style={{ backgroundColor: 'rgba(0, 0, 0, .2)' }}
@@ -189,10 +222,10 @@ function Theme1Actual() {
                         )}
                         <button
                             onClick={handleJoinWaitlist}
-                            className='text-sm text-white tracking-wide p-2 px-6 rounded-full bg-gradient-to-r  btn-hover transition-all'
-                            style={{
-                                backgroundImage: `linear-gradient(to right, rgba(${shadeRgb}, 1), rgba(${shadeRgb}, 0.9))`,
-                            }}
+                            className='text-sm text-white tracking-wide p-3 px-6 rounded-md bg-gradient-to-r btn-hover transition-all max-w-96 min-w-48 w-72 bg-blue-500'
+                            // style={{
+                            //     backgroundImage: `linear-gradient(to right, rgba(${shadeRgb}, 1), rgba(${shadeRgb}, 0.9))`,
+                            // }}
                         >
                             Join <span className='transition-all'>&rarr;</span>
                         </button>
@@ -278,7 +311,7 @@ function Theme1Actual() {
             )}
 
             <section
-                className='py-24 bg-white'
+                className='py-24 bg-gray-50'
                 // style={{
                 //     backgroundColor: `rgba(0, 0, 0, .2)`,
                 // }}

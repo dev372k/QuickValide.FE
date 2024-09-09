@@ -15,6 +15,13 @@ import { Helmet } from 'react-helmet';
 function Theme0Actual() {
     const app = useSelector((state) => state.builder);
 
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+        reset,
+    } = useForm();
+
     const themeData = useSelector((state) => state.builder);
     const pricing = app.pricing ? JSON.parse(useSelector((state) => state.builder.pricing)) : [];
 
@@ -47,13 +54,10 @@ function Theme0Actual() {
 
         if (res?.status) message.success(res.message);
         else message.error(res.message);
+        reset({
+            email: '',
+        });
     }
-
-    const {
-        register,
-        handleSubmit,
-        formState: { errors },
-    } = useForm();
 
     const hexToRgb = (hex) => {
         let r = 0,

@@ -116,11 +116,11 @@ function Builder() {
                         {(() => {
                             switch (themeId) {
                                 case 1:
-                                    if (view === 'desktop') return <Theme0Desktop />;
-                                    return <Theme0Mobile />;
-                                case 2:
                                     if (view === 'desktop') return <Theme1Desktop />;
                                     return <Theme1Mobile />;
+                                case 2:
+                                    if (view === 'desktop') return <Theme0Desktop />;
+                                    return <Theme0Mobile />;
                             }
                         })()}
                     </motion.div>

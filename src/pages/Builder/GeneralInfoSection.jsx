@@ -165,74 +165,82 @@ function GeneralInfoSection() {
                                 </div>
                             )}
 
-                            <div className='flex flex-col gap-2'>
-                                <div className='flex flex-col text-sm'>
-                                    <h4 className='font-semibold'>Text color</h4>
-                                    <p className='text-text-secondary'>
-                                        The following color will be applied to all your text in the
-                                        page
-                                    </p>
+                            {themeId !== 1 && (
+                                <div className='flex flex-col gap-2'>
+                                    <div className='flex flex-col text-sm'>
+                                        <h4 className='font-semibold'>Text color</h4>
+                                        <p className='text-text-secondary'>
+                                            The following color will be applied to all your text in
+                                            the page
+                                        </p>
+                                    </div>
+                                    <input
+                                        type='color'
+                                        className='w-10 h-10 border-2 border-gray-300  cursor-pointer p-0 focus:outline-none'
+                                        {...register('style.color')}
+                                    />
                                 </div>
-                                <input
-                                    type='color'
-                                    className='w-10 h-10 border-2 border-gray-300  cursor-pointer p-0 focus:outline-none'
-                                    {...register('style.color')}
-                                />
-                            </div>
+                            )}
 
-                            <div className='flex flex-col gap-2'>
-                                <div className='flex flex-col text-sm'>
-                                    <h4 className='font-semibold'>Background Color</h4>
-                                    <p className='text-text-secondary'>
-                                        The following color will be applied to background of your
-                                        page
-                                    </p>
+                            {themeId !== 1 && (
+                                <div className='flex flex-col gap-2'>
+                                    <div className='flex flex-col text-sm'>
+                                        <h4 className='font-semibold'>Background Color</h4>
+                                        <p className='text-text-secondary'>
+                                            The following color will be applied to background of
+                                            your page
+                                        </p>
+                                    </div>
+                                    <input
+                                        type='color'
+                                        className='w-10 h-10 border-2 border-gray-300  cursor-pointer p-0 focus:outline-none'
+                                        {...register('style.background')}
+                                    />
                                 </div>
-                                <input
-                                    type='color'
-                                    className='w-10 h-10 border-2 border-gray-300  cursor-pointer p-0 focus:outline-none'
-                                    {...register('style.background')}
-                                />
-                            </div>
+                            )}
 
-                            <div className='flex flex-col gap-2'>
-                                <div className='flex flex-col text-sm'>
-                                    <h4 className='font-semibold'>Accent Color</h4>
-                                    <p className='text-text-secondary'>
-                                        The following color will be applied to your Buttons and
-                                        Links in the page
-                                    </p>
+                            {themeId != 1 && (
+                                <div className='flex flex-col gap-2'>
+                                    <div className='flex flex-col text-sm'>
+                                        <h4 className='font-semibold'>Accent Color</h4>
+                                        <p className='text-text-secondary'>
+                                            The following color will be applied to your Buttons and
+                                            Links in the page
+                                        </p>
+                                    </div>
+                                    <input
+                                        type='color'
+                                        className='w-10 h-10 border-2 border-gray-300  cursor-pointer p-0 focus:outline-none'
+                                        {...register('style.shade')}
+                                    />
                                 </div>
-                                <input
-                                    type='color'
-                                    className='w-10 h-10 border-2 border-gray-300  cursor-pointer p-0 focus:outline-none'
-                                    {...register('style.shade')}
-                                />
-                            </div>
+                            )}
 
-                            <div className='flex flex-col gap-2'>
-                                <div className='flex flex-col text-sm'>
-                                    <h4 className='font-semibold'>Font Family</h4>
-                                    <p className='text-text-secondary'>
-                                        The following font will be applied to all your text in the
-                                        page
-                                    </p>
+                            {themeId !== 1 && (
+                                <div className='flex flex-col gap-2'>
+                                    <div className='flex flex-col text-sm'>
+                                        <h4 className='font-semibold'>Font Family</h4>
+                                        <p className='text-text-secondary'>
+                                            The following font will be applied to all your text in
+                                            the page
+                                        </p>
+                                    </div>
+                                    <select
+                                        {...register('style.font')}
+                                        className='mt-1 block w-full p-1 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 text-sm'
+                                    >
+                                        <option value=''>Select a Font</option>
+                                        <option value='Inter'>Inter</option>
+                                        <option value='Lato'>Lato</option>
+                                        <option value='Montserrat'>Montserrat</option>
+                                        <option value='Open Sans'>Open Sans</option>
+                                        <option value='Poppins'>Poppins</option>
+                                        <option value='Raleway'>Raleway</option>
+                                        <option value='Roboto'>Roboto</option>
+                                        <option value='Oswald'>Oswald</option>
+                                    </select>
                                 </div>
-                                <select
-                                    {...register('style.font')}
-                                    className='mt-1 block w-full p-1 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 text-sm'
-                                >
-                                    <option value=''>Select a Font</option>
-                                    <option value='Inter'>Inter</option>
-                                    <option value='Lato'>Lato</option>
-                                    <option value='Montserrat'>Montserrat</option>
-                                    <option value='Open Sans'>Open Sans</option>
-                                    <option value='Poppins'>Poppins</option>
-                                    <option value='Raleway'>Raleway</option>
-                                    <option value='Roboto'>Roboto</option>
-                                    <option value='Oswald'>Oswald</option>
-                                </select>
-                            </div>
+                            )}
                         </div>
                     </div>
 

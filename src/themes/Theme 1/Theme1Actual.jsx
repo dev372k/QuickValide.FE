@@ -15,6 +15,13 @@ import { Helmet } from 'react-helmet';
 function Theme1Actual() {
     const app = useSelector((state) => state.builder);
 
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+        reset,
+    } = useForm();
+
     const themeData = useSelector((state) => state.builder);
     const pricing = app.pricing ? JSON.parse(useSelector((state) => state.builder.pricing)) : [];
     const svglink = useSelector((state) => state.builder.svglink);
@@ -48,13 +55,10 @@ function Theme1Actual() {
 
         if (res?.status) message.success(res.message);
         else message.error(res.message);
+        reset({
+            email: '',
+        });
     }
-
-    const {
-        register,
-        handleSubmit,
-        formState: { errors },
-    } = useForm();
 
     const hexToRgb = (hex) => {
         let r = 0,
@@ -210,7 +214,7 @@ function Theme1Actual() {
                         <input
                             type='text'
                             placeholder='example@email.com'
-                            className='max-w-96 min-w-48 w-72 text-sm border p-3 bg-white'
+                            className='max-w-96 min-w-48 w-72 text-sm border p-3 bg-white rounded-md'
                             ref={inputRef}
                             {...register('email', {
                                 required: 'Email is required',

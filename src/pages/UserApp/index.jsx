@@ -26,8 +26,6 @@ function UserApp({ subdomain, token }) {
         getUserApp();
     }, []);
 
-    console.log(themeId);
-
     return (
         <>
             {isLoading ? (
@@ -36,9 +34,9 @@ function UserApp({ subdomain, token }) {
                 (() => {
                     switch (themeId) {
                         case 1:
-                            return <Theme0Actual />;
-                        case 2:
                             return <Theme1Actual />;
+                        case 2:
+                            return <Theme0Actual />;
 
                         default:
                             return <p>Unknown status</p>;

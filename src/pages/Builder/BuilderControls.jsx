@@ -8,19 +8,21 @@ import { useSelector } from 'react-redux';
 import { message } from 'antd';
 import { request } from '../../helpers/requestHelper';
 import CustomLoader from '../../components/CustomLoader';
+import { useNavigate } from 'react-router-dom';
 
 function BuilderControls({ setOpenMobileBuilder }) {
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
+    const navigate = useNavigate();
 
     const appId = urlParams.get('appId');
 
     const [selectedSection, setSelectedSection] = useState('select');
     const [isLoading, setIsLoading] = useState(false);
+    const [isPreviewLoading, setIsPreviewLoading] = useState(false);
     const themeData = useSelector((state) => state.builder);
 
     async function handleSave() {
-        if (!themeData.logo) return message.error('Please upload logo in general info section');
         if (!themeData.email) return message.error('Please enter email in general info section');
 
         try {
@@ -39,6 +41,22 @@ function BuilderControls({ setOpenMobileBuilder }) {
         }
     }
 
+    async function handlePreview() {
+        setIsPreviewLoading(true);
+        const res = await request(`https://api.quickvalide.com/api/App/${appId}`, 'PUT', themeData);
+        setIsPreviewLoading(false);
+        if (res.status)
+            window.open(
+                'https://' +
+                    themeData.name
+                        .trim()
+                        .toLowerCase()
+                        .replace(/[" "]+/g, '-') +
+                    '.quickvalide.com',
+                '_blank'
+            );
+    }
+
     return (
         <div className='h-[calc(100vh-65px)] bg-white p-6 flex flex-col gap-2 overflow-y-auto'>
             {isLoading && <CustomLoader />}
@@ -49,7 +67,12 @@ function BuilderControls({ setOpenMobileBuilder }) {
                 <RxCross1 size={20} />
             </div>
             <div className='flex items-center gap-2 self-end text-sm mb-4'>
-                <button className='p-2 px-8 border rounded-md text-text-secondary'>Preview</button>
+                <button
+                    onClick={handlePreview}
+                    className='p-2 px-8 border rounded-md text-text-secondary'
+                >
+                    {isPreviewLoading ? 'Loading...' : 'Preview'}
+                </button>
                 <button className='p-2 px-8 bg-accent-1 rounded-md text-white' onClick={handleSave}>
                     Save
                 </button>

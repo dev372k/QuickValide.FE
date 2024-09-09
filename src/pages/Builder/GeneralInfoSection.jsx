@@ -14,7 +14,6 @@ function GeneralInfoSection() {
     const dispatch = useDispatch();
     const themeData = useSelector((state) => state.builder);
     const logoBase64 = useSelector((state) => state.builder.logo);
-    true;
 
     const initialThemeData = useMemo(() => (themeData ? themeData : {}), []);
     const themeId = useSelector((state) => state.builder.themeId);
@@ -63,7 +62,7 @@ function GeneralInfoSection() {
                     appstoreLink: values.appstoreLink,
                     svglink: values.svglink,
                     playstoreLink: values.playstoreLink,
-                    videLink: values.videoLink,
+                    videolink: values.videolink,
                 })
             );
         });
@@ -72,7 +71,7 @@ function GeneralInfoSection() {
         watch('appstoreLink'),
         watch('playstoreLink'),
         watch('svglink'),
-        watch('videoLink'),
+        watch('videolink'),
         dispatch,
     ]);
 
@@ -121,11 +120,15 @@ function GeneralInfoSection() {
                     <div className='flex flex-col items-start gap-2'>
                         <h3 className='text-lg font-semibold'>Logo</h3>
                         <div className='flex items-center justify-center'>
-                            <img
-                                className='h-8 object-cover'
-                                src={logoBase64 || Logo}
-                                alt='App logo'
-                            />
+                            {logoBase64 ? (
+                                <img
+                                    className='h-8 object-cover'
+                                    src={logoBase64 || Logo}
+                                    alt='App logo'
+                                />
+                            ) : (
+                                <p>{themeData.name}</p>
+                            )}
                         </div>
                         <label className='w-full'>
                             <span className='sr-only'>Choose logo</span>
@@ -148,7 +151,7 @@ function GeneralInfoSection() {
                         <div className='flex flex-col gap-4'>
                             <h3 className='text-lg font-semibold'>Styles</h3>
 
-                            {themeId === 2 && (
+                            {themeId === 1 && (
                                 <div className='flex flex-col gap-2'>
                                     <div className='flex flex-col text-sm'>
                                         <h4 className='font-semibold'>Wave SVG color</h4>
@@ -249,13 +252,18 @@ function GeneralInfoSection() {
                             <h3 className=' font-semibold'>Video Link</h3>
                             <p className='text-sm text-text-secondary'>
                                 If you got any video which you think can describe your business
-                                more, feel free to paste its link below.
+                                more, feel free to paste its link below. Make sure to give correct
+                                URL for video embedding. For youtube it is:{' '}
+                                <span className='font-bold'>
+                                    https://www.youtube.com/embed/videoId
+                                </span>
+                                . You can search how other URLs look on internet and paste it here.
                             </p>
                         </div>
                         <input
                             type='text'
                             className='text-sm p-2 bg-none border rounded-md w-full mt-2'
-                            {...register('videoLink')}
+                            {...register('videolink')}
                         />
                     </div>
 

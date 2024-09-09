@@ -58,7 +58,13 @@ function Theme0Desktop() {
                 style={{ color: themeData.style.shade }}
             >
                 <div className='text-xl font-bold'>
-                    <img src={themeData?.logo || Logo} alt='Logo' className='h-10' />
+                    {themeData.logo ? (
+                        <img src={themeData.logo} alt='Logo' className='h-10' />
+                    ) : (
+                        <p className='text-xl md:text-2xl text-text-primary font-semibold tracking-tighter'>
+                            {themeData.name}
+                        </p>
+                    )}
                 </div>
                 <ul className='flex flex-row items-center gap-3 text-sm '>
                     <li className='hover:opacity-75 transition-all cursor-pointer hover:font-semibold'>
@@ -99,6 +105,20 @@ function Theme0Desktop() {
                     Get started <span className='transition-all'>&rarr;</span>
                 </a>
             </header>
+
+            {themeData.videolink && (
+                <section className='py-24 max-w-[55rem] mx-auto flex items-center justify-center'>
+                    <iframe
+                        width='700'
+                        height='400'
+                        src={themeData.videolink}
+                        frameborder='0'
+                        allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
+                        referrerpolicy='strict-origin-when-cross-origin'
+                        allowfullscreen
+                    ></iframe>
+                </section>
+            )}
 
             <section className='py-24'>
                 <div

@@ -64,7 +64,7 @@ const initialState = {
     logo: '',
     email: '',
     svglink: '#ff0080',
-    videoLink: '',
+    videolink: '',
     playstoreLink: '',
     appstoreLink: '',
     style: {},
@@ -85,6 +85,7 @@ const builderSlice = createSlice({
             state.playstoreLink = action.payload.playstoreLink;
             state.appstoreLink = action.payload.appstoreLink;
             state.svglink = action.payload.svglink;
+            state.videolink = action.payload.videolink;
         },
         updateLogo: (state, action) => {
             state.logo = action.payload;

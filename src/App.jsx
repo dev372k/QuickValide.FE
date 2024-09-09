@@ -10,7 +10,7 @@ import PrivacyPolicy from './pages/Privacy Policy';
 import TermsAndConditions from './pages/Terms and Conditions';
 import { decodeToken, getToken } from './helpers/jwtHelper';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import DashboardHome from './pages/Dashboard/DashboardHome.jsx';
 import DashboardSettings from './pages/Dashboard/DashboardSettings.jsx';
 import DashboardBuilder from './pages/Dashboard/DashboardBuilder.jsx';
@@ -25,9 +25,11 @@ import { request } from './helpers/requestHelper.js';
 import { saveUser } from './services/userSlice.js';
 
 import Builder from './pages/Builder/index.jsx';
+import AppPreview from './pages/Preview/index.jsx';
 
 function App() {
     const dispatch = useDispatch();
+    const appData = useSelector((state) => state.builder);
     useEffect(function () {
         const token = getToken();
 
@@ -85,6 +87,7 @@ function App() {
                     />
                 </Route>
                 <Route path='/builder' element={<ProtectedRoute Component={Builder} />} />
+                <Route path='/builder/preview/:appId' element={<AppPreview appDataa={appData} />} />
                 <Route path='/privacy-policy' element={<PrivacyPolicy />} />
                 <Route path='/terms-and-conditions' element={<TermsAndConditions />} />
                 <Route path='/forgot-password' element={<ForgotPassword />} />

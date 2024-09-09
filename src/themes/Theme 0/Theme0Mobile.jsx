@@ -57,7 +57,13 @@ function Theme0Mobile() {
                 style={{ color: themeData.style.shade }}
             >
                 <div className='text-xl font-bold'>
-                    <img src={themeData?.logo || Logo} alt='Logo' className='h-10' />
+                    {themeData.logo ? (
+                        <img src={themeData.logo} alt='Logo' className='h-10' />
+                    ) : (
+                        <p className='text-xl md:text-2xl text-text-primary font-semibold tracking-tighter'>
+                            {themeData.name}
+                        </p>
+                    )}
                 </div>
                 <ul className='flex flex-col  items-center gap-3 text-sm text-text-secondary'>
                     <li className='hover:opacity-75 transition-all cursor-pointer hover:font-semibold'>
@@ -96,6 +102,21 @@ function Theme0Mobile() {
                     Get started <span className='transition-all'>&rarr;</span>
                 </button>
             </header>
+
+            {themeData.videolink && (
+                <section className='py-24 max-w-[55rem] mx-auto flex items-center justify-center'>
+                    <iframe
+                        width='700'
+                        height='400'
+                        src={themeData.videolink}
+                        title='Take Me In Your Arms - Dr.Lamar - TikTok Viral - Song Music'
+                        frameborder='0'
+                        allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
+                        referrerpolicy='strict-origin-when-cross-origin'
+                        allowfullscreen
+                    ></iframe>
+                </section>
+            )}
 
             <section className='py-24'>
                 <div

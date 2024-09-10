@@ -287,7 +287,8 @@ function Theme1Actual() {
 
                                     <button
                                         onClick={() => {
-                                            focusInput();
+                                            console.log(inputRef.current);
+                                            // focusInput();
                                             setSelectedPlan(pricing.name);
                                         }}
                                         className='text-sm text-white tracking-wide p-2 px-6 rounded-md   btn-hover transition-all bg-blue-500'

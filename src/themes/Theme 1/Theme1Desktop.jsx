@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Logo from '../../assets/logo-no-background.svg';
 import { RxCross1 } from 'react-icons/rx';
@@ -14,6 +14,8 @@ function Theme1Desktop() {
     const svglink = useSelector((state) => state.builder.svglink);
 
     const businessEmail = useSelector((state) => state?.builder?.email);
+
+    const inputRef = useRef(null);
 
     const hexToRgb = (hex) => {
         let r = 0,
@@ -153,6 +155,7 @@ function Theme1Desktop() {
                             type='text'
                             placeholder='example@email.com'
                             className='max-w-96 min-w-48 w-72 text-sm border p-3 bg-white rounded-md'
+                            ref={inputRef}
                         />
                         <button
                             className='text-sm text-white tracking-wide p-3 px-6 rounded-md bg-gradient-to-r btn-hover transition-all max-w-96 min-w-48 w-72 bg-blue-500'
@@ -210,6 +213,7 @@ function Theme1Desktop() {
 
                                     <button
                                         className='text-sm text-white tracking-wide p-2 px-6 rounded-md   btn-hover transition-all bg-blue-500'
+                                        onClick={() => inputRef.current.focus()}
                                         // style={{
                                         //     background: `rgba(${shadeRgb}, 1)`,
                                         // }}

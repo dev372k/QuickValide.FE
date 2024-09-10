@@ -175,7 +175,7 @@ function Theme1Actual() {
                 </ul>
             </nav>
 
-            <header className='w-full md:max-w-[25rem] px-8 lg:px-16 lg:max-w-[50rem] leading-[1.2] tracking-tighter font-medium mx-auto text-3xl md:text-4xl lg:text-5xl  text-center min-h-[80vh] flex flex-col gap-8 items-center justify-center'>
+            <header className='w-full md:max-w-[25rem] px-8 lg:px-16 lg:max-w-[50rem] leading-[1.2] tracking-tighter font-medium mx-auto text-3xl md:text-4xl lg:text-5xl  text-center min-h-[80vh] flex flex-col gap-8 items-center justify-center mb-16'>
                 <div className='flex flex-col gap-5 items-center'>
                     <h1 className='leading-[1.3]'>{app.pageContent}</h1>
                 </div>
@@ -222,12 +222,15 @@ function Theme1Actual() {
                             type='text'
                             placeholder='example@email.com'
                             className='max-w-96 min-w-48 w-72 text-sm border p-3 bg-white rounded-md'
-                            ref={inputRef}
                             {...register('email', {
                                 required: 'Email is required',
                                 validate: (val) =>
                                     validator.isEmail(val) || 'Please enter a valid email address',
                             })}
+                            ref={(e) => {
+                                register('email').ref(e);
+                                inputRef.current = e;
+                            }}
                         />
                         {errors?.email && (
                             <p className='text-sm text-error -mt-2'>{errors.email.message}</p>
@@ -288,7 +291,7 @@ function Theme1Actual() {
                                     <button
                                         onClick={() => {
                                             console.log(inputRef.current);
-                                            // focusInput();
+                                            focusInput();
                                             setSelectedPlan(pricing.name);
                                         }}
                                         className='text-sm text-white tracking-wide p-2 px-6 rounded-md   btn-hover transition-all bg-blue-500'

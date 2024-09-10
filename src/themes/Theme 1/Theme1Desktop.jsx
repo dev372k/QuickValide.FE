@@ -38,14 +38,7 @@ function Theme1Desktop() {
     const backgroundRgb = hexToRgb(themeData?.style?.background);
 
     return (
-        <main
-            className={`relative z-10 text-text-primary w-full min-h-screen text-text-primary`}
-            // style={{
-            //     fontFamily: themeData?.style?.font,
-            //     color: `rgb(${colorRgb})`,
-            //     background: `rgb(${backgroundRgb})`,
-            // }}
-        >
+        <main className={`relative z-10 text-text-primary w-full min-h-screen bg-white`}>
             <svg
                 id='svg'
                 viewBox='0 0 1440 690'
@@ -81,7 +74,7 @@ function Theme1Desktop() {
                 ></path>
             </svg>
             <nav
-                className='w-full relative z-10 p-4 px-8 max-w-7xl mx-auto text-text-primary flex items-center justify-between text-text-primary'
+                className='w-full relative z-10 p-4 px-8 max-w-7xl mx-auto text-text-primary flex items-center justify-between '
                 // style={{ color: themeData.style.shade }}
             >
                 <div className='text-xl font-bold'>
@@ -107,7 +100,7 @@ function Theme1Desktop() {
                     )}
                     <a
                         href={`mailto:${businessEmail}`}
-                        className={`hover:bg-opacity-75 p-2 px-4 rounded-md bg-gradient-to-r  transition-all cursor-pointer  text-black hover:font-semibold bg-blue-500 text-white`}
+                        className={`hover:bg-opacity-75 p-2 px-4 rounded-md bg-gradient-to-r  transition-all cursor-pointer  hover:font-semibold bg-blue-500 text-white`}
                         // style={{
                         //     background: `rgba(${shadeRgb}, 1)`,
                         // }}
@@ -117,7 +110,7 @@ function Theme1Desktop() {
                 </ul>
             </nav>
 
-            <header className='w-full px-16 leading-[1.2] tracking-tighter font-medium mx-auto text-5xl text-center min-h-[80vh] flex flex-col gap-8 items-center justify-center'>
+            <header className='w-full px-16 leading-[1.2] tracking-tighter font-medium mx-auto text-5xl text-center min-h-[80vh] flex flex-col gap-8 items-center justify-center mb-16'>
                 <div className='flex flex-col gap-5 items-center'>
                     <h1 className='leading-[1.3]'>{themeData.pageContent}</h1>
                 </div>
@@ -147,7 +140,7 @@ function Theme1Desktop() {
                 </section>
             )}
 
-            <section className='py-24'>
+            <section className='py-24 bg-gray-50'>
                 <div className='max-w-[55rem] mx-auto text-center flex flex-col gap-4  p-8 rounded-md bg-white shadow-md border'>
                     <div className='flex flex-col w-full items-center gap-4 justify-center'>
                         <h2 className='text-xl font-medium'>Join Wailist</h2>
@@ -245,11 +238,17 @@ function Theme1Desktop() {
                 </section>
             )}
 
-            <section className='py-24 z-10 relative bg-white border-t'>
+            <section className='py-24 z-10 relative bg-gray-50 '>
                 <footer className='max-w-[55rem] mx-auto text-center flex flex-col gap-4 sm:px-8 '>
                     <nav className='w-full relative z-10 p-4 px-8 max-w-[70rem] mx-auto text-text-primary flex flex-col sm:flex-row items-center justify-between gap-8'>
                         <div className='text-xl font-bold flex flex-col gap-4 sm:items-start'>
-                            <img src={themeData?.logo || Logo} alt='Logo' className='h-10' />
+                            {themeData.logo ? (
+                                <img src={themeData.logo} alt='Logo' className='h-10' />
+                            ) : (
+                                <p className='text-xl md:text-2xl text-text-primary font-semibold tracking-tighter'>
+                                    {themeData.name}
+                                </p>
+                            )}
 
                             <div
                                 className='flex items-center text-center gap-4 text-text-secondary'

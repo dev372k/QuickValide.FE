@@ -267,7 +267,7 @@ function Theme1Actual() {
                         {pricing.map((pricing, pricingIndex) => {
                             return (
                                 <div
-                                    className='p-5 rounded-sm border flex flex-col gap-5 w-full bg-white'
+                                    className='p-5 rounded-sm border flex flex-col gap-5 w-full bg-white rounded-lg'
                                     // style={{ borderColor: `rgba(0, 0, 0, .2)` }}
                                     key={pricingIndex}
                                 >
@@ -338,7 +338,13 @@ function Theme1Actual() {
                             href='#'
                             className='text-xl font-bold flex flex-col gap-4 sm:items-start'
                         >
-                            <img src={themeData.logo || Logo} alt='Logo' className='h-10' />
+                            {app.logo ? (
+                                <img src={app.logo} alt='Logo' className='h-10' />
+                            ) : (
+                                <p className='text-xl md:text-2xl text-text-primary font-semibold tracking-tighter'>
+                                    {app.name}
+                                </p>
+                            )}
 
                             <div
                                 className='flex items-center text-center gap-4 text-text-primary'

@@ -227,7 +227,13 @@ function Theme0Mobile() {
                 <footer className='w-full md:max-w-[25rem] lg:max-w-[55rem] mx-auto text-center flex flex-col gap-4 px-8'>
                     <nav className='w-full relative z-10 p-4 px-8 mx-auto text-text-primary flex items-center justify-between'>
                         <div className='text-xl font-bold flex flex-col gap-4 sm:items-start'>
-                            <img src={themeData?.logo || Logo} alt='Logo' className='h-10' />
+                            {themeData.logo ? (
+                                <img src={themeData.logo} alt='Logo' className='h-10' />
+                            ) : (
+                                <p className='text-xl md:text-2xl text-text-primary font-semibold tracking-tighter'>
+                                    {themeData.name}
+                                </p>
+                            )}
 
                             <div
                                 className='flex items-center text-center gap-4'

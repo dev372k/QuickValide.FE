@@ -197,12 +197,15 @@ function Theme0Actual() {
                             type='text'
                             placeholder='example@email.com'
                             className='max-w-96 min-w-48 w-72 text-sm border p-3 bg-white'
-                            ref={inputRef}
                             {...register('email', {
                                 required: 'Email is required',
                                 validate: (val) =>
                                     validator.isEmail(val) || 'Please enter a valid email address',
                             })}
+                            ref={(e) => {
+                                register('email').ref(e);
+                                inputRef.current = e;
+                            }}
                         />
                         {errors?.email && (
                             <p className='text-sm text-error -mt-2'>{errors.email.message}</p>
@@ -309,7 +312,13 @@ function Theme0Actual() {
                             href='#'
                             className='text-xl font-bold flex flex-col gap-4 sm:items-start'
                         >
-                            <img src={themeData.logo || Logo} alt='Logo' className='h-10' />
+                            {app.logo ? (
+                                <img src={app.logo} alt='Logo' className='h-10' />
+                            ) : (
+                                <p className='text-xl md:text-2xl text-text-primary font-semibold tracking-tighter'>
+                                    {app.name}
+                                </p>
+                            )}
 
                             <div
                                 className='flex items-center text-center gap-4'

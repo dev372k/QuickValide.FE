@@ -36,7 +36,7 @@ function Theme1Mobile() {
 
     return (
         <main
-            className={`relative z-10 text-text-primary w-full min-h-screen text-text-primary`}
+            className={`relative z-10 text-text-primary w-full min-h-screen bg-white`}
             // style={{
             //     fontFamily: themeData.style.font,
             //     color: `rgb(${colorRgb})`,
@@ -79,7 +79,7 @@ function Theme1Mobile() {
             </svg>
 
             <nav
-                className='w-full relative z-10 p-4 px-8 max-w-7xl mx-auto text-text-primary flex items-center justify-between text-text-primary'
+                className='w-full relative z-10 p-4 px-8 max-w-7xl mx-auto text-text-primary flex items-center justify-between '
                 // style={{ color: themeData.style.shade }}
             >
                 <div className='text-xl font-bold'>
@@ -104,7 +104,7 @@ function Theme1Mobile() {
                         </li>
                     )}
                     <li
-                        className='hover:opacity-75 p-2  bg-gradient-to-r transition-all cursor-pointer  text-white hover:font-semibold bg-blue-500 text-white rounded-md'
+                        className='hover:opacity-75 p-2  bg-gradient-to-r transition-all cursor-pointer  text-white hover:font-semibold bg-blue-500  rounded-md'
                         // style={{
                         //     backgroundImage: `linear-gradient(to right, rgba(${shadeRgb}, 1), rgba(${shadeRgb}, 0.4)`,
                         // }}
@@ -114,7 +114,7 @@ function Theme1Mobile() {
                 </ul>
             </nav>
 
-            <header className='w-full leading-[1.2] tracking-tighter font-medium mx-auto text-3xl  text-center min-h-[80vh] flex flex-col gap-8 items-center justify-center'>
+            <header className='w-full leading-[1.2] tracking-tighter font-medium mx-auto text-3xl  text-center min-h-[80vh] flex flex-col gap-8 items-center justify-center mb-16'>
                 <div className='flex flex-col gap-5 items-center'>
                     <h1 className='leading-[1.3] w-full'>{themeData.pageContent}</h1>
                 </div>
@@ -143,7 +143,7 @@ function Theme1Mobile() {
                 </section>
             )}
 
-            <section className='py-24'>
+            <section className='py-24 bg-gray-50'>
                 <div
                     className='w-full mx-auto text-center flex flex-col gap-4  p-8 rounded-md bg-white'
                     // style={{ backgroundColor: 'rgba(0, 0, 0, .2)' }}
@@ -186,7 +186,7 @@ function Theme1Mobile() {
                         {pricings.map((pricing, pricingIndex) => {
                             return (
                                 <div
-                                    className='p-5 rounded-sm border flex flex-col gap-5 w-full bg-white'
+                                    className='p-5 rounded-lg border shadow-md flex flex-col gap-5 w-full bg-white'
                                     key={pricingIndex}
                                     // style={{ borderColor: `rgba(0, 0, 0, .2)` }}
                                 >
@@ -244,7 +244,7 @@ function Theme1Mobile() {
             )}
 
             <section
-                className='py-24 bg-white'
+                className='py-24 bg-gray-50'
                 // style={{
                 //     backgroundColor: `rgba(0, 0, 0, .2)`,
                 // }}
@@ -252,7 +252,13 @@ function Theme1Mobile() {
                 <footer className='w-full md:max-w-[25rem] lg:max-w-[55rem] mx-auto text-center flex flex-col gap-4 px-8'>
                     <nav className='w-full relative z-10 p-4 px-8 mx-auto text-text-primary flex items-center justify-between'>
                         <div className='text-xl font-bold flex flex-col gap-4 sm:items-start'>
-                            <img src={themeData?.logo || Logo} alt='Logo' className='h-10' />
+                            {themeData.logo ? (
+                                <img src={themeData.logo} alt='Logo' className='h-10' />
+                            ) : (
+                                <p className='text-xl md:text-2xl text-text-primary font-semibold tracking-tighter'>
+                                    {themeData.name}
+                                </p>
+                            )}
 
                             <div
                                 className='flex items-center text-center gap-4 text-text-primary'
@@ -292,7 +298,7 @@ function Theme1Mobile() {
                                 </li>
                             )}
                             <li
-                                className='hover:opacity-75 p-2  bg-gradient-to-r  transition-all cursor-pointer rounded-sm text-white hover:font-semibold bg-blue-500 text-white'
+                                className='hover:opacity-75 p-2  bg-gradient-to-r  transition-all cursor-pointer rounded-md text-white hover:font-semibold bg-blue-500 '
                                 // style={{
                                 //     backgroundImage: `linear-gradient(to right, rgba(${shadeRgb}, 1), rgba(${shadeRgb}, 0.4))`,
                                 // }}

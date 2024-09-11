@@ -11,6 +11,7 @@ import CustomLoader from '../../components/CustomLoader';
 import { FaAppStoreIos } from 'react-icons/fa6';
 import { IoLogoGooglePlaystore } from 'react-icons/io5';
 import { Helmet } from 'react-helmet';
+import WaitlistModal from '../../components/WaitlistModal';
 
 function Theme0Actual() {
     const app = useSelector((state) => state.builder);
@@ -29,6 +30,7 @@ function Theme0Actual() {
 
     const [selectedPlan, setSelectedPlan] = useState('');
     const [isLoading, setIsLoading] = useState(false);
+    const [isShown, setIsShown] = useState(false);
 
     useEffect(() => {
         if (selectedPlan) {
@@ -44,6 +46,8 @@ function Theme0Actual() {
 
     async function handleJoinWaitlist(data) {
         if (!data.email) return;
+
+        if (pricing.length > 0 && !selectedPlan) return setIsShown(true);
         setIsLoading(true);
         const res = await request('https://api.quickvalide.com/api/Waitlist', 'POST', {
             appId: app.id,
@@ -87,7 +91,7 @@ function Theme0Actual() {
                 background: `rgb(${backgroundRgb})`,
             }}
         >
-            {isLoading && <CustomLoader />}
+            <WaitlistModal isShown={isShown} setIsShown={setIsShown} />
             <Helmet>
                 <title>{themeData?.seo?.title}</title>
                 <meta name='description' content={themeData?.seo?.description} />

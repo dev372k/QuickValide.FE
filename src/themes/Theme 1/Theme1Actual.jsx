@@ -11,9 +11,12 @@ import CustomLoader from '../../components/CustomLoader';
 import { FaAppStoreIos } from 'react-icons/fa6';
 import { IoLogoGooglePlaystore } from 'react-icons/io5';
 import { Helmet } from 'react-helmet';
+import WaitlistModal from '../../components/WaitlistModal';
+import { BounceLoader } from 'react-spinners';
 
 function Theme1Actual() {
     const app = useSelector((state) => state.builder);
+    const [isShown, setIsShown] = useState(false);
 
     const {
         register,
@@ -45,6 +48,9 @@ function Theme1Actual() {
 
     async function handleJoinWaitlist(data) {
         if (!data.email) return;
+
+        if (pricing.length > 0 && !selectedPlan) return setIsShown(true);
+
         setIsLoading(true);
         const res = await request('https://api.quickvalide.com/api/Waitlist', 'POST', {
             appId: app.id,
@@ -88,7 +94,12 @@ function Theme1Actual() {
             //     background: `rgb(${backgroundRgb})`,
             // }}
         >
-            {isLoading && <CustomLoader />}
+            <WaitlistModal isShown={isShown} setIsShown={setIsShown} />
+            {isLoading && (
+                <div className='w-full h-screen flex items-center justify-center absolute bg-black/10'>
+                    <BounceLoader color={themeData.svglink} />
+                </div>
+            )}
             <Helmet>
                 <title>{themeData?.seo?.title}</title>
                 <meta name='description' content={themeData?.seo?.description} />

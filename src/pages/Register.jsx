@@ -40,6 +40,13 @@ function Register() {
         if (getValues().password !== getValues().passwordConfirm)
             return message.error("Passwords don't match");
 
+        const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/;
+
+        if (!passwordRegex.test(data.password))
+            return message.error(
+                'Password is invalid, make sure it fulfills all the validation criteria'
+            );
+
         const dataModified = {
             name: data.name,
             email: data.email,
@@ -207,6 +214,12 @@ function Register() {
                                         {errors?.passwordConfirm?.message}
                                     </p>
                                 )}
+
+                                <p className='text-xs text-text-secondary mt-2'>
+                                    Password must contain atleast 1 capital letter, atleast 1
+                                    special character (!, @, #, $, %, ^, &, *), atleast 1 number and
+                                    must be atleast 8 characters long
+                                </p>
                             </div>
 
                             <button

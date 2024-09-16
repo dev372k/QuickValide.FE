@@ -36,7 +36,7 @@ function UserApp({ subdomain, token }) {
                 <div className='w-full h-screen flex items-center justify-center absolute '>
                     <Loader color='#6c757d' />
                 </div>
-            ) : (S
+            ) : (
                 (() => {
                     switch (themeId) {
                         case 1:
